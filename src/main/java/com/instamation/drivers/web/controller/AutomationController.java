@@ -59,7 +59,6 @@ public class AutomationController {
         List<Account> accounts = accountRepository.findByRunningAndEnabled(true, true);
 
         for(Account account : accounts){
-//            if(!DriverList.containsKey(account) || DriverList.get(account).isClosed()) {
             if(!account.isAutomationLock()) {
                 account.setAutomationLock(true);
                 accountRepository.save(account);
@@ -97,7 +96,6 @@ public class AutomationController {
                             profileSeed.setUsed(true);
                             profileSeedRepository.save(profileSeed);
 
-//                        driver.close();
                             logger.info(account.getUsername() + " finished getting profiles");
                         }
                     }
@@ -145,7 +143,6 @@ public class AutomationController {
         logger.info(account.getUsername() + " has started automation");
 
         if(profileSeedRepository.findByAccount(accountRepository.findByUsername(account.getUsername())).isEmpty()){
-            redirectAttributes.addFlashAttribute("alert", new Alert(Alert.Status.WARNING,"Please add usernames and/or tags in the settings menu before starting activity."));
 
             String referer = request.getHeader("referer");
             return "redirect:" + referer;
@@ -161,7 +158,6 @@ public class AutomationController {
         account.setRunning(true);
         accountRepository.save(account);
 
-        redirectAttributes.addFlashAttribute("alert", new Alert(Alert.Status.PRIMARY,account.getUsername() + " has started automation"));
 
         String referer = request.getHeader("referer");
         return "redirect:" + referer;
@@ -187,7 +183,6 @@ public class AutomationController {
 //        }while (attempt <= 5);
 
 
-        redirectAttributes.addFlashAttribute("alert", new Alert(Alert.Status.PRIMARY,account.getUsername() + " has stopped automation"));
         accountRepository.save(account);
         logger.info(account.getUsername() + " has stopped automation");
 
@@ -200,7 +195,6 @@ public class AutomationController {
 
         // TODO: STOP ALL AUTOMATION
 
-        redirectAttributes.addFlashAttribute("alert", new Alert(Alert.Status.PRIMARY,"Stopped all automation."));
 
         String referer = request.getHeader("referer");
         return "redirect:" + referer;
@@ -230,30 +224,18 @@ public class AutomationController {
 
                         if(!accountRepository.findById(account.getId()).get().isRunning()){
                             logger.info(account.getUsername() + " has stopped automation");
-//                            driver.close();
-//                            logger.info(account.getUsername() + " has closed driver");
-//                            DriverList.remove(account);
-//                            logger.info(account.getUsername() + " has removed driver from list");
                             break;
                         }
 
                         // If account has reached is actions per day limit or is not working, break the loop.
                         if (account.getActions() >= setting.getActionsPerDay() || !setting.isWorkingTime()) {
                             logger.info(account.getUsername() + " has stopped automation");
-//                            driver.close();
-//                            logger.info(account.getUsername() + " has closed driver");
-//                            DriverList.remove(account);
-//                            logger.info(account.getUsername() + " has removed driver from list");
                             break;
                         }
 
                         // If all settings are off, break loop.
                         if (!setting.isFollow() && !setting.isLikes() && !setting.isUnfollow() && !setting.isComment()){
                             logger.info(account.getUsername() + " has stopped automation");
-//                            driver.close();
-//                            logger.info(account.getUsername() + " has closed driver");
-//                            DriverList.remove(account);
-//                            logger.info(account.getUsername() + " has removed driver from list");
                             break;
                         }
 
@@ -359,10 +341,6 @@ public class AutomationController {
 
                 if(driver != null) {
                     logger.info(account.getUsername() + " has stopped automation");
-//                    driver.close();
-//                    logger.info(account.getUsername() + " has closed driver");
-//                    DriverList.remove(account);
-//                    logger.info(account.getUsername() + " has removed driver from list");
                 }
 
                 account.setAutomationLock(false);

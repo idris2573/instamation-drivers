@@ -29,6 +29,9 @@ public class DriverList {
     }
 
     public static Driver get(Account account){
+        if(account == null){
+            return null;
+        }
         for(Map.Entry driver : drivers.entrySet()){
             Account accountEntry = (Account) driver.getKey();
             if(account.getId().equals(accountEntry.getId())){

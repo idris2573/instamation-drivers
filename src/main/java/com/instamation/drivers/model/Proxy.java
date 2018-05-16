@@ -1,5 +1,7 @@
 package com.instamation.drivers.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,7 @@ public class Proxy {
     @Column(name = "ip", unique = true)
     private String ip;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;

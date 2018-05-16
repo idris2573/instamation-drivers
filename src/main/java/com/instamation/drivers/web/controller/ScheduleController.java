@@ -98,7 +98,6 @@ public class ScheduleController {
             accountRepository.save(account);
 
             logger.info(account.getUsername() + " stats have been updated");
-//            driver.close();
         }
 
         logger.info("Completed stats update - All account stats have been updated");

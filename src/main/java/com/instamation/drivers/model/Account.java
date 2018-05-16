@@ -1,5 +1,7 @@
 package com.instamation.drivers.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.instamation.drivers.repository.StatsRepository;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -22,7 +24,7 @@ public class Account {
     @JoinColumn(name="user_id")
     private User user;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "password")
@@ -67,7 +69,7 @@ public class Account {
     @Column(name = "enabled")
     private boolean enabled = true;
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "settings_id")
     private Setting setting;

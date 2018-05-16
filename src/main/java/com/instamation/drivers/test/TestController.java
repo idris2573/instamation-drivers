@@ -10,11 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/test")
 public class TestController {
 
@@ -44,21 +45,18 @@ public class TestController {
 
 
     @RequestMapping(value = "/drivers")
-    @ResponseBody
     public Map<Account, Driver> drivers(){
         return DriverList.getDrivers();
     }
 
 
     @RequestMapping(value = "/accounts")
-    @ResponseBody
     public List<Account> accounts(){
         List<Account> accounts = accountRepository.findAll();
         return accounts;
     }
 
     @RequestMapping(value = "/account")
-    @ResponseBody
     public Account account(){
         return accountRepository.findById(1L).get();
     }
