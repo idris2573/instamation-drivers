@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layout :: head('Contact Us')"></head>
+
+<body>
+<div th:replace="layouts/layout :: alert"></div>
+<div th:replace="layouts/layout :: navigation-in"></div>
+<div th:replace="layouts/layout :: navigation-out"></div>
+
+
+<div class="container mt-4 mb-5 box pt-5">
+    <h2 class="text-center mb-4">Get in touch</h2>
+    <p class="text-center">Have a question? Send us a message using the form below and someone from our team will be in touch soon.</p>
+
+    <form th:action="@{/contact/send}" class="contact mt-5 mx-auto pb-5 mb-5 w-lg-75" th:object="${ticket}" method="post">
+        <div class="form-row">
+
+            <div class="col-12 col-lg-6 mb-3">
+                <input type="text" class="form-control" id="first-name" th:field="*{firstName}" placeholder="First Name" required="required"/>
+            </div>
+
+            <div class="col-12 col-lg-6 mb-3">
+                <input type="text" class="form-control" id="last-name" th:field="*{lastName}" placeholder="Last Name"/>
+            </div>
+
+            <div class="col-12 col-lg-6 mb-3">
+                <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Email" required="required"/>
+            </div>
+
+            <div class="col-12 col-lg-6 mb-3">
+                <input type="text" class="form-control" id="phone-number" th:field="*{phone}" placeholder="Phone number"/>
+            </div>
+
+            <div class="col-12 mb-3">
+                <textarea class="form-control" id="message" th:field="*{message}" rows="4" placeholder="How can we help you?" required="required"></textarea>
+            </div>
+
+            <div class="col-12 mb-3">
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Send Message</button>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
+
+<footer th:replace="layouts/layout :: footer"></footer>
+
+
+</body>
+</html>

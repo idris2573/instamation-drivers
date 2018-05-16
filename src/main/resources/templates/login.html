@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layout :: head('Log In')"></head>
+
+<body style="min-height:1000px">
+<div th:replace="layouts/layout :: alert"></div>
+
+<div th:if="${param.error}" class="alert alert-dismissible fade show text-center alert-danger" role="alert">
+    <span>Invalid username and password.</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div th:if="${param.logout}" class="alert alert-dismissible fade show text-center alert-warning" role="alert">
+    <span>You have been logged out.</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="text-center mt-4">
+    <a th:href="@{/}">
+        <!--<img src="http://via.placeholder.com/250x75" alt=""/>-->
+        <img th:src="@{/assets/images/logo-white.png}" class="img-fluid" style="max-height: 30px;" alt="">
+    </a>
+</div>
+
+<div id="login" class="container mt-4 mb-3 box py-5 shadow text-center px-3 px-lg-5">
+
+    <div class="text-center">
+
+        <h2 class="mb-4">Log In</h2>
+
+        <form th:action="@{/login}" method="post" class="login">
+
+            <div class="form-group">
+
+                <input type="email" class="form-control"  name="username" placeholder="Email Address" required="required"/>
+            </div>
+
+                <input type="password" id="password" class="form-control mb-3" name="password" placeholder="Password" required="required"/>
+
+            <button type="submit" class="btn-lg btn-primary w-100 mb-3 font-weight-500">Sign In</button>
+
+        </form>
+
+
+    </div>
+
+</div>
+
+<div class="text-white text-center ">
+    <p class="mb-1 text-white">Don't have an account?
+        <a class="login-text font-weight-bold" th:href="@{/signup}">Sign Up</a>
+    </p>
+
+    <a class="login-text" th:href="@{forgot-password}">Forgot password?</a>
+
+</div>
+
+
+</body>
+</html>

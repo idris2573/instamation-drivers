@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layout :: head('Contact Us')"></head>
+
+<body style="background:white !important;">
+<div th:replace="layouts/layout :: alert"></div>
+
+<div class="container mt-4 text-center" th:object="${account}">
+
+    <div class="card text-secondary product d-flex p-1 w-lg-50 mx-auto">
+
+            <div class="card-body row p-0">
+
+                <div class="col-6">
+                    <img class="card-img-top img-fluid profile-pic" th:src="@{*{profilePic}}" alt="Card image cap">
+                </div>
+
+                <div class="col-6 p-0 my-auto text-left">
+                    <h5 class="card-title mb-0" th:text="*{username}">Username</h5>
+                    <span class="card-text mb-0" th:text="*{email}">Email</span>
+
+                    <div class="mb-2">
+                        <p class="mb-0" th:text="*{'Posts: ' + postCount}"></p>
+                        <p class="mb-0" th:text="*{'Followers: ' + followers}"></p>
+                        <p class="mb-0" th:text="*{'Following: ' + following}"></p>
+                    </div>
+
+                </div>
+            </div>
+    </div>
+
+    <div class="mb-4">
+        <a th:href="@{/}" class="btn btn-primary mt-4 mr-2" role="button">< Back to dashboard</a>
+        <a th:href="@{'/account/update/' + *{id}}" class="btn btn-primary mt-4 mr-2" role="button">Update Info</a>
+        <a th:href="@{'https://instagram.com/' + *{username}}" target="_blank" class="btn btn-primary mt-4 mr-2" role="button">View Profile</a>
+        <a th:href="@{'/automate/stop/' + *{id}}" class="btn btn-warning mt-4 mr-2" role="button" th:if="${account.running}">Stop Automation</a>
+        <a th:href="@{'/automate/start/' + *{id}}" class="btn btn-success mt-4 mr-2" role="button" th:unless="${account.running}">Start Automation</a>
+        <a th:href="@{'/posts/initializeposts/' + ${account.id}}" th:if="${account.postCount < 9}" class="btn btn-info mt-4 mr-2" role="button">Initialize Posts</a>
+    </div>
+
+
+    <form th:action="@{/account/get-profiles}" class="w-lg-50 mx-auto" method="post" th:object="${profile}">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="instagram page" th:field="*{username}"/>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Add to List</button>
+            </div>
+        </div>
+    </form>
+
+    <form th:action="@{'/posts/scrape/' + ${account.id}}" class="w-lg-50 mx-auto" method="post">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="search" placeholder="search query"/>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Scrape Posts</button>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <h5 th:text="${'Followers Gained: ' + account.followersGained}" class="mb-1 text-success">Followers Gained: 200</h5>
+        <h5 th:text="${'Pending Following: ' + pendingFollowing}" class="mb-1">Pending Following: 200</h5>
+        <h5 th:text="${'Following: ' + following}" class="mb-1">Following: 150</h5>
+        <h5 th:text="${'Unfollowed: ' + unfollowed}" class="mb-1">Unfollowed: 20</h5>
+        <h5 th:text="${'Actions Completed: ' + account.actions}" class="mb-1">Actions Completed: 20</h5>
+        <h5 th:text="${'Posted: ' + posted}" class="mb-1">Posted: 20</h5>
+
+        <div class="row text-center w-lg-50 mx-auto mt-4">
+            <div class="col-6" th:text="${'Liked: ' + liked}">Liked</div>
+            <div class="col-6" th:text="${'Commented: ' + commented}">Commented</div>
+        </div>
+    </div>
+
+
+    <button class="btn btn-secondary btn-block mt-4 w-lg-50 mx-auto" type="button" data-toggle="collapse" data-target="#settings" aria-expanded="false" aria-controls="settings">
+        Settings
+    </button>
+    <div class="collapse" id="settings">
+        <div class="card card-body w-lg-50 mx-auto">
+
+            <form th:action="@{/account/save-settings}" class="text-left" th:object="${setting}" method="post">
+
+                <div class="custom-control custom-checkbox mb-4">
+                    <div class="row">
+                        <input type="hidden" th:field="*{account}"/>
+                        <div class="col-6 col-lg-3">
+                            <input type="checkbox" class="custom-control-input" id="follow" th:field="*{follow}" onChange="this.form.submit()"/>
+                            <label class="custom-control-label ml-2" for="follow">Follow</label>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <input type="checkbox" class="custom-control-input" id="unfollow" th:field="*{unfollow}" onChange="this.form.submit()"/>
+                            <label class="custom-control-label ml-2" for="unfollow">Unfollow</label>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <input type="checkbox" class="custom-control-input" id="likes" th:field="*{likes}" onChange="this.form.submit()"/>
+                            <label class="custom-control-label ml-2" for="likes">Likes</label>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <input type="checkbox" class="custom-control-input" id="comment" th:field="*{comment}" onChange="this.form.submit()"/>
+                            <label class="custom-control-label ml-2" for="comment">Comment</label>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <input type="checkbox" class="custom-control-input" id="autopost" th:field="*{autopost}" onChange="this.form.submit()"/>
+                            <label class="custom-control-label ml-2" for="autopost">Autopost</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="col-12 col-lg-6">
+                        <input type="number" min="0" class="form-control" id="actions-pd" th:field="*{actionsPerDay}"/>
+                        <label class="ml-2" for="actions-pd">Actions p/d</label>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <input type="number" min="0" class="form-control" id="unfollow-nd" th:field="*{unfollowAfterNoDays}"/>
+                        <label class="ml-2" for="unfollow-nd">Unfollow after no. days</label>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <div class="form-row mb-0 mb-lg-3">
+                            <div class="col-6">
+                                <input type="time" class="form-control" id="start-time" th:field="*{startTime}"/>
+                                <label class="ml-2" for="start-time">Start hh:mm</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="time" class="form-control" id="end-time" th:field="*{endTime}"/>
+                                <label class="ml-2" for="end-time">End hh:mm</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <div class="form-row mb-3">
+                            <div class="col-6">
+                                <input type="number" min="0" class="form-control" id="likes-pp" th:field="*{likesPerPage}"/>
+                                <label class="ml-2" for="likes-pp">Likes p/p</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="number" min="0" class="form-control" id="posts-pd" th:field="*{postsPerDay}"/>
+                                <label class="ml-2" for="posts-pd">Posts p/d</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="col-12 col-lg-6">
+                        <input type="text" class="form-control" id="hashtag-category" th:field="*{hashtagCategory}" disabled="true"/>
+                        <label class="ml-2" for="hashtag-category">Hashtag Category</label>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <div class="form-row mb-3">
+                            <div class="col-6">
+                                <input  type="number" min="0" class="form-control" id="hashtag-amount" th:field="*{hashtagAmount}" disabled="true"/>
+                                <label class="ml-2" for="hashtag-amount">Tag Amount</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Save Settings</button>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="row mx-auto w-lg-50">
+        <div class="col-12 col-lg-6 px-0">
+            <button class="btn btn-info btn-block mt-4 mx-auto" type="button" data-toggle="collapse" data-target="#post-times" aria-expanded="false" aria-controls="post-time">
+                Post Times
+            </button>
+
+            <div class="collapse" id="post-times">
+                <div class="card card-body mx-auto">
+                    <p th:each="postTime : ${setting.getPostTimes()}" th:text="${postTime.key + ' - ' + postTime.value}"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+
+        </div>
+    </div>
+
+
+    <div class="bg-white mr-3 py-4">
+        <div class="dropdown text-right mb-4">
+            <button class="btn btn-secondary dropdown-toggle bg-primary text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${'Date: ' + dates}"></button>
+            <div class="dropdown-menu bg-primary-light" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" th:href="@{'/account/' + ${account.id} + '?d=7'}">Last: 7 days</a>
+                <a class="dropdown-item" th:href="@{'/account/' + ${account.id} + '?d=28'}">Last 28 days</a>
+                <a class="dropdown-item" th:href="@{'/account/' + ${account.id} + '?d=90'}">Last 90 days</a>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+            <div class="">
+                <h5 class="text-secondary text-center mb-4 text-xl-left">FOLLOWERS</h5>
+                <div th:replace="layouts/graphs :: stats"></div>
+            </div>
+
+    </div>
+
+    <div>
+        <h4 class="mt-5 mb-4">Automated Posts</h4>
+        <div class="row">
+            <div class="col-4 col-md-3 col-lg-2 mb-2 text-right" th:each="post : ${posts}" th:object="${post}">
+                <img class="img-fluid" th:src="*{url}"/>
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <p class="mb-0 text-left" th:if="*{posted}">Posted</p>
+                        <p class="mb-0 text-left" th:unless="*{posted}">Pending</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <a th:href="@{'/posts/delete/' + *{id}}" class="badge badge-pill badge-danger">Delete</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<footer th:replace="layouts/layout :: footer"></footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+                <script>
+                    $(document).ready(function(){
+
+                        checkAutopost();
+                        function checkAutopost(){
+                            var autopostOn = $("#autopost")[0].checked;
+                            if(autopostOn){
+                                $("#hashtag-category")[0].disabled = false;
+                                $("#hashtag-amount")[0].disabled = false;
+                                $("#post-times").addClass("show");
+                            }
+                        }
+                    });
+                </script>
+
+</body>
+</html>

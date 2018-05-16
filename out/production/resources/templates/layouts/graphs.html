@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+
+
+<div th:fragment="stats" class="dashboard-graph">
+
+    <canvas id="statsChart" width="400" height="200"></canvas>
+
+    <script th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    var statsData = [];
+    var xAxisLabel = [];
+    /*[# th:each="stats : ${statsGraph}"]*/
+        statsData.push(/*[[${stats.value}]]*/);
+        xAxisLabel.push(/*[[${stats.key}]]*/);
+    /*[/]*/
+
+    /*]]>*/
+
+    var ctxViews = document.getElementById("statsChart").getContext('2d');
+      var statsChart = new Chart(ctxViews, {
+        type: 'line',
+        data: {
+            labels: xAxisLabel,
+            datasets: [{
+                label: 'Followers',
+                data: statsData,
+                backgroundColor: 'rgba(58, 151, 233, 0.2)',
+                borderColor: 'rgba(58, 151, 233, 1)',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                yAxes: [{
+                    gridLines: {
+                        display:false
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        display:false
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return new Date(value).toLocaleDateString('en-EN', {day:'numeric', month:'short'});
+                        },
+                    }
+                }]
+            },
+            legend:{
+                position:'top-left',
+                labels:{
+                    fontColor:'#000'
+                }
+            },
+            elements: {
+                point: {
+                    radius: 1.5
+                }
+            }
+        }
+    });
+</script>
+</div>
+
+
+
+</body>
+</html>

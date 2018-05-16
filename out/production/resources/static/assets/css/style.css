@@ -1,0 +1,210 @@
+body{
+    background: linear-gradient(to bottom right, #51b2ff, #96d1ff);
+}
+
+p, h1, h2, h3, h4, h5, h6{
+    color:#3c3c3c;
+}
+
+a:hover{
+    text-decoration:none !important;
+}
+
+.card span{
+    font-size:14px;
+}
+
+.font-weight-500{
+    font-weight:500;
+}
+
+.profile-pic{
+    max-width: 120px;
+}
+
+.border-left{
+    border-left: solid 2px #ebebeb;
+}
+
+.box{
+    background: white;
+    border: 1px solid #e9ecef!important;
+    border-radius: .25rem!important;
+}
+
+.box:hover{
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    transition: .3s;
+}
+
+.span{
+    font-size:0.9rem;
+}
+
+.activity{
+    overflow-y: scroll;
+    min-height: 200px;
+}
+
+.modal-header, .modal-footer{
+    border-bottom: 0 !important;
+    border-top: 0 !important;
+}
+
+.help{
+    margin: auto 0;
+    padding: 0 7px;
+    color: white;
+    border-radius: 50px;
+    background-color: #868e96;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+
+#login{
+    width: 100%;
+}
+
+.login-text{
+    color: white !important;
+}
+
+.login-text:hover{
+    color: lightgrey !important;
+}
+
+.logout:hover{
+    cursor: pointer;
+}
+
+#add-account-submit img{
+    max-height:25px;
+}
+
+.check{
+    max-height: 24px;
+}
+
+.round-disabled{
+    background-color: #e9ecef !important;
+}
+/**********************************SLIDER*************************************************/
+
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+hr{
+    border-top: 2px solid rgba(0,0,0,.1) !important;
+}
+
+.nav-item .active{
+    color: #007bff!important;
+}
+
+.d-contents{
+    display: contents;
+}
+
+.started{
+    max-width: 150px;
+    max-height: 150px;
+}
+/**********************************RESPONSIVE*************************************************/
+
+
+
+@media (min-width: 390px) {
+
+
+}
+
+
+@media (min-width: 576px) {
+  #login{
+        width: 500px;
+    }
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+    .w-lg-50{
+        width:50% !important;
+    }
+
+    .w-lg-75{
+        width:75% !important;
+    }
+
+    .d-lg-contents{
+        display: contents;
+    }
+}
+
+@media (min-width: 1200px) {
+
+}
+
+@media (min-width: 1450px) {
+
+}

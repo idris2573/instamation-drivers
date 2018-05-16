@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layout :: head('Sign Up')"></head>
+
+<body style="min-height:1000px">
+<div th:replace="layouts/layout :: alert"></div>
+
+<div class="text-center mt-4">
+    <a th:href="@{/}">
+        <img th:src="@{/assets/images/logo-white.png}" class="img-fluid" style="max-height: 30px;" alt="">
+    </a>
+</div>
+
+<div id="login" class="container mt-4 mb-3 box py-5 shadow text-center px-3 px-lg-5">
+
+    <div class="text-center">
+
+        <h2 class="">Sign Up</h2>
+        <p class="mb-4 text-secondary font-weight-500">Start your FREE 3-day trial.</p>
+        <form th:action="@{/signup/success}" th:object="${newUser}" method="post" class="login">
+
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email Address" required="required" th:field="*{username}"/>
+            </div>
+
+
+            <div class="input-group mb-3">
+
+                <input type="password" id="password" class="form-control" placeholder="Password" required="required" th:field="*{password}"/>
+
+                <div class="eye-pass input-group-append"  onclick="passHide()">
+                    <span class="input-group-text" id="basic-addon2">
+                        <i id="eye" class="oi oi-eye form-control-feedback">Show</i>
+                    </span>
+                </div>
+
+            </div>
+
+
+            <button type="submit" class="btn-lg btn-primary w-100 mb-3 font-weight-500">Sign Up</button>
+
+        </form>
+
+        <p class="mb-0">By signing up, you agree to the <a th:href="@{/terms}">Terms of Service</a> and <a th:href="@{/privacy}">Privacy Policy</a>.</p>
+
+    </div>
+
+</div>
+
+<div class="text-white text-center ">
+    <p class="mb-1 text-white">Already have an account?
+        <a class="login-text font-weight-bold" th:href="@{/login}">Log In</a>
+    </p>
+
+</div>
+
+
+<script>
+    function passHide() {
+        var x = document.getElementById("password");
+        var y = document.getElementById("eye");
+        if (x.type === "password") {
+            x.type = "text";
+            y.style.color = "#18bc18";
+
+        } else {
+            x.type = "password";
+            y.style.color = "#495057";
+        }
+    }
+</script>
+
+
+</body>
+</html>
