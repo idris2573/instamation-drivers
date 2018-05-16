@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "accounts")
@@ -66,6 +67,7 @@ public class Account {
     @Column(name = "enabled")
     private boolean enabled = true;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "settings_id")
     private Setting setting;
