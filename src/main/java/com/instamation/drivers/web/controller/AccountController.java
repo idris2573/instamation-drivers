@@ -73,6 +73,14 @@ public class AccountController {
             return new Response("wrong-credentials");
         }
 
+
+        // add proxy if one is available.
+        if(proxy != null) {
+            proxy.setAccount(account);
+            account.setProxy(proxy);
+            proxyRepository.save(account.getProxy());
+        }
+
         // skipped to entering security code
         try{
             Thread.sleep(1000);
@@ -102,44 +110,8 @@ public class AccountController {
             return new Response(response);
         }
 
-        Actions.updateProfileDetails(driver, account);
-
-        // like instamation
-        driver.getDriver().get("https://www.instagram.com/instamation8/");
-        Actions.clickButton(driver, "Follow");
-
-
-        account.setUser(userRepository.findById(userId).get());
-        accountRepository.save(account);
-
-        // add proxy if one is available.
-        if(proxy != null) {
-            proxy.setAccount(account);
-            account.setProxy(proxy);
-            proxyRepository.save(account.getProxy());
-        }
-
-        // create settings for the account and vice versa, setting has to be saved to the database first.
-        Setting setting = new Setting();
-        setting.setAccount(account);
-        setting.setActionSpeed("normal");
-        setting.updateSettingsSpeed();
-        settingRepository.save(setting);
-        account.setSetting(setting);
-
-        // set expiry date for the first days free trial
-        long day = 86400000;
-        account.setExpiryDate(new Date(System.currentTimeMillis() + day*3));
-
-        accountRepository.save(account);
-
-        Stats stats = new Stats();
-        stats.setAccount(account);
-        stats.setFollowers(account.getFollowers());
-        stats.setActions(account.getActions());
-        stats.setFollowing(account.getFollowing());
-        stats.setPostCount(account.getPostCount());
-        statsRepository.save(stats);
+        // successful login
+        loginSuccess(driver, account);
 
         return new Response("success");
     }
@@ -185,7 +157,8 @@ public class AccountController {
         String code = request.getParameter("code");
         String username = request.getParameter("username");
 
-        Driver driver = DriverList.get(accountRepository.findByUsername(username));
+        Account account = accountRepository.findByUsername(username);
+        Driver driver = DriverList.get(account);
 
         driver.getDriver().findElement(By.id("security_code")).clear();
         driver.getDriver().findElement(By.id("security_code")).sendKeys(code);
@@ -199,9 +172,48 @@ public class AccountController {
             }
         }catch (Exception e){}
 
+
+        // user is confirmed via code. add user
+        loginSuccess(driver, account);
+
         return new Response("success");
     }
 
+
+
+    private void loginSuccess(Driver driver, Account account) throws Exception{
+        // update profile details
+        Actions.updateProfileDetails(driver, account);
+
+        // like instamation
+        driver.getDriver().get("https://www.instagram.com/instamation8/");
+        Actions.clickButton(driver, "Follow");
+
+        accountRepository.save(account);
+
+        // create settings for the account and vice versa, setting has to be saved to the database first.
+        Setting setting = new Setting();
+        setting.setAccount(account);
+        setting.setActionSpeed("normal");
+        setting.updateSettingsSpeed();
+        settingRepository.save(setting);
+        account.setSetting(setting);
+
+        // set expiry date for the first days free trial
+        long day = 86400000;
+        account.setExpiryDate(new Date(System.currentTimeMillis() + day*3));
+
+        accountRepository.save(account);
+
+        Stats stats = new Stats();
+        stats.setAccount(account);
+        stats.setFollowers(account.getFollowers());
+        stats.setActions(account.getActions());
+        stats.setFollowing(account.getFollowing());
+        stats.setPostCount(account.getPostCount());
+        statsRepository.save(stats);
+
+    }
 
 
 }
