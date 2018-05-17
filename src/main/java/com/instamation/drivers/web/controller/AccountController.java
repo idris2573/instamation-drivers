@@ -20,7 +20,7 @@ import java.sql.Date;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = {"http://localhost:8081", "https://insta-mation.com"})
 @RequestMapping(value = "/account")
 public class AccountController {
 
@@ -42,7 +42,7 @@ public class AccountController {
 
     @PostMapping(value = "/add/{userId}")
     public Response addAccount(@RequestBody Account account, @PathVariable Long userId) throws Exception{
-
+        System.out.println("HIT THE BOX");
         // check if account exists and if the account exists and account does not belong to this user
         User user = userRepository.findById(userId).get();
         Account existingAccount = accountRepository.findByUsername(account.getUsername());
