@@ -512,6 +512,17 @@ public class Actions {
         }
     }
 
+    public static void clickLink(Driver driver, String linkText){
+        List<WebElement> elements = driver.getDriver().findElements(By.tagName("a"));
+
+        for(WebElement element : elements) {
+            if(element.getText().equalsIgnoreCase(linkText)){
+                element.click();
+                break;
+            }
+        }
+    }
+
     public static boolean doesButtonExist(Driver driver, String buttonText){
         List<WebElement> elements = driver.getDriver().findElements(By.tagName("button"));
 
@@ -621,7 +632,6 @@ public class Actions {
             driver.getDriver().findElement(By.cssSelector("span._8scx2.coreSpriteComment")).click();
         }catch (Exception e){}
     }
-
 
 
     private static boolean isSaveLoginInfo(Driver driver){

@@ -51,14 +51,22 @@ public class AutomationController {
     @Autowired
     private ProfileSeedRepository profileSeedRepository;
 
-//    @RequestMapping("/run")
-//    @ResponseBody
     @Scheduled(fixedRate = 5000)
     public void run() throws Exception{
 
         List<Account> accounts = accountRepository.findByRunningAndEnabled(true, true);
 
         for(Account account : accounts){
+            Driver driver = DriverList.get(account);
+
+            if(driver == null){
+                account.setRunning(false);
+                accountRepository.save(account);
+                // if login page then login
+                // if login page is blocked by verify, notify user
+                continue;
+            }
+
             if(!account.isAutomationLock()) {
                 account.setAutomationLock(true);
                 accountRepository.save(account);
@@ -69,19 +77,6 @@ public class AutomationController {
 
                     if (profiles.isEmpty()) {
                         logger.info(account.getUsername() + "has no profiles, adding new profiles.");
-
-                        Driver driver;
-                        if (DriverList.containsKey(account)) {
-                            driver = DriverList.get(account);
-                        } else if (account.getProxy() != null) {
-                            driver = new Driver(false, account.getProxy().getIp());
-                            DriverList.put(account, driver);
-                            Actions.login(driver, account);
-                        } else {
-                            driver = new Driver();
-                            DriverList.put(account, driver);
-                            Actions.login(driver, account);
-                        }
 
                         for (ProfileSeed profileSeed : profileSeedRepository.findByAccountAndUsed(account, false)) {
                             String prepend = (profileSeed.getType().equalsIgnoreCase("username")) ? "@" : "#";
@@ -110,19 +105,6 @@ public class AutomationController {
                     if (account.isEnabled() && account.getActions() < setting.getActionsPerDay() && setting.isWorkingTime() && !profiles.isEmpty()
                             && (setting.isFollow() || setting.isLikes() || setting.isUnfollow() || setting.isComment())) {
 
-                        Driver driver;
-                        if (DriverList.containsKey(account)) {
-                            driver = DriverList.get(account);
-                        } else if (account.getProxy() != null) {
-                            driver = new Driver(false, account.getProxy().getIp());
-                            DriverList.put(account, driver);
-                            Actions.login(driver, account);
-                        } else {
-                            driver = new Driver();
-                            DriverList.put(account, driver);
-                            Actions.login(driver, account);
-                        }
-
                         logger.info(account.getUsername() + " starting automation");
                         DriverList.put(account, driver);
 
@@ -136,70 +118,6 @@ public class AutomationController {
             }
         }
     }
-
-    @PostMapping(value = "/start")
-    public String startRunning(@ModelAttribute Account account, RedirectAttributes redirectAttributes, HttpServletRequest request){
-
-        logger.info(account.getUsername() + " has started automation");
-
-        if(profileSeedRepository.findByAccount(accountRepository.findByUsername(account.getUsername())).isEmpty()){
-
-            String referer = request.getHeader("referer");
-            return "redirect:" + referer;
-        }
-
-        account = accountRepository.findByUsername(account.getUsername());
-
-        if(account.getSetting().getActionSpeed().isEmpty()){
-            account.getSetting().setActionSpeed("normal");
-            account.getSetting().updateSettingsSpeed();
-        }
-
-        account.setRunning(true);
-        accountRepository.save(account);
-
-
-        String referer = request.getHeader("referer");
-        return "redirect:" + referer;
-    }
-
-    @RequestMapping(value = "/stop")
-    public String stopRunning(@ModelAttribute Account account, RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception{
-
-        account = accountRepository.findByUsername(account.getUsername());
-        account.setRunning(false);
-
-//        int attempt = 0;
-//
-//        do{
-//            Thread.sleep(1000);
-//            if(DriverList.get(account) != null) {
-//                DriverList.get(account).close();
-//                DriverList.remove(account);
-//                break;
-//            } else {
-//                attempt++;
-//            }
-//        }while (attempt <= 5);
-
-
-        accountRepository.save(account);
-        logger.info(account.getUsername() + " has stopped automation");
-
-        String referer = request.getHeader("referer");
-        return "redirect:" + referer;
-    }
-
-    @RequestMapping(value = "/stop-all")
-    public String stopAllRunning(RedirectAttributes redirectAttributes, HttpServletRequest request){
-
-        // TODO: STOP ALL AUTOMATION
-
-
-        String referer = request.getHeader("referer");
-        return "redirect:" + referer;
-    }
-
 
     ///////////THE ACTUAL AUTOMATION/////////////////
     public void automate(Account account){
@@ -349,6 +267,7 @@ public class AutomationController {
         };
         thread.start();
     }
+    ///////////THE ACTUAL AUTOMATION/////////////////
 
     private ActionType getActionType(String type){
         return actionTypeRepository.findByType(type);
@@ -374,7 +293,6 @@ public class AutomationController {
             profiles.remove(profile);
         }
     }
-
 
     private void updateStats(Driver driver, Account account){
         try{

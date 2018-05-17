@@ -2,34 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b50e871-cac3-4430-957a-34dd92abe263" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/instamation-drivers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/instamation-drivers.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/config/SecurityConfig$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/config/SecurityConfig$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/config/SecurityConfig$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/config/SecurityConfig$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/config/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/model/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/model/Account.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/model/Alert$Status.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/model/Alert.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/model/Proxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/model/Proxy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/model/Setting.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/model/Setting.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/instamation/drivers/selenium/Actions.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/instamation/drivers/selenium/Actions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/instamation/drivers/web/controller/AccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/instamation/drivers/web/controller/AccountController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/instamation/drivers/web/controller/AutomationController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/instamation/drivers/web/controller/AutomationController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/instamation/drivers/web/controller/AutomationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/instamation/drivers/web/controller/AutomationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/instamation/drivers/web/controller/DriversController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/instamation/drivers/web/controller/DriversController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/instamation/drivers/web/controller/ScheduleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/instamation/drivers/web/controller/ScheduleController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/instamation-drivers-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/instamation-drivers-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/selenium/Actions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/selenium/Actions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/test/TestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/test/TestController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/web/controller/AccountController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/web/controller/AccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/web/controller/AccountController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/web/controller/AutomationController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/web/controller/AutomationController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/web/controller/AutomationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/web/controller/AutomationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/web/controller/DriversController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/web/controller/DriversController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/web/controller/ScheduleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/web/controller/ScheduleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Alert.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Proxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Proxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Setting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Setting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/repository/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/repository/AccountRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/Actions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/Actions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/DriverList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/DriverList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/test/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/test/TestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AutomationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AutomationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/DriversController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/DriversController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/ScheduleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/ScheduleController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -50,22 +43,70 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="instamation-drivers" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="instamation-drivers" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="instamation-drivers" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="AccountController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="97" column="34" selection-start-line="97" selection-start-column="34" selection-end-line="97" selection-end-column="34" />
+            <state relative-caret-position="425">
+              <caret line="42" column="17" selection-start-line="42" selection-end-line="43" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DriverList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/DriverList.java">
+      <file leaf-file-name="DriversController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/DriversController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="53" selection-start-line="53" selection-end-line="53" />
+            <state relative-caret-position="238">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AutomationController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AutomationController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-458">
+              <caret line="65" column="66" selection-start-line="65" selection-start-column="66" selection-end-line="65" selection-end-column="66" />
+              <folding>
+                <element signature="e#748#759#0" />
+                <element signature="method#automate#0;class#AutomationController#0" />
+                <element signature="e#12958#12959#0" expanded="true" />
+                <element signature="e#13018#13019#0" expanded="true" />
+                <element signature="method#sanatizeAutomatedLists#0;class#AutomationController#0" />
+                <element signature="method#updateStats#0;class#AutomationController#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -73,10 +114,9 @@
       <file leaf-file-name="Actions.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/Actions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-273">
-              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+            <state relative-caret-position="234">
+              <caret line="67" column="23" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="23" />
               <folding>
-                <element signature="method#login#0;class#Actions#0" />
                 <element signature="method#updateProfileDetails#0;class#Actions#0" />
                 <element signature="method#setProfileDetails#0;class#Actions#0" />
                 <element signature="method#updateFollowers#0;class#Actions#0" />
@@ -95,7 +135,6 @@
                 <element signature="method#clickNotNow#0;class#Actions#0" />
                 <element signature="method#waitElement#0;class#Actions#0" />
                 <element signature="method#clickLogin#0;class#Actions#0" />
-                <element signature="method#clickButton#0;class#Actions#0" />
                 <element signature="method#doesButtonExist#0;class#Actions#0" />
                 <element signature="method#clickContainsSignUp#0;class#Actions#0" />
                 <element signature="method#clickEqualsSignUp#0;class#Actions#0" />
@@ -108,20 +147,6 @@
                 <element signature="method#clickLike#0;class#Actions#0" />
                 <element signature="method#clickComment#0;class#Actions#0" />
                 <element signature="method#isSaveLoginInfo#0;class#Actions#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LogInMethods.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/LogInMethods.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="58" column="30" lean-forward="true" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#isWrongCredentials#0;class#LogInMethods#0" />
-                <element signature="method#isUnusualAttempt#0;class#LogInMethods#0" />
               </folding>
             </state>
           </provider>
@@ -143,6 +168,8 @@
       <find>.close</find>
       <find>notno</find>
       <find>user</find>
+      <find>save</find>
+      <find>account.seten</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -378,7 +405,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4579485959008" />
+        <entry key="$PROJECT_DIR$" value="4579740176323" />
         <entry key="$PROJECT_DIR$/.gradle" value="0" />
         <entry key="$PROJECT_DIR$/build.gradle" value="1530096009" />
         <entry key="$PROJECT_DIR$/settings.gradle" value="2586357205" />
@@ -585,24 +612,25 @@
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Proxy.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Setting.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AutomationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/test/TestController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/LogInController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/LogIn.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/Actions.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/config/SecurityConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/DriversController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/LogInMethods.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/repository/AccountRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/DriverList.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Account.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/LogInMethods.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/Actions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/ScheduleController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AutomationController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/DriversController.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="57" />
-    <option name="y" value="156" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -648,9 +676,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -733,11 +760,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="project.propCompiler" />
@@ -754,7 +782,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.instamation-drivers [build]">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
@@ -771,6 +799,40 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="instamation-drivers [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+    </configuration>
+    <configuration name="instamation-drivers [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -810,9 +872,16 @@
       <properties />
       <listeners />
     </configuration>
+    <list>
+      <item itemvalue="Application.InstamationDriversApplication" />
+      <item itemvalue="Gradle.instamation-drivers [build]" />
+      <item itemvalue="Gradle.instamation-drivers [clean]" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.InstamationDriversApplication" />
+        <item itemvalue="Gradle.instamation-drivers [clean]" />
+        <item itemvalue="Gradle.instamation-drivers [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -831,7 +900,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="DB Execution Console" order="7" />
@@ -841,26 +909,26 @@
       <window_info id="Designer" order="2" />
       <window_info id="Project Explorer" order="2" />
       <window_info id="Job Explorer" order="2" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.32900432" />
       <window_info anchor="bottom" id="Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3073593" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.29329005" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info id="DB Browser" order="2" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.32900432" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32900432" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2553305" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26066098" />
       <window_info anchor="bottom" id="Problems" order="7" />
-      <window_info anchor="right" id="Gradle" order="3" />
+      <window_info anchor="right" id="Gradle" order="3" visible="true" weight="0.108208954" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.32900432" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -874,11 +942,49 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="34" />
+      <option name="time" value="49" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>accountRepository.save(account);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>Actions.clickButton(driver, &quot;Follow&quot;);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>driver.isClosed()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>driver</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>List&lt;WebElement&gt; elements = driver.getDriver().findElements(By.tagName(&quot;a&quot;));
+
+for(WebElement element : elements) {
+    if(element.getText().equalsIgnoreCase(&quot;Get a new one&quot;)){
+        element.click();
+        break;
+    }
+}</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>org.openqa.selenium.WebElement,java.util.List,org.openqa.selenium.By</custom-info>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>account</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>driver.getDriver().findElement(By.tagName(&quot;h2&quot;)).getText().equalsIgnoreCase(&quot;Enter Your Security Code&quot;)</expression-string>
         <language-id>JAVA</language-id>
@@ -899,56 +1005,28 @@
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>driver.getDriver().findElement(By.id(&quot;form_error&quot;)).getText().contains(&quot;Please check the code&quot;)</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>org.openqa.selenium.By</custom-info>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>driver.getDriver().findElement(By.id(&quot;form_error&quot;)).getText()</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>org.openqa.selenium.By</custom-info>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>driver.getDriver().findElement(By.id(&quot;form_error&quot;))</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>org.openqa.selenium.By</custom-info>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>driver.getDriver().findElement(By.id(&quot;security_code&quot;)).sendKeys(type);
-Actions.clickButton(driver, &quot;Submit&quot;);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>driver.getDriver().findElement(By.id(&quot;security_code&quot;)).sendKeys(type);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>driver.getDriver().findElement(By.id(&quot;security_code&quot;))</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        <state relative-caret-position="1360">
+          <caret line="97" column="30" lean-forward="true" selection-start-line="97" selection-start-column="30" selection-end-line="97" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/DriverList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/Actions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
+        <state relative-caret-position="391">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
           <folding>
-            <element signature="method#login#0;class#Actions#0" />
             <element signature="method#updateProfileDetails#0;class#Actions#0" />
             <element signature="method#setProfileDetails#0;class#Actions#0" />
             <element signature="method#updateFollowers#0;class#Actions#0" />
@@ -967,7 +1045,131 @@ Actions.clickButton(driver, &quot;Submit&quot;);</expression-string>
             <element signature="method#clickNotNow#0;class#Actions#0" />
             <element signature="method#waitElement#0;class#Actions#0" />
             <element signature="method#clickLogin#0;class#Actions#0" />
-            <element signature="method#clickButton#0;class#Actions#0" />
+            <element signature="method#doesButtonExist#0;class#Actions#0" />
+            <element signature="method#clickContainsSignUp#0;class#Actions#0" />
+            <element signature="method#clickEqualsSignUp#0;class#Actions#0" />
+            <element signature="method#clickSkip#0;class#Actions#0" />
+            <element signature="method#getImage#0;class#Actions#0" />
+            <element signature="method#getPostUrls#0;class#Actions#0" />
+            <element signature="method#getProfileUsernames#0;class#Actions#0" />
+            <element signature="method#saveProfileUsernames#0;class#Actions#0" />
+            <element signature="method#scroll#0;class#Actions#0" />
+            <element signature="method#clickLike#0;class#Actions#0" />
+            <element signature="method#clickComment#0;class#Actions#0" />
+            <element signature="method#isSaveLoginInfo#0;class#Actions#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/LogInMethods.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="58" column="30" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
+          <folding>
+            <element signature="method#inputLoginInfo#0;class#LogInMethods#0" />
+            <element signature="method#isWrongCredentials#0;class#LogInMethods#0" />
+            <element signature="method#isUnusualAttempt#0;class#LogInMethods#0" />
+            <element signature="method#getUnusualAttemptRecoveryType#0;class#LogInMethods#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1394">
+          <caret line="97" column="34" selection-start-line="97" selection-start-column="34" selection-end-line="97" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/DriverList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/Actions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+          <folding>
+            <element signature="method#updateProfileDetails#0;class#Actions#0" />
+            <element signature="method#setProfileDetails#0;class#Actions#0" />
+            <element signature="method#updateFollowers#0;class#Actions#0" />
+            <element signature="method#isNotAvailable#0;class#Actions#0" />
+            <element signature="method#followProfile#0;class#Actions#0" />
+            <element signature="method#unfollowProfile#0;class#Actions#0" />
+            <element signature="method#likeProfilePosts#0;class#Actions#0" />
+            <element signature="method#commentProfilePosts#0;class#Actions#0" />
+            <element signature="method#isPrivate#0;class#Actions#0" />
+            <element signature="method#getAutomatedPosts#0;class#Actions#0" />
+            <element signature="method#getProfiles#0;class#Actions#0" />
+            <element signature="method#post#0;class#Actions#0" />
+            <element signature="method#downloadImage#0;class#Actions#0" />
+            <element signature="method#getHashtags#0;class#Actions#0" />
+            <element signature="method#getRandomHashtagsAsString#0;class#Actions#0" />
+            <element signature="method#clickNotNow#0;class#Actions#0" />
+            <element signature="method#waitElement#0;class#Actions#0" />
+            <element signature="method#clickLogin#0;class#Actions#0" />
+            <element signature="method#doesButtonExist#0;class#Actions#0" />
+            <element signature="method#clickContainsSignUp#0;class#Actions#0" />
+            <element signature="method#clickEqualsSignUp#0;class#Actions#0" />
+            <element signature="method#clickSkip#0;class#Actions#0" />
+            <element signature="method#getImage#0;class#Actions#0" />
+            <element signature="method#getPostUrls#0;class#Actions#0" />
+            <element signature="method#getProfileUsernames#0;class#Actions#0" />
+            <element signature="method#saveProfileUsernames#0;class#Actions#0" />
+            <element signature="method#scroll#0;class#Actions#0" />
+            <element signature="method#clickLike#0;class#Actions#0" />
+            <element signature="method#clickComment#0;class#Actions#0" />
+            <element signature="method#isSaveLoginInfo#0;class#Actions#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/LogInMethods.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="58" column="30" lean-forward="true" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
+          <folding>
+            <element signature="method#inputLoginInfo#0;class#LogInMethods#0" />
+            <element signature="method#isWrongCredentials#0;class#LogInMethods#0" />
+            <element signature="method#isUnusualAttempt#0;class#LogInMethods#0" />
+            <element signature="method#getUnusualAttemptRecoveryType#0;class#LogInMethods#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/Actions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
+          <folding>
+            <element signature="method#updateProfileDetails#0;class#Actions#0" />
+            <element signature="method#setProfileDetails#0;class#Actions#0" />
+            <element signature="method#updateFollowers#0;class#Actions#0" />
+            <element signature="method#isNotAvailable#0;class#Actions#0" />
+            <element signature="method#followProfile#0;class#Actions#0" />
+            <element signature="method#unfollowProfile#0;class#Actions#0" />
+            <element signature="method#likeProfilePosts#0;class#Actions#0" />
+            <element signature="method#commentProfilePosts#0;class#Actions#0" />
+            <element signature="method#isPrivate#0;class#Actions#0" />
+            <element signature="method#getAutomatedPosts#0;class#Actions#0" />
+            <element signature="method#getProfiles#0;class#Actions#0" />
+            <element signature="method#post#0;class#Actions#0" />
+            <element signature="method#downloadImage#0;class#Actions#0" />
+            <element signature="method#getHashtags#0;class#Actions#0" />
+            <element signature="method#getRandomHashtagsAsString#0;class#Actions#0" />
+            <element signature="method#clickNotNow#0;class#Actions#0" />
+            <element signature="method#waitElement#0;class#Actions#0" />
+            <element signature="method#clickLogin#0;class#Actions#0" />
             <element signature="method#doesButtonExist#0;class#Actions#0" />
             <element signature="method#clickContainsSignUp#0;class#Actions#0" />
             <element signature="method#clickEqualsSignUp#0;class#Actions#0" />
@@ -989,9 +1191,10 @@ Actions.clickButton(driver, &quot;Submit&quot;);</expression-string>
         <state relative-caret-position="561">
           <caret line="59" column="36" lean-forward="true" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#inputLoginInfo#0;class#LogInMethods#0" />
             <element signature="method#isWrongCredentials#0;class#LogInMethods#0" />
             <element signature="method#isUnusualAttempt#0;class#LogInMethods#0" />
+            <element signature="method#getUnusualAttemptRecoveryType#0;class#LogInMethods#0" />
           </folding>
         </state>
       </provider>
@@ -1008,7 +1211,6 @@ Actions.clickButton(driver, &quot;Submit&quot;);</expression-string>
         <state relative-caret-position="544">
           <caret line="49" selection-start-line="49" selection-end-line="49" />
           <folding>
-            <element signature="method#login#0;class#Actions#0" />
             <element signature="method#updateProfileDetails#0;class#Actions#0" />
             <element signature="method#setProfileDetails#0;class#Actions#0" />
             <element signature="method#updateFollowers#0;class#Actions#0" />
@@ -1027,7 +1229,6 @@ Actions.clickButton(driver, &quot;Submit&quot;);</expression-string>
             <element signature="method#clickNotNow#0;class#Actions#0" />
             <element signature="method#waitElement#0;class#Actions#0" />
             <element signature="method#clickLogin#0;class#Actions#0" />
-            <element signature="method#clickButton#0;class#Actions#0" />
             <element signature="method#doesButtonExist#0;class#Actions#0" />
             <element signature="method#clickContainsSignUp#0;class#Actions#0" />
             <element signature="method#clickEqualsSignUp#0;class#Actions#0" />
@@ -1049,9 +1250,10 @@ Actions.clickButton(driver, &quot;Submit&quot;);</expression-string>
         <state relative-caret-position="544">
           <caret line="58" selection-start-line="58" selection-end-line="58" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#inputLoginInfo#0;class#LogInMethods#0" />
             <element signature="method#isWrongCredentials#0;class#LogInMethods#0" />
             <element signature="method#isUnusualAttempt#0;class#LogInMethods#0" />
+            <element signature="method#getUnusualAttemptRecoveryType#0;class#LogInMethods#0" />
           </folding>
         </state>
       </provider>
@@ -1096,27 +1298,6 @@ Actions.clickButton(driver, &quot;Submit&quot;);</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/5.0.4.RELEASE/2fbf13b190d2b64c44f4235ff24038a1215cbf2d/spring-web-5.0.4.RELEASE-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="217" selection-start-line="217" selection-end-line="217" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AutomationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="916">
-          <caret line="99" column="25" lean-forward="true" selection-start-line="99" selection-start-column="25" selection-end-line="99" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/DriversController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/repository/AccountRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1124,12 +1305,64 @@ Actions.clickButton(driver, &quot;Submit&quot;);</expression-string>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Account.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="27" column="28" lean-forward="true" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk-9.0.1/lib/src.zip!/java.base/java/util/Date.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="955" selection-start-line="955" selection-end-line="955" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/LogInMethods.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="82" column="5" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
+          <folding>
+            <element signature="method#inputLoginInfo#0;class#LogInMethods#0" />
+            <element signature="method#isWrongCredentials#0;class#LogInMethods#0" />
+            <element signature="method#isUnusualAttempt#0;class#LogInMethods#0" />
+            <element signature="method#getUnusualAttemptRecoveryType#0;class#LogInMethods#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.seleniumhq.selenium/selenium-remote-driver/3.9.1/406fb68f3facb1ad3c675a8e9e425b489d29293/selenium-remote-driver-3.9.1-sources.jar!/org/openqa/selenium/remote/HttpCommandExecutor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="159" selection-start-line="159" selection-end-line="159" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/5.0.4.RELEASE/2fbf13b190d2b64c44f4235ff24038a1215cbf2d/spring-web-5.0.4.RELEASE-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="215" selection-start-line="215" selection-end-line="215" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/ScheduleController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="58" column="26" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
+          <folding>
+            <element signature="method#resetActions#0;class#ScheduleController#0" />
+            <element signature="method#updateStats#0;class#ScheduleController#0" />
+            <element signature="method#sendRequest#0;class#ScheduleController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/Actions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-273">
-          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+        <state relative-caret-position="234">
+          <caret line="67" column="23" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="23" />
           <folding>
-            <element signature="method#login#0;class#Actions#0" />
             <element signature="method#updateProfileDetails#0;class#Actions#0" />
             <element signature="method#setProfileDetails#0;class#Actions#0" />
             <element signature="method#updateFollowers#0;class#Actions#0" />
@@ -1148,7 +1381,6 @@ Actions.clickButton(driver, &quot;Submit&quot;);</expression-string>
             <element signature="method#clickNotNow#0;class#Actions#0" />
             <element signature="method#waitElement#0;class#Actions#0" />
             <element signature="method#clickLogin#0;class#Actions#0" />
-            <element signature="method#clickButton#0;class#Actions#0" />
             <element signature="method#doesButtonExist#0;class#Actions#0" />
             <element signature="method#clickContainsSignUp#0;class#Actions#0" />
             <element signature="method#clickEqualsSignUp#0;class#Actions#0" />
@@ -1165,42 +1397,69 @@ Actions.clickButton(driver, &quot;Submit&quot;);</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/LogInMethods.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/DriverList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="58" column="30" lean-forward="true" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
+        <state relative-caret-position="81">
+          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AutomationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-458">
+          <caret line="65" column="66" selection-start-line="65" selection-start-column="66" selection-end-line="65" selection-end-column="66" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#isWrongCredentials#0;class#LogInMethods#0" />
-            <element signature="method#isUnusualAttempt#0;class#LogInMethods#0" />
+            <element signature="e#748#759#0" />
+            <element signature="method#automate#0;class#AutomationController#0" />
+            <element signature="e#12958#12959#0" expanded="true" />
+            <element signature="e#13018#13019#0" expanded="true" />
+            <element signature="method#sanatizeAutomatedLists#0;class#AutomationController#0" />
+            <element signature="method#updateStats#0;class#AutomationController#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Account.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/DriversController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="27" column="28" lean-forward="true" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/DriverList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        <state relative-caret-position="238">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="97" column="34" selection-start-line="97" selection-start-column="34" selection-end-line="97" selection-end-column="34" />
+        <state relative-caret-position="425">
+          <caret line="42" column="17" selection-start-line="42" selection-end-line="43" />
         </state>
       </provider>
     </entry>
   </component>
   <component name="masterDetails">
     <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
           <splitter-proportions>
@@ -1214,7 +1473,19 @@ Actions.clickButton(driver, &quot;Submit&quot;);</expression-string>
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>9.0</last-edited>
+          <last-edited>Android API 23 Platform</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>instamation-drivers</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1226,6 +1497,7 @@ Actions.clickButton(driver, &quot;Submit&quot;);</expression-string>
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>Gradle: antlr:antlr:2.7.7</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

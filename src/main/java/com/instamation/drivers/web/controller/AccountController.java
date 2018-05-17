@@ -42,7 +42,6 @@ public class AccountController {
 
     @PostMapping(value = "/add/{userId}")
     public Response addAccount(@RequestBody Account account, @PathVariable Long userId) throws Exception{
-        System.out.println("HIT THE BOX");
         // check if account exists and if the account exists and account does not belong to this user
         User user = userRepository.findById(userId).get();
         Account existingAccount = accountRepository.findByUsername(account.getUsername());
@@ -55,6 +54,9 @@ public class AccountController {
         Driver driver = DriverList.get(accountRepository.findByUsername(account.getUsername()));
         Proxy proxy = proxyRepository.findFirstByAccount(null);
 
+        if(driver != null && driver.isClosed()){
+            driver = null;
+        }
         if(driver == null) {
             if (proxy != null) {
                 driver = new Driver(false, proxy.getIp());
@@ -65,6 +67,7 @@ public class AccountController {
 
         String response = Actions.loginFirstTime(driver, account);
 
+        // user enters the wrong credentials
         if(response.equalsIgnoreCase("wrong-credentials")){
             driver.close();
             try{
@@ -73,13 +76,6 @@ public class AccountController {
             return new Response("wrong-credentials");
         }
 
-
-        // add proxy if one is available.
-        if(proxy != null) {
-            proxy.setAccount(account);
-            account.setProxy(proxy);
-            proxyRepository.save(account.getProxy());
-        }
 
         // skipped to entering security code
         try{
@@ -101,8 +97,17 @@ public class AccountController {
         if(response.contains("unusual-attempt")){
             account.setUser(user);
             account.setEnabled(false);
+
+            // save proxy with account
             try {
-                accountRepository.save(account);
+                if(proxy != null) {
+                    proxy.setAccount(account);
+                    account.setProxy(proxy);
+                    accountRepository.save(account);
+                    proxyRepository.save(account.getProxy());
+                }else {
+                    accountRepository.save(account);
+                }
             }catch (Exception e){}
             if(!DriverList.containsKey(account)) {
                 DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
@@ -179,7 +184,17 @@ public class AccountController {
         return new Response("success");
     }
 
+    @PostMapping(value = "/verify-new")
+    public Response verifyNew(HttpServletRequest request){
+        String username = request.getParameter("username");
 
+        Account account = accountRepository.findByUsername(username);
+        Driver driver = DriverList.get(account);
+
+        Actions.clickLink(driver, "Get a new one");
+
+        return new Response("success");
+    }
 
     private void loginSuccess(Driver driver, Account account) throws Exception{
         // update profile details
@@ -202,7 +217,7 @@ public class AccountController {
         // set expiry date for the first days free trial
         long day = 86400000;
         account.setExpiryDate(new Date(System.currentTimeMillis() + day*3));
-
+        account.setEnabled(true);
         accountRepository.save(account);
 
         Stats stats = new Stats();

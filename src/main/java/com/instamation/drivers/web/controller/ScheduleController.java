@@ -55,7 +55,7 @@ public class ScheduleController {
         accountRepository.saveAll(accounts);
     }
 
-    @RequestMapping("/update-stats")
+//    @RequestMapping("/update-stats")
 //    @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
     public void updateStats() throws Exception{
         logger.info("Updating stats for all account");
@@ -104,19 +104,23 @@ public class ScheduleController {
 
     }
 
-    @Scheduled(cron="0 0 */1 * * *", zone="Europe/London")
+    @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
     public void updateMemberships() throws Exception{
         List<Account> accounts = accountRepository.findAll();
 
         for(Account account : accounts){
             // check if today is after account expiry date and account is not pending an upgrade.
-            if(new Date(System.currentTimeMillis()).after(account.getExpiryDate()) && !account.isPendingUpgrade()){
+            if(account.getExpiryDate() != null && new Date(System.currentTimeMillis()).after(account.getExpiryDate()) && !account.isPendingUpgrade()){
                 account.setEnabled(false);
                 sendRequest("https://insta-mation.com/automate/stop/" + account.getId());
+                account.getProxy().setAccount(null);
+                account.setProxy(null);
+                DriverList.get(account).close();
+                DriverList.remove(account);
             }
 
             // check if today is after account expiry date and account is pending an upgrade.
-            if(new Date(System.currentTimeMillis()).after(account.getExpiryDate()) && account.isPendingUpgrade()){
+            if(account.getExpiryDate() != null && new Date(System.currentTimeMillis()).after(account.getExpiryDate()) && account.isPendingUpgrade()){
                 account.setEnabled(true);
                 account.setPendingUpgrade(false);
             }
