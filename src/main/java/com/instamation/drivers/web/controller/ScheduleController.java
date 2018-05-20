@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.apache.http.protocol.HTTP.USER_AGENT;
@@ -128,6 +129,22 @@ public class ScheduleController {
             accountRepository.save(account);
         }
 
+    }
+
+    @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
+    public void deleteUnused() throws Exception{
+        List<Driver> deleteDrivers = new ArrayList<>();
+
+        for(Driver driver : DriverList.getNewDrivers()){
+            if(!DriverList.contains(driver)){
+                driver.close();
+                deleteDrivers.add(driver);
+            }
+        }
+
+        for(Driver driver : deleteDrivers){
+            DriverList.getNewDrivers().remove(driver);
+        }
     }
 
     private void sendRequest(String url) throws Exception{

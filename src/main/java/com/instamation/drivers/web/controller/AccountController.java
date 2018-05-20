@@ -8,16 +8,10 @@ import com.instamation.drivers.selenium.DriverList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 import java.sql.Date;
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:8081", "https://insta-mation.com"})
@@ -45,37 +39,67 @@ public class AccountController {
         // check if account exists and if the account exists and account does not belong to this user
         User user = userRepository.findById(userId).get();
         Account existingAccount = accountRepository.findByUsername(account.getUsername());
+
+        // if existing account exists and the id does not belong to you. Return already exists
         if(existingAccount != null){
             if(!existingAccount.getUser().getId().equals(user.getId())){
                 return new Response("exists");
+            } else {
+                account = existingAccount;
             }
         }
 
-        Driver driver = DriverList.get(accountRepository.findByUsername(account.getUsername()));
-        Proxy proxy = proxyRepository.findFirstByAccount(null);
+        Driver driver = DriverList.get(account);
+        Proxy proxy;
+        // if account has proxy, set proxy as accounts proxy. If not find a new proxy without an account.
+        if(account.getProxy() != null){
+            proxy = account.getProxy();
+        }else {
+            proxy = proxyRepository.findFirstByAccount(null);
+        }
 
+        // if driver is closed, set driver as null.
         if(driver != null && driver.isClosed()){
             driver = null;
         }
+
+        // if a driver is null create a new driver.
         if(driver == null) {
+            // if proxy exists, give the driver the proxy.
             if (proxy != null) {
                 driver = new Driver(false, proxy.getIp());
             } else {
                 driver = new Driver();
             }
+            DriverList.getNewDrivers().add(driver);
         }
 
-        String response = Actions.loginFirstTime(driver, account);
+        String response = Actions.login(driver, account);
 
         // user enters the wrong credentials
         if(response.equalsIgnoreCase("wrong-credentials")){
+            // close drive and remove it from driver list if its already in the driver list.
             driver.close();
-            try{
+            DriverList.getNewDrivers().remove(driver);
+            if(DriverList.containsKey(account)){
                 DriverList.remove(account);
-            }catch (Exception e){}
+            }
             return new Response("wrong-credentials");
         }
 
+        // if account credentials are correct
+        account.setUser(user);
+        if(proxy != null) {
+            proxy.setAccount(account);
+            account.setProxy(proxy);
+            accountRepository.save(account);
+            proxyRepository.save(account.getProxy());
+        }
+        accountRepository.save(account);
+
+        if(!DriverList.containsKey(account)) {
+            DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
+        }
 
         // skipped to entering security code
         try{
@@ -94,24 +118,8 @@ public class AccountController {
         }catch (Exception e){}
 
 
+        // if login runs into unusual attempt, return an unusual attempt response
         if(response.contains("unusual-attempt")){
-            account.setUser(user);
-            account.setEnabled(false);
-
-            // save proxy with account
-            try {
-                if(proxy != null) {
-                    proxy.setAccount(account);
-                    account.setProxy(proxy);
-                    accountRepository.save(account);
-                    proxyRepository.save(account.getProxy());
-                }else {
-                    accountRepository.save(account);
-                }
-            }catch (Exception e){}
-            if(!DriverList.containsKey(account)) {
-                DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
-            }
             return new Response(response);
         }
 
@@ -204,21 +212,26 @@ public class AccountController {
         driver.getDriver().get("https://www.instagram.com/instamation8/");
         Actions.clickButton(driver, "Follow");
 
+        account.setLoggedIn(true);
         accountRepository.save(account);
 
         // create settings for the account and vice versa, setting has to be saved to the database first.
-        Setting setting = new Setting();
-        setting.setAccount(account);
-        setting.setActionSpeed("normal");
-        setting.updateSettingsSpeed();
-        settingRepository.save(setting);
-        account.setSetting(setting);
+        if(account.getSetting() == null) {
+            Setting setting = new Setting();
+            setting.setAccount(account);
+            setting.setActionSpeed("normal");
+            setting.updateSettingsSpeed();
+            settingRepository.save(setting);
+            account.setSetting(setting);
+        }
 
         // set expiry date for the first days free trial
-        long day = 86400000;
-        account.setExpiryDate(new Date(System.currentTimeMillis() + day*3));
-        account.setEnabled(true);
-        accountRepository.save(account);
+        if(account.getExpiryDate() == null) {
+            long day = 86400000;
+            account.setExpiryDate(new Date(System.currentTimeMillis() + day * 3));
+            account.setEnabled(true);
+            accountRepository.save(account);
+        }
 
         Stats stats = new Stats();
         stats.setAccount(account);

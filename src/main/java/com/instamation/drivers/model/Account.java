@@ -67,9 +67,8 @@ public class Account {
     private Integer followersGained = 0;
 
     @Column(name = "enabled")
-    private boolean enabled = true;
+    private boolean enabled = false;
 
-//    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "settings_id")
     private Setting setting;
@@ -90,6 +89,9 @@ public class Account {
 
     @Column(name = "automation_lock")
     private boolean automationLock = false;
+
+    @Column(name = "logged_in")
+    private boolean loggedIn = false;
 
     public Long getId() {
         return id;
@@ -300,6 +302,14 @@ public class Account {
 
     public void setAutomationLock(boolean automationLock) {
         this.automationLock = automationLock;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 
     @Override

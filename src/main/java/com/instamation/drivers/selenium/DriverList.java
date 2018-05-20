@@ -1,8 +1,6 @@
 package com.instamation.drivers.selenium;
 
-import com.instamation.drivers.repository.ProxyRepository;
 import com.instamation.drivers.model.Account;
-import com.instamation.drivers.model.Proxy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +10,7 @@ import java.util.Map;
 public class DriverList {
 
     private static Map<Account, Driver> drivers = new HashMap<>();
-    private static List<Driver> driverList = new ArrayList<>();
+    private static List<Driver> newDrivers = new ArrayList<>();
 
     public static Map<Account, Driver> getDrivers() {
         return drivers;
@@ -41,6 +39,19 @@ public class DriverList {
         return null;
     }
 
+    public static boolean contains(Driver driver){
+        if(driver == null){
+            return false;
+        }
+        for(Map.Entry driverMap : drivers.entrySet()){
+            Driver driverEntry = (Driver) driverMap.getValue();
+            if(driverEntry == driver || driverEntry.equals(driver)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void remove(Account account){
         for(Map.Entry driver : drivers.entrySet()){
             Account accountEntry = (Account) driver.getKey();
@@ -60,10 +71,7 @@ public class DriverList {
         drivers.put(account, driver);
     }
 
-    public static void startDrivers(ProxyRepository proxyRepository) throws Exception{
-        for(Proxy proxy : proxyRepository.findAll()){
-            Driver driver = new Driver(false, proxy.getIp());
-            driverList.add(driver);
-        }
+    public static List<Driver> getNewDrivers() {
+        return newDrivers;
     }
 }
