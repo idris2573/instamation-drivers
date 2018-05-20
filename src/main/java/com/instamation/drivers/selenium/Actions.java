@@ -33,6 +33,7 @@ public class Actions {
         Thread.sleep(1000);
         // if already logged in
         if (!Actions.doesButtonExist(driver, "Log In")) {
+            logger.info(account.getUsername() + " is already logged in");
             return "success";
         }
         clickLogin(driver);

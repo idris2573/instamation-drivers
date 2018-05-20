@@ -44,17 +44,6 @@ public class ScheduleController {
     @Autowired
     private ActionRepository actionRepository;
 
-    @Scheduled(cron="0 1 1 * * ?", zone="Europe/London")
-    public void resetActions(){
-        List<Account> accounts = accountRepository.findAll();
-
-        for(Account account : accounts){
-            account.setActions(0);
-            account.getSetting().setPostActions(0);
-        }
-
-        accountRepository.saveAll(accounts);
-    }
 
 //    @RequestMapping("/update-stats")
 //    @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
@@ -105,34 +94,6 @@ public class ScheduleController {
 
     }
 
-    @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
-    public void updateMemberships() throws Exception{
-        List<Account> accounts = accountRepository.findAll();
-
-        for(Account account : accounts){
-            // check if today is after account expiry date and account is not pending an upgrade.
-            if(account.getExpiryDate() != null && new Date(System.currentTimeMillis()).after(account.getExpiryDate()) && !account.isPendingUpgrade()){
-                account.setEnabled(false);
-                sendRequest("https://insta-mation.com/automate/stop/" + account.getId());
-                account.getProxy().setAccount(null);
-                account.setProxy(null);
-                Driver driver = DriverList.get(account);
-                if(driver != null) {
-                    driver.close();
-                    DriverList.remove(account);
-                }
-            }
-
-            // check if today is after account expiry date and account is pending an upgrade.
-            if(account.getExpiryDate() != null && new Date(System.currentTimeMillis()).after(account.getExpiryDate()) && account.isPendingUpgrade()){
-                account.setEnabled(true);
-                account.setPendingUpgrade(false);
-            }
-
-            accountRepository.save(account);
-        }
-
-    }
 
     @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
     public void deleteUnused() throws Exception{
@@ -148,20 +109,6 @@ public class ScheduleController {
         for(Driver driver : deleteDrivers){
             DriverList.getNewDrivers().remove(driver);
         }
-    }
-
-    private void sendRequest(String url) throws Exception{
-
-        URL obj = new URL(url);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-        // optional default is GET
-        con.setRequestMethod("GET");
-
-        //add request header
-        con.setRequestProperty("User-Agent", USER_AGENT);
-
-        int responseCode = con.getResponseCode();
     }
 
 }

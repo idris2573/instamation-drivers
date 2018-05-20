@@ -130,6 +130,9 @@ public class AccountController {
             return new Response(response);
         }
 
+        account.setLoggedIn(true);
+        accountRepository.save(account);
+
         // successful login
         loginSuccess(driver, account);
 
@@ -192,6 +195,8 @@ public class AccountController {
             }
         }catch (Exception e){}
 
+        account.setLoggedIn(true);
+        accountRepository.save(account);
 
         // user is confirmed via code. add user
         loginSuccess(driver, account);
@@ -218,9 +223,6 @@ public class AccountController {
         // like instamation
         driver.getDriver().get("https://www.instagram.com/instamation8/");
         Actions.clickButton(driver, "Follow");
-
-        account.setLoggedIn(true);
-        accountRepository.save(account);
 
         // create settings for the account and vice versa, setting has to be saved to the database first.
         if(account.getSetting() == null) {
