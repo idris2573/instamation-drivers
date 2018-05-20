@@ -116,8 +116,11 @@ public class ScheduleController {
                 sendRequest("https://insta-mation.com/automate/stop/" + account.getId());
                 account.getProxy().setAccount(null);
                 account.setProxy(null);
-                DriverList.get(account).close();
-                DriverList.remove(account);
+                Driver driver = DriverList.get(account);
+                if(driver != null) {
+                    driver.close();
+                    DriverList.remove(account);
+                }
             }
 
             // check if today is after account expiry date and account is pending an upgrade.

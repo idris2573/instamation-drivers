@@ -17,6 +17,10 @@ public class DriverList {
     }
 
     public static boolean containsKey(Account account){
+        if(account == null || account.getId() == null){
+            return false;
+        }
+
         for(Map.Entry driver : drivers.entrySet()){
             Account accountEntry = (Account) driver.getKey();
             if(account.getId().equals(accountEntry.getId())){
@@ -27,7 +31,7 @@ public class DriverList {
     }
 
     public static Driver get(Account account){
-        if(account == null){
+        if(account == null || account.getId() == null){
             return null;
         }
         for(Map.Entry driver : drivers.entrySet()){
@@ -53,6 +57,10 @@ public class DriverList {
     }
 
     public static void remove(Account account){
+        if(account == null || account.getId() == null){
+            return;
+        }
+
         for(Map.Entry driver : drivers.entrySet()){
             Account accountEntry = (Account) driver.getKey();
             if(account.getId().equals(accountEntry.getId())){
@@ -62,6 +70,10 @@ public class DriverList {
     }
 
     public static void put(Account account, Driver driver){
+        if(account == null || account.getId() == null){
+            return;
+        }
+
         for(Map.Entry driver1 : drivers.entrySet()){
             Account accountEntry = (Account) driver1.getKey();
             if(account.getId().equals(accountEntry.getId())){

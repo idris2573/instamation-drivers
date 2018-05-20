@@ -114,6 +114,12 @@ public class AutomationController {
                     // accounts settings working time is true
                     // account HAS list of profile to work with
                     // accounts settings has 1 of the four actions active
+                    logger.info(account.getUsername() + String.format("'s automation settings: \nenabled: %s, \nactions available: %s, \nis working time: %s, \nprofile list is not empty: %s, \nFULC action: %s",
+                            account.isEnabled(),
+                            (account.getActions() < setting.getActionsPerDay()),
+                            setting.isWorkingTime(),
+                            !profiles.isEmpty(),
+                            (setting.isFollow() || setting.isLikes() || setting.isUnfollow() || setting.isComment())));
 
                     if (account.isEnabled() && account.getActions() < setting.getActionsPerDay() && setting.isWorkingTime() && !profiles.isEmpty()
                             && (setting.isFollow() || setting.isLikes() || setting.isUnfollow() || setting.isComment())) {

@@ -44,6 +44,10 @@ public class DriversController {
     public Boolean isLoggedIn(@PathVariable String username) {
         Account account = accountRepository.findByUsername(username);
         Driver driver = DriverList.get(account);
+        if(driver == null || driver.isClosed()){
+            return false;
+        }
+
         driver.getDriver().get("https://instagram.com");
         if(!Actions.doesButtonExist(driver, "Log In")) {
             return true;

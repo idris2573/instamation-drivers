@@ -95,8 +95,15 @@ public class AccountController {
             accountRepository.save(account);
             proxyRepository.save(account.getProxy());
         }
-        accountRepository.save(account);
 
+        // save or update an account;
+        // if account does not have an id, get the account from the database with the same username.
+        accountRepository.save(account);
+        if(account.getId() == null) {
+            account = accountRepository.findByUsername(account.getUsername());
+        }
+
+        // if Driverlist does not contain account, add accoung and driver to Driverlist
         if(!DriverList.containsKey(account)) {
             DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
         }
