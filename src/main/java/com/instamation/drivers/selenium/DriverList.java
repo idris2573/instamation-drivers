@@ -1,8 +1,6 @@
 package com.instamation.drivers.selenium;
 
-import com.instamation.drivers.repository.ProxyRepository;
 import com.instamation.drivers.model.Account;
-import com.instamation.drivers.model.Proxy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,13 +10,17 @@ import java.util.Map;
 public class DriverList {
 
     private static Map<Account, Driver> drivers = new HashMap<>();
-    private static List<Driver> driverList = new ArrayList<>();
+    private static List<Driver> newDrivers = new ArrayList<>();
 
     public static Map<Account, Driver> getDrivers() {
         return drivers;
     }
 
     public static boolean containsKey(Account account){
+        if(account == null || account.getId() == null){
+            return false;
+        }
+
         for(Map.Entry driver : drivers.entrySet()){
             Account accountEntry = (Account) driver.getKey();
             if(account.getId().equals(accountEntry.getId())){
@@ -29,6 +31,9 @@ public class DriverList {
     }
 
     public static Driver get(Account account){
+        if(account == null || account.getId() == null){
+            return null;
+        }
         for(Map.Entry driver : drivers.entrySet()){
             Account accountEntry = (Account) driver.getKey();
             if(account.getId().equals(accountEntry.getId())){
@@ -38,7 +43,24 @@ public class DriverList {
         return null;
     }
 
+    public static boolean contains(Driver driver){
+        if(driver == null){
+            return false;
+        }
+        for(Map.Entry driverMap : drivers.entrySet()){
+            Driver driverEntry = (Driver) driverMap.getValue();
+            if(driverEntry == driver || driverEntry.equals(driver)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void remove(Account account){
+        if(account == null || account.getId() == null){
+            return;
+        }
+
         for(Map.Entry driver : drivers.entrySet()){
             Account accountEntry = (Account) driver.getKey();
             if(account.getId().equals(accountEntry.getId())){
@@ -48,6 +70,10 @@ public class DriverList {
     }
 
     public static void put(Account account, Driver driver){
+        if(account == null || account.getId() == null){
+            return;
+        }
+
         for(Map.Entry driver1 : drivers.entrySet()){
             Account accountEntry = (Account) driver1.getKey();
             if(account.getId().equals(accountEntry.getId())){
@@ -57,10 +83,7 @@ public class DriverList {
         drivers.put(account, driver);
     }
 
-    public static void startDrivers(ProxyRepository proxyRepository) throws Exception{
-        for(Proxy proxy : proxyRepository.findAll()){
-            Driver driver = new Driver(false, proxy.getIp());
-            driverList.add(driver);
-        }
+    public static List<Driver> getNewDrivers() {
+        return newDrivers;
     }
 }

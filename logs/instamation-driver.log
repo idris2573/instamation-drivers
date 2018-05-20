@@ -1,0 +1,939 @@
+20-05-2018 00:29:58 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 22328 (H:\WebApps\instamation-drivers\out\production\classes started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 00:29:58 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 00:29:58 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@f58a597: startup date [Sun May 20 00:29:58 BST 2018]; root of context hierarchy
+20-05-2018 00:30:00 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ccd709b5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 00:30:01 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 00:30:01 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 3105 ms
+20-05-2018 00:30:01 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 00:30:01 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 00:30:01 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 00:30:01 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 00:30:01 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 00:30:01 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 00:30:02 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:30:04 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:30:05 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/test/**'], []
+20-05-2018 00:30:05 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/account/**'], []
+20-05-2018 00:30:05 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/drivers/**'], []
+20-05-2018 00:30:05 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/automate/**'], []
+20-05-2018 00:30:05 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1767dd47, org.springframework.security.web.context.SecurityContextPersistenceFilter@1cf50fa8, org.springframework.security.web.header.HeaderWriterFilter@443d554, org.springframework.security.web.csrf.CsrfFilter@5ecaf7e6, org.springframework.security.web.authentication.logout.LogoutFilter@3dab61ff, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@13c57a98, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@12f61b46, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5114707b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@511622f0, org.springframework.security.web.session.SessionManagementFilter@7c5d5c3, org.springframework.security.web.access.ExceptionTranslationFilter@7a313eec, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1287515b]
+20-05-2018 00:30:06 INFO  RequestMappingHandlerAdapter:567 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@f58a597: startup date [Sun May 20 00:29:58 BST 2018]; root of context hierarchy
+20-05-2018 00:30:06 WARN  JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start]}" onto public java.lang.String com.instamation.drivers.test.TestController.start() throws java.lang.Exception
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/accounts]}" onto public java.util.List<com.instamation.drivers.model.Account> com.instamation.drivers.test.TestController.accounts()
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/account]}" onto public com.instamation.drivers.model.Account com.instamation.drivers.test.TestController.account()
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start2],methods=[POST]}" onto public java.lang.String com.instamation.drivers.test.TestController.start2() throws java.lang.Exception
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/drivers]}" onto public java.util.Map<com.instamation.drivers.model.Account, com.instamation.drivers.selenium.Driver> com.instamation.drivers.test.TestController.drivers()
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verify(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/add/{userId}],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.addAccount(com.instamation.drivers.model.Account,java.lang.Long) throws java.lang.Exception
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/recovery],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.recovery(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify-new],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verifyNew(javax.servlet.http.HttpServletRequest)
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/all],methods=[GET]}" onto public java.util.Set<com.instamation.drivers.model.Account> com.instamation.drivers.web.controller.DriversController.getAll()
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/running/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isAccountDriverRunning(java.lang.String)
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/close/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.closeDriverByUsername(java.lang.String)
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/loggedin/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isLoggedIn(java.lang.String)
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+20-05-2018 00:30:06 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+20-05-2018 00:30:06 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:30:06 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:30:06 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:30:06 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:104 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+20-05-2018 00:30:07 WARN  OptionalLiveReloadServer:61 - Unable to start LiveReload server
+20-05-2018 00:30:07 INFO  AnnotationMBeanExporter:434 - Registering beans for JMX exposure on startup
+20-05-2018 00:30:07 INFO  AnnotationMBeanExporter:896 - Bean with name 'dataSource' has been autodetected for JMX exposure
+20-05-2018 00:30:07 INFO  AnnotationMBeanExporter:669 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+20-05-2018 00:30:07 INFO  ScheduledAnnotationBeanPostProcessor:275 - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+20-05-2018 00:30:07 INFO  TomcatWebServer:205 - Tomcat started on port(s): 8082 (http) with context path ''
+20-05-2018 00:30:07 INFO  InstamationDriversApplication:59 - Started InstamationDriversApplication in 9.709 seconds (JVM running for 10.615)
+20-05-2018 00:31:27 INFO  DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+20-05-2018 00:31:27 INFO  DispatcherServlet:513 - FrameworkServlet 'dispatcherServlet': initialization completed in 22 ms
+20-05-2018 00:31:31 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 00:32:07 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 00:32:43 INFO  AutomationController:91 - repostgymmemeshas no profiles, adding new profiles.
+20-05-2018 00:32:43 INFO  AutomationController:95 - repostgymmemes adding profiles using '@memes' seed
+20-05-2018 00:33:04 INFO  AutomationController:106 - repostgymmemes finished getting profiles
+20-05-2018 00:34:34 INFO  AnnotationConfigServletWebServerApplicationContext:989 - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@f58a597: startup date [Sun May 20 00:29:58 BST 2018]; root of context hierarchy
+20-05-2018 00:34:34 INFO  AnnotationMBeanExporter:452 - Unregistering JMX-exposed beans on shutdown
+20-05-2018 00:34:34 INFO  AnnotationMBeanExporter:183 - Unregistering JMX-exposed beans
+20-05-2018 00:34:34 INFO  LocalContainerEntityManagerFactoryBean:572 - Closing JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:34:35 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 22328 (H:\WebApps\instamation-drivers\out\production\classes started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 00:34:35 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 00:34:35 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@591ae89: startup date [Sun May 20 00:34:35 BST 2018]; root of context hierarchy
+20-05-2018 00:34:36 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ccd709b5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 00:34:36 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 00:34:36 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 1145 ms
+20-05-2018 00:34:36 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 00:34:36 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 00:34:36 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 00:34:36 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 00:34:36 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 00:34:36 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 00:34:36 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:34:37 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:34:38 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/test/**'], []
+20-05-2018 00:34:38 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/account/**'], []
+20-05-2018 00:34:38 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/drivers/**'], []
+20-05-2018 00:34:38 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/automate/**'], []
+20-05-2018 00:34:38 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@59707578, org.springframework.security.web.context.SecurityContextPersistenceFilter@7a324b66, org.springframework.security.web.header.HeaderWriterFilter@13301202, org.springframework.security.web.csrf.CsrfFilter@5628f123, org.springframework.security.web.authentication.logout.LogoutFilter@3d444220, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@488c51fb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@557878f4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@464bc05b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@bb6ee5f, org.springframework.security.web.session.SessionManagementFilter@6b021ecc, org.springframework.security.web.access.ExceptionTranslationFilter@426db10d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@121e5670]
+20-05-2018 00:34:38 INFO  RequestMappingHandlerAdapter:567 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@591ae89: startup date [Sun May 20 00:34:35 BST 2018]; root of context hierarchy
+20-05-2018 00:34:38 WARN  JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start]}" onto public java.lang.String com.instamation.drivers.test.TestController.start() throws java.lang.Exception
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/accounts]}" onto public java.util.List<com.instamation.drivers.model.Account> com.instamation.drivers.test.TestController.accounts()
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/account]}" onto public com.instamation.drivers.model.Account com.instamation.drivers.test.TestController.account()
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start2],methods=[POST]}" onto public java.lang.String com.instamation.drivers.test.TestController.start2() throws java.lang.Exception
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/drivers]}" onto public java.util.Map<com.instamation.drivers.model.Account, com.instamation.drivers.selenium.Driver> com.instamation.drivers.test.TestController.drivers()
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verify(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/add/{userId}],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.addAccount(com.instamation.drivers.model.Account,java.lang.Long) throws java.lang.Exception
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/recovery],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.recovery(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify-new],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verifyNew(javax.servlet.http.HttpServletRequest)
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/all],methods=[GET]}" onto public java.util.Set<com.instamation.drivers.model.Account> com.instamation.drivers.web.controller.DriversController.getAll()
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/running/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isAccountDriverRunning(java.lang.String)
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/close/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.closeDriverByUsername(java.lang.String)
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/loggedin/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isLoggedIn(java.lang.String)
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+20-05-2018 00:34:38 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+20-05-2018 00:34:38 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:34:38 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:34:38 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:34:38 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:104 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+20-05-2018 00:34:38 WARN  OptionalLiveReloadServer:61 - Unable to start LiveReload server
+20-05-2018 00:34:39 INFO  AnnotationMBeanExporter:434 - Registering beans for JMX exposure on startup
+20-05-2018 00:34:39 INFO  AnnotationMBeanExporter:896 - Bean with name 'dataSource' has been autodetected for JMX exposure
+20-05-2018 00:34:39 INFO  AnnotationMBeanExporter:669 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+20-05-2018 00:34:39 INFO  ScheduledAnnotationBeanPostProcessor:275 - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+20-05-2018 00:34:39 INFO  TomcatWebServer:205 - Tomcat started on port(s): 8082 (http) with context path ''
+20-05-2018 00:34:39 INFO  InstamationDriversApplication:59 - Started InstamationDriversApplication in 4.027 seconds (JVM running for 282.277)
+20-05-2018 00:34:39 INFO  ConditionEvaluationDeltaLoggingListener:56 - Condition evaluation unchanged
+20-05-2018 00:34:41 INFO  AnnotationConfigServletWebServerApplicationContext:989 - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@591ae89: startup date [Sun May 20 00:34:35 BST 2018]; root of context hierarchy
+20-05-2018 00:34:41 INFO  AnnotationMBeanExporter:452 - Unregistering JMX-exposed beans on shutdown
+20-05-2018 00:34:41 INFO  AnnotationMBeanExporter:183 - Unregistering JMX-exposed beans
+20-05-2018 00:34:41 INFO  LocalContainerEntityManagerFactoryBean:572 - Closing JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:34:41 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 22328 (H:\WebApps\instamation-drivers\out\production\classes started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 00:34:41 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 00:34:41 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@5065236b: startup date [Sun May 20 00:34:41 BST 2018]; root of context hierarchy
+20-05-2018 00:34:42 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ccd709b5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 00:34:42 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 00:34:42 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 1040 ms
+20-05-2018 00:34:42 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 00:34:42 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 00:34:42 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 00:34:42 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 00:34:42 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 00:34:42 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 00:34:42 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:34:43 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:34:44 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/test/**'], []
+20-05-2018 00:34:44 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/account/**'], []
+20-05-2018 00:34:44 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/drivers/**'], []
+20-05-2018 00:34:44 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/automate/**'], []
+20-05-2018 00:34:44 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@289dc3c7, org.springframework.security.web.context.SecurityContextPersistenceFilter@29b59775, org.springframework.security.web.header.HeaderWriterFilter@2126fb00, org.springframework.security.web.csrf.CsrfFilter@4915aad9, org.springframework.security.web.authentication.logout.LogoutFilter@23bf3d4d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@14828ee7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6d669cc8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7b8e849f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@54277bb0, org.springframework.security.web.session.SessionManagementFilter@4d12af6c, org.springframework.security.web.access.ExceptionTranslationFilter@185b8992, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4ec11d93]
+20-05-2018 00:34:44 INFO  RequestMappingHandlerAdapter:567 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@5065236b: startup date [Sun May 20 00:34:41 BST 2018]; root of context hierarchy
+20-05-2018 00:34:44 WARN  JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start]}" onto public java.lang.String com.instamation.drivers.test.TestController.start() throws java.lang.Exception
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/accounts]}" onto public java.util.List<com.instamation.drivers.model.Account> com.instamation.drivers.test.TestController.accounts()
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/account]}" onto public com.instamation.drivers.model.Account com.instamation.drivers.test.TestController.account()
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start2],methods=[POST]}" onto public java.lang.String com.instamation.drivers.test.TestController.start2() throws java.lang.Exception
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/drivers]}" onto public java.util.Map<com.instamation.drivers.model.Account, com.instamation.drivers.selenium.Driver> com.instamation.drivers.test.TestController.drivers()
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verify(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/add/{userId}],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.addAccount(com.instamation.drivers.model.Account,java.lang.Long) throws java.lang.Exception
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/recovery],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.recovery(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify-new],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verifyNew(javax.servlet.http.HttpServletRequest)
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/all],methods=[GET]}" onto public java.util.Set<com.instamation.drivers.model.Account> com.instamation.drivers.web.controller.DriversController.getAll()
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/running/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isAccountDriverRunning(java.lang.String)
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/close/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.closeDriverByUsername(java.lang.String)
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/loggedin/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isLoggedIn(java.lang.String)
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+20-05-2018 00:34:44 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+20-05-2018 00:34:44 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:34:44 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:34:44 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:34:44 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:104 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+20-05-2018 00:34:44 WARN  OptionalLiveReloadServer:61 - Unable to start LiveReload server
+20-05-2018 00:34:45 INFO  AnnotationMBeanExporter:434 - Registering beans for JMX exposure on startup
+20-05-2018 00:34:45 INFO  AnnotationMBeanExporter:896 - Bean with name 'dataSource' has been autodetected for JMX exposure
+20-05-2018 00:34:45 INFO  AnnotationMBeanExporter:669 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+20-05-2018 00:34:45 INFO  ScheduledAnnotationBeanPostProcessor:275 - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+20-05-2018 00:34:45 INFO  TomcatWebServer:205 - Tomcat started on port(s): 8082 (http) with context path ''
+20-05-2018 00:34:45 INFO  InstamationDriversApplication:59 - Started InstamationDriversApplication in 3.424 seconds (JVM running for 288.256)
+20-05-2018 00:34:45 INFO  ConditionEvaluationDeltaLoggingListener:56 - Condition evaluation unchanged
+20-05-2018 00:35:12 INFO  DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+20-05-2018 00:35:12 INFO  DispatcherServlet:513 - FrameworkServlet 'dispatcherServlet': initialization completed in 4 ms
+20-05-2018 00:35:15 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 00:35:22 INFO  Action:53 - repostgymmemes has an unusual attempt when logging in
+20-05-2018 00:36:25 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 00:36:32 INFO  Action:67 - repostgymmemes has logged in successfully
+20-05-2018 00:36:40 INFO  AutomationController:91 - repostgymmemeshas no profiles, adding new profiles.
+20-05-2018 00:37:15 INFO  AutomationController:91 - repostgymmemeshas no profiles, adding new profiles.
+20-05-2018 00:38:37 INFO  AutomationController:91 - repostgymmemeshas no profiles, adding new profiles.
+20-05-2018 00:39:50 INFO  AutomationController:91 - repostgymmemeshas no profiles, adding new profiles.
+20-05-2018 00:39:50 INFO  AutomationController:95 - repostgymmemes adding profiles using '@funny' seed
+20-05-2018 00:41:38 INFO  AutomationController:120 - repostgymmemes starting automation
+20-05-2018 00:41:40 INFO  AutomationController:326 - repostgymmemes failed to updateProfileDetails
+20-05-2018 00:43:18 ERROR TaskUtils$LoggingErrorHandler:96 - Unexpected error occurred in scheduled task.
+org.openqa.selenium.StaleElementReferenceException: stale element reference: element is not attached to the page document
+  (Session info: chrome=66.0.3359.181)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.17134 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'IDRIS-PC', ip: '192.168.1.48', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '9.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.35.528161 (5b82f2d2aae0ca..., userDataDir: C:\Users\Idris\AppData\Loca...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: true, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: true, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 66.0.3359.181, webStorageEnabled: true}
+Session ID: f21cbcceeaf4ce6c160d9351800e41c8
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:488)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
+	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)
+	at org.openqa.selenium.remote.RemoteWebElement.getText(RemoteWebElement.java:160)
+	at com.instamation.drivers.selenium.Actions.doesButtonExist(Actions.java:499)
+	at com.instamation.drivers.web.controller.AutomationController.run(AutomationController.java:74)
+	at jdk.internal.reflect.GeneratedMethodAccessor114.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:65)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:514)
+	at java.base/java.util.concurrent.FutureTask.runAndReset$$$capture(FutureTask.java:305)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:300)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+20-05-2018 00:43:40 INFO  AutomationController:341 - repostgymmemes stats have been updated
+20-05-2018 00:43:45 INFO  AutomationController:288 - repostgymmemes has stopped automation
+20-05-2018 00:43:45 INFO  AutomationController:120 - repostgymmemes starting automation
+20-05-2018 00:43:53 INFO  AutomationController:341 - repostgymmemes stats have been updated
+20-05-2018 00:43:54 INFO  AutomationController:288 - repostgymmemes has stopped automation
+20-05-2018 00:45:18 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 00:45:38 INFO  AutomationController:120 - repostgymmemes starting automation
+20-05-2018 00:45:46 ERROR TaskUtils$LoggingErrorHandler:96 - Unexpected error occurred in scheduled task.
+org.openqa.selenium.StaleElementReferenceException: stale element reference: element is not attached to the page document
+  (Session info: chrome=66.0.3359.181)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.17134 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'IDRIS-PC', ip: '192.168.1.48', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '9.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.35.528161 (5b82f2d2aae0ca..., userDataDir: C:\Users\Idris\AppData\Loca...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: true, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: true, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 66.0.3359.181, webStorageEnabled: true}
+Session ID: f21cbcceeaf4ce6c160d9351800e41c8
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:488)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
+	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)
+	at org.openqa.selenium.remote.RemoteWebElement.getText(RemoteWebElement.java:160)
+	at com.instamation.drivers.selenium.Actions.doesButtonExist(Actions.java:499)
+	at com.instamation.drivers.web.controller.AutomationController.run(AutomationController.java:74)
+	at jdk.internal.reflect.GeneratedMethodAccessor114.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:65)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:514)
+	at java.base/java.util.concurrent.FutureTask.runAndReset$$$capture(FutureTask.java:305)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:300)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+20-05-2018 00:45:47 INFO  AutomationController:326 - repostgymmemes failed to updateProfileDetails
+20-05-2018 00:45:51 INFO  AutomationController:341 - repostgymmemes stats have been updated
+20-05-2018 00:47:16 INFO  AutomationController:326 - repostgymmemes failed to updateProfileDetails
+20-05-2018 00:47:30 INFO  AutomationController:341 - repostgymmemes stats have been updated
+20-05-2018 00:47:31 INFO  AutomationController:326 - repostgymmemes failed to updateProfileDetails
+20-05-2018 00:47:32 INFO  AutomationController:341 - repostgymmemes stats have been updated
+20-05-2018 00:48:26 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 26036 (H:\WebApps\instamation-drivers\out\production\classes started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 00:48:26 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 00:48:26 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@78754f04: startup date [Sun May 20 00:48:26 BST 2018]; root of context hierarchy
+20-05-2018 00:48:29 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$352c34b4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 00:48:29 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 00:48:29 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 3113 ms
+20-05-2018 00:48:30 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 00:48:30 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 00:48:30 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 00:48:30 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 00:48:30 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 00:48:30 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 00:48:30 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:48:33 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:48:34 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/test/**'], []
+20-05-2018 00:48:34 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/account/**'], []
+20-05-2018 00:48:34 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/drivers/**'], []
+20-05-2018 00:48:34 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/automate/**'], []
+20-05-2018 00:48:34 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3656e38d, org.springframework.security.web.context.SecurityContextPersistenceFilter@51c3235f, org.springframework.security.web.header.HeaderWriterFilter@2b435312, org.springframework.security.web.csrf.CsrfFilter@22a9ffff, org.springframework.security.web.authentication.logout.LogoutFilter@4dce437d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3b875ee8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@562d3b7a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@16929f1e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1ba70d31, org.springframework.security.web.session.SessionManagementFilter@4fecefa, org.springframework.security.web.access.ExceptionTranslationFilter@150b3da3, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5a55fbbb]
+20-05-2018 00:48:34 INFO  RequestMappingHandlerAdapter:567 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@78754f04: startup date [Sun May 20 00:48:26 BST 2018]; root of context hierarchy
+20-05-2018 00:48:34 WARN  JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start]}" onto public java.lang.String com.instamation.drivers.test.TestController.start() throws java.lang.Exception
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start2],methods=[POST]}" onto public java.lang.String com.instamation.drivers.test.TestController.start2() throws java.lang.Exception
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/drivers]}" onto public java.util.Map<com.instamation.drivers.model.Account, com.instamation.drivers.selenium.Driver> com.instamation.drivers.test.TestController.drivers()
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/accounts]}" onto public java.util.List<com.instamation.drivers.model.Account> com.instamation.drivers.test.TestController.accounts()
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/account]}" onto public com.instamation.drivers.model.Account com.instamation.drivers.test.TestController.account()
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verify(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/add/{userId}],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.addAccount(com.instamation.drivers.model.Account,java.lang.Long) throws java.lang.Exception
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify-new],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verifyNew(javax.servlet.http.HttpServletRequest)
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/recovery],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.recovery(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/loggedin/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isLoggedIn(java.lang.String)
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/all],methods=[GET]}" onto public java.util.Set<com.instamation.drivers.model.Account> com.instamation.drivers.web.controller.DriversController.getAll()
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/close/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.closeDriverByUsername(java.lang.String)
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/running/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isAccountDriverRunning(java.lang.String)
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+20-05-2018 00:48:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+20-05-2018 00:48:35 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:48:35 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:48:35 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:48:35 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:104 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+20-05-2018 00:48:35 WARN  OptionalLiveReloadServer:61 - Unable to start LiveReload server
+20-05-2018 00:48:36 INFO  AnnotationMBeanExporter:434 - Registering beans for JMX exposure on startup
+20-05-2018 00:48:36 INFO  AnnotationMBeanExporter:896 - Bean with name 'dataSource' has been autodetected for JMX exposure
+20-05-2018 00:48:36 INFO  AnnotationMBeanExporter:669 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+20-05-2018 00:48:36 INFO  ScheduledAnnotationBeanPostProcessor:275 - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+20-05-2018 00:48:36 INFO  TomcatWebServer:205 - Tomcat started on port(s): 8082 (http) with context path ''
+20-05-2018 00:48:36 INFO  InstamationDriversApplication:59 - Started InstamationDriversApplication in 10.169 seconds (JVM running for 11.076)
+20-05-2018 00:48:43 INFO  DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+20-05-2018 00:48:43 INFO  DispatcherServlet:513 - FrameworkServlet 'dispatcherServlet': initialization completed in 26 ms
+20-05-2018 00:48:47 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 00:49:35 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 00:49:41 INFO  Action:53 - repostgymmemes has an unusual attempt when logging in
+20-05-2018 00:50:09 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 00:50:15 INFO  Action:67 - repostgymmemes has logged in successfully
+20-05-2018 00:50:31 INFO  AutomationController:120 - repostgymmemes starting automation
+20-05-2018 00:50:39 ERROR TaskUtils$LoggingErrorHandler:96 - Unexpected error occurred in scheduled task.
+org.openqa.selenium.StaleElementReferenceException: stale element reference: element is not attached to the page document
+  (Session info: chrome=66.0.3359.181)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.17134 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'IDRIS-PC', ip: '192.168.1.48', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '9.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.35.528161 (5b82f2d2aae0ca..., userDataDir: C:\Users\Idris\AppData\Loca...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: true, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: true, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 66.0.3359.181, webStorageEnabled: true}
+Session ID: 3d54505598df73e57da6a91f341b835a
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:488)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
+	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)
+	at org.openqa.selenium.remote.RemoteWebElement.getText(RemoteWebElement.java:160)
+	at com.instamation.drivers.selenium.Actions.doesButtonExist(Actions.java:491)
+	at com.instamation.drivers.web.controller.AutomationController.run(AutomationController.java:74)
+	at jdk.internal.reflect.GeneratedMethodAccessor70.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:65)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:514)
+	at java.base/java.util.concurrent.FutureTask.runAndReset$$$capture(FutureTask.java:305)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:300)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+20-05-2018 00:52:36 ERROR TaskUtils$LoggingErrorHandler:96 - Unexpected error occurred in scheduled task.
+org.openqa.selenium.StaleElementReferenceException: stale element reference: element is not attached to the page document
+  (Session info: chrome=66.0.3359.181)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.17134 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'IDRIS-PC', ip: '192.168.1.48', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '9.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.35.528161 (5b82f2d2aae0ca..., userDataDir: C:\Users\Idris\AppData\Loca...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: true, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: true, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 66.0.3359.181, webStorageEnabled: true}
+Session ID: 3d54505598df73e57da6a91f341b835a
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:488)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
+	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)
+	at org.openqa.selenium.remote.RemoteWebElement.getText(RemoteWebElement.java:160)
+	at com.instamation.drivers.selenium.Actions.doesButtonExist(Actions.java:491)
+	at com.instamation.drivers.web.controller.AutomationController.run(AutomationController.java:74)
+	at jdk.internal.reflect.GeneratedMethodAccessor70.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:65)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:514)
+	at java.base/java.util.concurrent.FutureTask.runAndReset$$$capture(FutureTask.java:305)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:300)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+20-05-2018 00:53:19 ERROR TaskUtils$LoggingErrorHandler:96 - Unexpected error occurred in scheduled task.
+org.openqa.selenium.StaleElementReferenceException: stale element reference: element is not attached to the page document
+  (Session info: chrome=66.0.3359.181)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.17134 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'IDRIS-PC', ip: '192.168.1.48', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '9.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.35.528161 (5b82f2d2aae0ca..., userDataDir: C:\Users\Idris\AppData\Loca...}, cssSelectorsEnabled: true, databaseEnabled: false, handlesAlerts: true, hasTouchScreen: true, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: true, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 66.0.3359.181, webStorageEnabled: true}
+Session ID: 3d54505598df73e57da6a91f341b835a
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:488)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
+	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)
+	at org.openqa.selenium.remote.RemoteWebElement.getText(RemoteWebElement.java:160)
+	at com.instamation.drivers.selenium.Actions.doesButtonExist(Actions.java:491)
+	at com.instamation.drivers.web.controller.AutomationController.run(AutomationController.java:74)
+	at jdk.internal.reflect.GeneratedMethodAccessor70.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:65)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:514)
+	at java.base/java.util.concurrent.FutureTask.runAndReset$$$capture(FutureTask.java:305)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:300)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+20-05-2018 00:53:34 INFO  AutomationController:326 - repostgymmemes failed to updateProfileDetails
+20-05-2018 00:55:02 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 20372 (H:\WebApps\instamation-drivers\out\production\classes started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 00:55:02 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 00:55:02 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@69640ed3: startup date [Sun May 20 00:55:02 BST 2018]; root of context hierarchy
+20-05-2018 00:55:05 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$aaad21e4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 00:55:05 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 00:55:06 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 3683 ms
+20-05-2018 00:55:06 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 00:55:06 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 00:55:06 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 00:55:06 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 00:55:06 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 00:55:06 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 00:55:06 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:55:09 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:55:10 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/test/**'], []
+20-05-2018 00:55:10 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/account/**'], []
+20-05-2018 00:55:10 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/drivers/**'], []
+20-05-2018 00:55:10 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/automate/**'], []
+20-05-2018 00:55:10 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4322a263, org.springframework.security.web.context.SecurityContextPersistenceFilter@36a3ca0, org.springframework.security.web.header.HeaderWriterFilter@12ef0dae, org.springframework.security.web.csrf.CsrfFilter@59ddd721, org.springframework.security.web.authentication.logout.LogoutFilter@1a8dffab, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3ef0d1a2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1e77910b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@686fd8c6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@45a220ed, org.springframework.security.web.session.SessionManagementFilter@11c3a453, org.springframework.security.web.access.ExceptionTranslationFilter@3eda8d66, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@78d2f6e0]
+20-05-2018 00:55:11 INFO  RequestMappingHandlerAdapter:567 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@69640ed3: startup date [Sun May 20 00:55:02 BST 2018]; root of context hierarchy
+20-05-2018 00:55:11 WARN  JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start]}" onto public java.lang.String com.instamation.drivers.test.TestController.start() throws java.lang.Exception
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/drivers]}" onto public java.util.Map<com.instamation.drivers.model.Account, com.instamation.drivers.selenium.Driver> com.instamation.drivers.test.TestController.drivers()
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start2],methods=[POST]}" onto public java.lang.String com.instamation.drivers.test.TestController.start2() throws java.lang.Exception
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/account]}" onto public com.instamation.drivers.model.Account com.instamation.drivers.test.TestController.account()
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/accounts]}" onto public java.util.List<com.instamation.drivers.model.Account> com.instamation.drivers.test.TestController.accounts()
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verify(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/add/{userId}],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.addAccount(com.instamation.drivers.model.Account,java.lang.Long) throws java.lang.Exception
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/recovery],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.recovery(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify-new],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verifyNew(javax.servlet.http.HttpServletRequest)
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/all],methods=[GET]}" onto public java.util.Set<com.instamation.drivers.model.Account> com.instamation.drivers.web.controller.DriversController.getAll()
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/running/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isAccountDriverRunning(java.lang.String)
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/close/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.closeDriverByUsername(java.lang.String)
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/loggedin/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isLoggedIn(java.lang.String)
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+20-05-2018 00:55:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+20-05-2018 00:55:11 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:55:11 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:55:11 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:55:11 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:104 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+20-05-2018 00:55:12 WARN  OptionalLiveReloadServer:61 - Unable to start LiveReload server
+20-05-2018 00:55:12 INFO  AnnotationMBeanExporter:434 - Registering beans for JMX exposure on startup
+20-05-2018 00:55:12 INFO  AnnotationMBeanExporter:896 - Bean with name 'dataSource' has been autodetected for JMX exposure
+20-05-2018 00:55:12 INFO  AnnotationMBeanExporter:669 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+20-05-2018 00:55:12 INFO  ScheduledAnnotationBeanPostProcessor:275 - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+20-05-2018 00:55:12 INFO  TomcatWebServer:205 - Tomcat started on port(s): 8082 (http) with context path ''
+20-05-2018 00:55:12 INFO  InstamationDriversApplication:59 - Started InstamationDriversApplication in 10.442 seconds (JVM running for 11.453)
+20-05-2018 00:55:37 INFO  DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+20-05-2018 00:55:37 INFO  DispatcherServlet:513 - FrameworkServlet 'dispatcherServlet': initialization completed in 25 ms
+20-05-2018 00:55:41 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 00:55:48 INFO  Action:53 - repostgymmemes has an unusual attempt when logging in
+20-05-2018 00:56:16 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 00:56:33 INFO  AutomationController:121 - repostgymmemes starting automation
+20-05-2018 00:56:55 INFO  AutomationController:342 - repostgymmemes stats have been updated
+20-05-2018 00:56:57 INFO  AutomationController:289 - repostgymmemes has stopped automation
+20-05-2018 00:58:03 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 00:58:18 INFO  AutomationController:121 - repostgymmemes starting automation
+20-05-2018 00:58:39 INFO  AutomationController:342 - repostgymmemes stats have been updated
+20-05-2018 00:59:31 INFO  AutomationController:289 - repostgymmemes has stopped automation
+20-05-2018 00:59:32 INFO  AnnotationConfigServletWebServerApplicationContext:989 - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@69640ed3: startup date [Sun May 20 00:55:02 BST 2018]; root of context hierarchy
+20-05-2018 00:59:32 INFO  AnnotationMBeanExporter:452 - Unregistering JMX-exposed beans on shutdown
+20-05-2018 00:59:32 INFO  AnnotationMBeanExporter:183 - Unregistering JMX-exposed beans
+20-05-2018 00:59:32 INFO  LocalContainerEntityManagerFactoryBean:572 - Closing JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:59:32 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 20372 (H:\WebApps\instamation-drivers\out\production\classes started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 00:59:32 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 00:59:32 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@76f5ec65: startup date [Sun May 20 00:59:32 BST 2018]; root of context hierarchy
+20-05-2018 00:59:33 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$aaad21e4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 00:59:33 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 00:59:33 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 824 ms
+20-05-2018 00:59:33 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 00:59:33 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 00:59:33 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 00:59:33 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 00:59:33 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 00:59:33 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 00:59:33 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:59:34 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 00:59:35 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/test/**'], []
+20-05-2018 00:59:35 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/account/**'], []
+20-05-2018 00:59:35 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/drivers/**'], []
+20-05-2018 00:59:35 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/automate/**'], []
+20-05-2018 00:59:35 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2b3688af, org.springframework.security.web.context.SecurityContextPersistenceFilter@3f3b6176, org.springframework.security.web.header.HeaderWriterFilter@773a961b, org.springframework.security.web.csrf.CsrfFilter@509e7029, org.springframework.security.web.authentication.logout.LogoutFilter@a283744, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5ec9c9b7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@f8f32ee, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2c26f74a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4048494e, org.springframework.security.web.session.SessionManagementFilter@1c0755e7, org.springframework.security.web.access.ExceptionTranslationFilter@1dc5b83f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@50bb2435]
+20-05-2018 00:59:35 INFO  RequestMappingHandlerAdapter:567 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@76f5ec65: startup date [Sun May 20 00:59:32 BST 2018]; root of context hierarchy
+20-05-2018 00:59:35 WARN  JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start]}" onto public java.lang.String com.instamation.drivers.test.TestController.start() throws java.lang.Exception
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/drivers]}" onto public java.util.Map<com.instamation.drivers.model.Account, com.instamation.drivers.selenium.Driver> com.instamation.drivers.test.TestController.drivers()
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start2],methods=[POST]}" onto public java.lang.String com.instamation.drivers.test.TestController.start2() throws java.lang.Exception
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/account]}" onto public com.instamation.drivers.model.Account com.instamation.drivers.test.TestController.account()
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/accounts]}" onto public java.util.List<com.instamation.drivers.model.Account> com.instamation.drivers.test.TestController.accounts()
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verify(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/add/{userId}],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.addAccount(com.instamation.drivers.model.Account,java.lang.Long) throws java.lang.Exception
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/recovery],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.recovery(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify-new],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verifyNew(javax.servlet.http.HttpServletRequest)
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/all],methods=[GET]}" onto public java.util.Set<com.instamation.drivers.model.Account> com.instamation.drivers.web.controller.DriversController.getAll()
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/running/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isAccountDriverRunning(java.lang.String)
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/close/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.closeDriverByUsername(java.lang.String)
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/loggedin/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isLoggedIn(java.lang.String)
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+20-05-2018 00:59:35 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+20-05-2018 00:59:35 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:59:35 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:59:35 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 00:59:35 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:104 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+20-05-2018 00:59:35 WARN  OptionalLiveReloadServer:61 - Unable to start LiveReload server
+20-05-2018 00:59:35 INFO  AnnotationMBeanExporter:434 - Registering beans for JMX exposure on startup
+20-05-2018 00:59:35 INFO  AnnotationMBeanExporter:896 - Bean with name 'dataSource' has been autodetected for JMX exposure
+20-05-2018 00:59:35 INFO  AnnotationMBeanExporter:669 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+20-05-2018 00:59:35 INFO  ScheduledAnnotationBeanPostProcessor:275 - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+20-05-2018 00:59:35 INFO  TomcatWebServer:205 - Tomcat started on port(s): 8082 (http) with context path ''
+20-05-2018 00:59:35 INFO  InstamationDriversApplication:59 - Started InstamationDriversApplication in 2.761 seconds (JVM running for 274.813)
+20-05-2018 00:59:35 INFO  ConditionEvaluationDeltaLoggingListener:56 - Condition evaluation unchanged
+20-05-2018 00:59:46 INFO  DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+20-05-2018 00:59:46 INFO  DispatcherServlet:513 - FrameworkServlet 'dispatcherServlet': initialization completed in 4 ms
+20-05-2018 00:59:49 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 00:59:56 INFO  Action:53 - repostgymmemes has an unusual attempt when logging in
+20-05-2018 01:00:38 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 01:00:45 INFO  Action:67 - repostgymmemes has logged in successfully
+20-05-2018 01:00:56 INFO  AutomationController:121 - repostgymmemes starting automation
+20-05-2018 01:01:01 INFO  AutomationController:342 - repostgymmemes stats have been updated
+20-05-2018 01:01:10 INFO  AutomationController:342 - repostgymmemes stats have been updated
+20-05-2018 01:03:54 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 27404 (H:\WebApps\instamation-drivers\out\production\classes started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 01:03:54 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 01:03:55 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@57c2cf9b: startup date [Sun May 20 01:03:55 BST 2018]; root of context hierarchy
+20-05-2018 01:03:57 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$72dce12d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 01:03:58 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 01:03:58 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 3443 ms
+20-05-2018 01:03:58 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 01:03:58 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 01:03:58 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 01:03:58 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 01:03:58 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 01:03:58 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 01:03:59 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 01:04:01 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 01:04:02 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/test/**'], []
+20-05-2018 01:04:02 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/account/**'], []
+20-05-2018 01:04:02 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/drivers/**'], []
+20-05-2018 01:04:02 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/automate/**'], []
+20-05-2018 01:04:02 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6ccc3020, org.springframework.security.web.context.SecurityContextPersistenceFilter@50bf3d1d, org.springframework.security.web.header.HeaderWriterFilter@3e1b4e69, org.springframework.security.web.csrf.CsrfFilter@5d43bd6e, org.springframework.security.web.authentication.logout.LogoutFilter@74bd7d27, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@d0d8cfc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@635588b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3bb1a395, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6215050b, org.springframework.security.web.session.SessionManagementFilter@1cf66e62, org.springframework.security.web.access.ExceptionTranslationFilter@5d65bea7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2ae35103]
+20-05-2018 01:04:03 INFO  RequestMappingHandlerAdapter:567 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@57c2cf9b: startup date [Sun May 20 01:03:55 BST 2018]; root of context hierarchy
+20-05-2018 01:04:03 WARN  JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start]}" onto public java.lang.String com.instamation.drivers.test.TestController.start() throws java.lang.Exception
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/accounts]}" onto public java.util.List<com.instamation.drivers.model.Account> com.instamation.drivers.test.TestController.accounts()
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/drivers]}" onto public java.util.Map<com.instamation.drivers.model.Account, com.instamation.drivers.selenium.Driver> com.instamation.drivers.test.TestController.drivers()
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start2],methods=[POST]}" onto public java.lang.String com.instamation.drivers.test.TestController.start2() throws java.lang.Exception
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/account]}" onto public com.instamation.drivers.model.Account com.instamation.drivers.test.TestController.account()
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verify(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/add/{userId}],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.addAccount(com.instamation.drivers.model.Account,java.lang.Long) throws java.lang.Exception
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/recovery],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.recovery(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify-new],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verifyNew(javax.servlet.http.HttpServletRequest)
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/all],methods=[GET]}" onto public java.util.Set<com.instamation.drivers.model.Account> com.instamation.drivers.web.controller.DriversController.getAll()
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/close/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.closeDriverByUsername(java.lang.String)
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/running/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isAccountDriverRunning(java.lang.String)
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/loggedin/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isLoggedIn(java.lang.String)
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+20-05-2018 01:04:03 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+20-05-2018 01:04:03 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 01:04:03 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 01:04:03 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 01:04:03 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:104 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+20-05-2018 01:04:04 WARN  OptionalLiveReloadServer:61 - Unable to start LiveReload server
+20-05-2018 01:04:04 INFO  AnnotationMBeanExporter:434 - Registering beans for JMX exposure on startup
+20-05-2018 01:04:04 INFO  AnnotationMBeanExporter:896 - Bean with name 'dataSource' has been autodetected for JMX exposure
+20-05-2018 01:04:04 INFO  AnnotationMBeanExporter:669 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+20-05-2018 01:04:04 INFO  ScheduledAnnotationBeanPostProcessor:275 - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+20-05-2018 01:04:04 INFO  TomcatWebServer:205 - Tomcat started on port(s): 8082 (http) with context path ''
+20-05-2018 01:04:04 INFO  InstamationDriversApplication:59 - Started InstamationDriversApplication in 10.232 seconds (JVM running for 11.133)
+20-05-2018 01:04:58 INFO  DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+20-05-2018 01:04:58 INFO  DispatcherServlet:513 - FrameworkServlet 'dispatcherServlet': initialization completed in 22 ms
+20-05-2018 01:05:02 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 01:05:09 INFO  Action:53 - repostgymmemes has an unusual attempt when logging in
+20-05-2018 01:07:07 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 01:07:14 INFO  Action:67 - repostgymmemes has logged in successfully
+20-05-2018 01:08:00 INFO  AutomationController:121 - repostgymmemes starting automation
+20-05-2018 01:08:05 INFO  AutomationController:343 - repostgymmemes stats have been updated
+20-05-2018 01:31:47 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 23244 (H:\WebApps\instamation-drivers\out\production\classes started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 01:31:47 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 01:31:48 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@35926476: startup date [Sun May 20 01:31:48 BST 2018]; root of context hierarchy
+20-05-2018 01:31:50 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$320909cb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 01:31:50 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 01:31:51 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 3031 ms
+20-05-2018 01:31:51 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 01:31:51 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 01:31:51 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 01:31:51 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 01:31:51 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 01:31:51 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 01:31:51 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 01:31:54 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 01:31:55 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/test/**'], []
+20-05-2018 01:31:55 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/account/**'], []
+20-05-2018 01:31:55 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/drivers/**'], []
+20-05-2018 01:31:55 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/automate/**'], []
+20-05-2018 01:31:55 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@70452933, org.springframework.security.web.context.SecurityContextPersistenceFilter@7aa2401b, org.springframework.security.web.header.HeaderWriterFilter@1a921746, org.springframework.security.web.csrf.CsrfFilter@28841c95, org.springframework.security.web.authentication.logout.LogoutFilter@cfc0a55, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4ef4e180, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@53438588, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4c4e06ed, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@69e80e81, org.springframework.security.web.session.SessionManagementFilter@31ca65f7, org.springframework.security.web.access.ExceptionTranslationFilter@e8d9e3, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7e4749eb]
+20-05-2018 01:31:56 INFO  RequestMappingHandlerAdapter:567 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@35926476: startup date [Sun May 20 01:31:48 BST 2018]; root of context hierarchy
+20-05-2018 01:31:56 WARN  JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start]}" onto public java.lang.String com.instamation.drivers.test.TestController.start() throws java.lang.Exception
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start2],methods=[POST]}" onto public java.lang.String com.instamation.drivers.test.TestController.start2() throws java.lang.Exception
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/account]}" onto public com.instamation.drivers.model.Account com.instamation.drivers.test.TestController.account()
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/accounts]}" onto public java.util.List<com.instamation.drivers.model.Account> com.instamation.drivers.test.TestController.accounts()
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/drivers]}" onto public java.util.Map<com.instamation.drivers.model.Account, com.instamation.drivers.selenium.Driver> com.instamation.drivers.test.TestController.drivers()
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verify(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/add/{userId}],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.addAccount(com.instamation.drivers.model.Account,java.lang.Long) throws java.lang.Exception
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/recovery],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.recovery(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify-new],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verifyNew(javax.servlet.http.HttpServletRequest)
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/all],methods=[GET]}" onto public java.util.Set<com.instamation.drivers.model.Account> com.instamation.drivers.web.controller.DriversController.getAll()
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/close/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.closeDriverByUsername(java.lang.String)
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/running/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isAccountDriverRunning(java.lang.String)
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/loggedin/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isLoggedIn(java.lang.String)
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+20-05-2018 01:31:56 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+20-05-2018 01:31:56 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 01:31:56 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 01:31:56 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 01:31:56 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:104 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+20-05-2018 01:31:57 INFO  OptionalLiveReloadServer:57 - LiveReload server is running on port 35729
+20-05-2018 01:31:57 INFO  AnnotationMBeanExporter:434 - Registering beans for JMX exposure on startup
+20-05-2018 01:31:57 INFO  AnnotationMBeanExporter:896 - Bean with name 'dataSource' has been autodetected for JMX exposure
+20-05-2018 01:31:57 INFO  AnnotationMBeanExporter:669 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+20-05-2018 01:31:57 INFO  ScheduledAnnotationBeanPostProcessor:275 - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+20-05-2018 01:31:57 INFO  TomcatWebServer:205 - Tomcat started on port(s): 8082 (http) with context path ''
+20-05-2018 01:31:57 INFO  InstamationDriversApplication:59 - Started InstamationDriversApplication in 10.446 seconds (JVM running for 11.281)
+20-05-2018 01:35:43 INFO  AnnotationConfigServletWebServerApplicationContext:989 - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@35926476: startup date [Sun May 20 01:31:48 BST 2018]; root of context hierarchy
+20-05-2018 01:35:43 INFO  AnnotationMBeanExporter:452 - Unregistering JMX-exposed beans on shutdown
+20-05-2018 01:35:43 INFO  AnnotationMBeanExporter:183 - Unregistering JMX-exposed beans
+20-05-2018 01:35:43 INFO  LocalContainerEntityManagerFactoryBean:572 - Closing JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 01:35:44 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 23244 (H:\WebApps\instamation-drivers\out\production\classes started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 01:35:44 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 01:35:44 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2f9e8f3d: startup date [Sun May 20 01:35:44 BST 2018]; root of context hierarchy
+20-05-2018 01:35:45 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$320909cb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 01:35:45 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 01:35:45 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 892 ms
+20-05-2018 01:35:45 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 01:35:45 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 01:35:45 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 01:35:45 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 01:35:45 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 01:35:45 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 01:35:45 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 01:35:46 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 01:39:32 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 22508 (H:\WebApps\instamation-drivers\out\production\classes started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 01:39:32 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 01:39:32 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@e4776f4: startup date [Sun May 20 01:39:32 BST 2018]; root of context hierarchy
+20-05-2018 01:39:35 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$eeccc7f2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 01:39:36 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 01:39:36 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 3374 ms
+20-05-2018 01:39:36 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 01:39:36 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 01:39:36 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 01:39:36 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 01:39:36 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 01:39:36 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 01:39:37 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 01:39:39 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 01:39:42 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/test/**'], []
+20-05-2018 01:39:42 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/account/**'], []
+20-05-2018 01:39:42 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/drivers/**'], []
+20-05-2018 01:39:42 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/automate/**'], []
+20-05-2018 01:39:42 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2a99af46, org.springframework.security.web.context.SecurityContextPersistenceFilter@10bc9cc8, org.springframework.security.web.header.HeaderWriterFilter@6321f444, org.springframework.security.web.csrf.CsrfFilter@10a948d6, org.springframework.security.web.authentication.logout.LogoutFilter@144e34f3, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2dc1142e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@409fda01, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7548307c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@338b0b45, org.springframework.security.web.session.SessionManagementFilter@643722fe, org.springframework.security.web.access.ExceptionTranslationFilter@6723c5a4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@55b665f8]
+20-05-2018 01:39:43 INFO  RequestMappingHandlerAdapter:567 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@e4776f4: startup date [Sun May 20 01:39:32 BST 2018]; root of context hierarchy
+20-05-2018 01:39:43 WARN  JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start]}" onto public java.lang.String com.instamation.drivers.test.TestController.start() throws java.lang.Exception
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/account]}" onto public com.instamation.drivers.model.Account com.instamation.drivers.test.TestController.account()
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start2],methods=[POST]}" onto public java.lang.String com.instamation.drivers.test.TestController.start2() throws java.lang.Exception
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/accounts]}" onto public java.util.List<com.instamation.drivers.model.Account> com.instamation.drivers.test.TestController.accounts()
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/drivers]}" onto public java.util.Map<com.instamation.drivers.model.Account, com.instamation.drivers.selenium.Driver> com.instamation.drivers.test.TestController.drivers()
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verify(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/recovery],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.recovery(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify-new],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verifyNew(javax.servlet.http.HttpServletRequest)
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/add/{userId}],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.addAccount(com.instamation.drivers.model.Account,java.lang.Long) throws java.lang.Exception
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/all],methods=[GET]}" onto public java.util.Set<com.instamation.drivers.model.Account> com.instamation.drivers.web.controller.DriversController.getAll()
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/loggedin/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isLoggedIn(java.lang.String)
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/running/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isAccountDriverRunning(java.lang.String)
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/close/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.closeDriverByUsername(java.lang.String)
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+20-05-2018 01:39:43 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+20-05-2018 01:39:43 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 01:39:43 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 01:39:43 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 01:39:43 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:104 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+20-05-2018 01:39:44 INFO  OptionalLiveReloadServer:57 - LiveReload server is running on port 35729
+20-05-2018 01:39:44 INFO  AnnotationMBeanExporter:434 - Registering beans for JMX exposure on startup
+20-05-2018 01:39:44 INFO  AnnotationMBeanExporter:896 - Bean with name 'dataSource' has been autodetected for JMX exposure
+20-05-2018 01:39:44 INFO  AnnotationMBeanExporter:669 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+20-05-2018 01:39:44 INFO  ScheduledAnnotationBeanPostProcessor:275 - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+20-05-2018 01:39:45 INFO  TomcatWebServer:205 - Tomcat started on port(s): 8082 (http) with context path ''
+20-05-2018 01:39:45 INFO  InstamationDriversApplication:59 - Started InstamationDriversApplication in 12.799 seconds (JVM running for 13.718)
+20-05-2018 01:42:56 INFO  DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+20-05-2018 01:42:56 INFO  DispatcherServlet:513 - FrameworkServlet 'dispatcherServlet': initialization completed in 22 ms
+20-05-2018 01:43:00 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 01:43:07 INFO  Action:53 - repostgymmemes has an unusual attempt when logging in
+20-05-2018 01:44:25 INFO  AutomationController:117 - repostgymmemes's automation settings:
+ enabled: true, actions available: true, is working time: true, profile list is not empty: true, FULC action: true
+20-05-2018 01:44:54 INFO  AutomationController:117 - repostgymmemes's automation settings: 
+enabled: true, 
+actions available: true, 
+is working time: true, 
+profile list is not empty: true, 
+FULC action: true
+20-05-2018 13:46:57 INFO  AutomationController:117 - repostgymmemes's automation settings:
+ enabled: true, actions available: true, is working time: false, profile list is not empty: true, FULC action: true
+20-05-2018 14:13:24 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 24260 (H:\WebApps\instamation-drivers\build\classes\java\main started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 14:13:24 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 14:13:24 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@41c0ec3a: startup date [Sun May 20 14:13:24 BST 2018]; root of context hierarchy
+20-05-2018 14:13:26 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$6d489122] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 14:13:27 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 14:13:27 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 2867 ms
+20-05-2018 14:13:27 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 14:13:27 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 14:13:27 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 14:13:27 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 14:13:27 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 14:13:27 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 14:13:28 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 14:13:30 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 14:13:31 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/test/**'], []
+20-05-2018 14:13:31 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/account/**'], []
+20-05-2018 14:13:31 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/drivers/**'], []
+20-05-2018 14:13:31 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/automate/**'], []
+20-05-2018 14:13:31 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1234c5d7, org.springframework.security.web.context.SecurityContextPersistenceFilter@650c7820, org.springframework.security.web.header.HeaderWriterFilter@10ec720f, org.springframework.security.web.csrf.CsrfFilter@7fcbfeb6, org.springframework.security.web.authentication.logout.LogoutFilter@3d9371f7, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@a273f90, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7bc7d561, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@45bf6342, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@53c0755b, org.springframework.security.web.session.SessionManagementFilter@233d7fd5, org.springframework.security.web.access.ExceptionTranslationFilter@112069d3, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3ae8383b]
+20-05-2018 14:13:32 INFO  RequestMappingHandlerAdapter:567 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@41c0ec3a: startup date [Sun May 20 14:13:24 BST 2018]; root of context hierarchy
+20-05-2018 14:13:32 WARN  JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start]}" onto public java.lang.String com.instamation.drivers.test.TestController.start() throws java.lang.Exception
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/drivers]}" onto public java.util.Map<com.instamation.drivers.model.Account, com.instamation.drivers.selenium.Driver> com.instamation.drivers.test.TestController.drivers()
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/accounts]}" onto public java.util.List<com.instamation.drivers.model.Account> com.instamation.drivers.test.TestController.accounts()
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/account]}" onto public com.instamation.drivers.model.Account com.instamation.drivers.test.TestController.account()
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start2],methods=[POST]}" onto public java.lang.String com.instamation.drivers.test.TestController.start2() throws java.lang.Exception
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verify(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify-new],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verifyNew(javax.servlet.http.HttpServletRequest)
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/recovery],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.recovery(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/add/{userId}],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.addAccount(com.instamation.drivers.model.Account,java.lang.Long) throws java.lang.Exception
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/all],methods=[GET]}" onto public java.util.Set<com.instamation.drivers.model.Account> com.instamation.drivers.web.controller.DriversController.getAll()
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/running/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isAccountDriverRunning(java.lang.String)
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/close/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.closeDriverByUsername(java.lang.String)
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/loggedin/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isLoggedIn(java.lang.String)
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+20-05-2018 14:13:32 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+20-05-2018 14:13:32 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 14:13:32 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 14:13:32 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 14:13:32 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:104 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+20-05-2018 14:13:32 INFO  OptionalLiveReloadServer:57 - LiveReload server is running on port 35729
+20-05-2018 14:13:33 INFO  AnnotationMBeanExporter:434 - Registering beans for JMX exposure on startup
+20-05-2018 14:13:33 INFO  AnnotationMBeanExporter:896 - Bean with name 'dataSource' has been autodetected for JMX exposure
+20-05-2018 14:13:33 INFO  AnnotationMBeanExporter:669 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+20-05-2018 14:13:33 INFO  ScheduledAnnotationBeanPostProcessor:275 - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+20-05-2018 14:13:33 INFO  TomcatWebServer:205 - Tomcat started on port(s): 8082 (http) with context path ''
+20-05-2018 14:13:33 INFO  InstamationDriversApplication:59 - Started InstamationDriversApplication in 9.036 seconds (JVM running for 9.767)
+20-05-2018 14:13:46 INFO  DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+20-05-2018 14:13:46 INFO  DispatcherServlet:513 - FrameworkServlet 'dispatcherServlet': initialization completed in 21 ms
+20-05-2018 14:16:03 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 15088 (H:\WebApps\instamation-drivers\build\classes\java\main started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 14:16:03 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 14:16:03 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3e3ee05f: startup date [Sun May 20 14:16:03 BST 2018]; root of context hierarchy
+20-05-2018 14:16:05 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$6373c9c0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 14:16:06 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 14:16:06 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 3257 ms
+20-05-2018 14:16:06 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 14:16:06 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 14:16:06 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 14:16:06 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 14:16:06 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 14:16:06 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 14:16:07 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 14:16:09 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 14:16:10 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/test/**'], []
+20-05-2018 14:16:10 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/account/**'], []
+20-05-2018 14:16:10 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/drivers/**'], []
+20-05-2018 14:16:10 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/automate/**'], []
+20-05-2018 14:16:10 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@272d3e67, org.springframework.security.web.context.SecurityContextPersistenceFilter@66d9bf5c, org.springframework.security.web.header.HeaderWriterFilter@6f49f56b, org.springframework.security.web.csrf.CsrfFilter@1d7d729b, org.springframework.security.web.authentication.logout.LogoutFilter@1f3206fa, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@78b8e2ef, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@43cec08d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@71a75e69, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2b55aa02, org.springframework.security.web.session.SessionManagementFilter@3fea8979, org.springframework.security.web.access.ExceptionTranslationFilter@7feef6f6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@704a483c]
+20-05-2018 14:16:10 INFO  RequestMappingHandlerAdapter:567 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3e3ee05f: startup date [Sun May 20 14:16:03 BST 2018]; root of context hierarchy
+20-05-2018 14:16:11 WARN  JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start]}" onto public java.lang.String com.instamation.drivers.test.TestController.start() throws java.lang.Exception
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/accounts]}" onto public java.util.List<com.instamation.drivers.model.Account> com.instamation.drivers.test.TestController.accounts()
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start2],methods=[POST]}" onto public java.lang.String com.instamation.drivers.test.TestController.start2() throws java.lang.Exception
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/drivers]}" onto public java.util.Map<com.instamation.drivers.model.Account, com.instamation.drivers.selenium.Driver> com.instamation.drivers.test.TestController.drivers()
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/account]}" onto public com.instamation.drivers.model.Account com.instamation.drivers.test.TestController.account()
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verify(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/add/{userId}],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.addAccount(com.instamation.drivers.model.Account,java.lang.Long) throws java.lang.Exception
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify-new],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verifyNew(javax.servlet.http.HttpServletRequest)
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/recovery],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.recovery(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/all],methods=[GET]}" onto public java.util.Set<com.instamation.drivers.model.Account> com.instamation.drivers.web.controller.DriversController.getAll()
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/loggedin/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isLoggedIn(java.lang.String)
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/close/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.closeDriverByUsername(java.lang.String)
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/running/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isAccountDriverRunning(java.lang.String)
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+20-05-2018 14:16:11 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+20-05-2018 14:16:11 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 14:16:11 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 14:16:11 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 14:16:11 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:104 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+20-05-2018 14:16:11 INFO  OptionalLiveReloadServer:57 - LiveReload server is running on port 35729
+20-05-2018 14:16:12 INFO  AnnotationMBeanExporter:434 - Registering beans for JMX exposure on startup
+20-05-2018 14:16:12 INFO  AnnotationMBeanExporter:896 - Bean with name 'dataSource' has been autodetected for JMX exposure
+20-05-2018 14:16:12 INFO  AnnotationMBeanExporter:669 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+20-05-2018 14:16:12 INFO  ScheduledAnnotationBeanPostProcessor:275 - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+20-05-2018 14:16:12 INFO  TomcatWebServer:205 - Tomcat started on port(s): 8082 (http) with context path ''
+20-05-2018 14:16:12 INFO  InstamationDriversApplication:59 - Started InstamationDriversApplication in 9.453 seconds (JVM running for 10.249)
+20-05-2018 14:16:23 INFO  DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+20-05-2018 14:16:23 INFO  DispatcherServlet:513 - FrameworkServlet 'dispatcherServlet': initialization completed in 21 ms
+20-05-2018 14:39:22 WARN  PageNotFound:250 - Request method 'POST' not supported
+20-05-2018 14:39:22 WARN  DefaultHandlerExceptionResolver:193 - Resolved exception caused by Handler execution: org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported
+20-05-2018 14:43:30 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 19448 (H:\WebApps\instamation-drivers\build\classes\java\main started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 14:43:30 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 14:43:30 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@49063476: startup date [Sun May 20 14:43:30 BST 2018]; root of context hierarchy
+20-05-2018 14:43:33 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$3149e40e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 14:43:34 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 14:43:34 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 4043 ms
+20-05-2018 14:43:34 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 14:43:34 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 14:43:34 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 14:43:34 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 14:43:34 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 14:43:34 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 14:43:35 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 14:43:37 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 14:43:39 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/test/**'], []
+20-05-2018 14:43:39 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/account/**'], []
+20-05-2018 14:43:39 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/drivers/**'], []
+20-05-2018 14:43:39 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/automate/**'], []
+20-05-2018 14:43:39 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@34387528, org.springframework.security.web.context.SecurityContextPersistenceFilter@51327540, org.springframework.security.web.header.HeaderWriterFilter@18f74122, org.springframework.security.web.csrf.CsrfFilter@5902d5b8, org.springframework.security.web.authentication.logout.LogoutFilter@763b1352, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4e458a01, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@40e2c9da, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3100640, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2d8c75c, org.springframework.security.web.session.SessionManagementFilter@1582e52, org.springframework.security.web.access.ExceptionTranslationFilter@22ad4731, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@34232088]
+20-05-2018 14:43:40 INFO  RequestMappingHandlerAdapter:567 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@49063476: startup date [Sun May 20 14:43:30 BST 2018]; root of context hierarchy
+20-05-2018 14:43:40 WARN  JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start]}" onto public java.lang.String com.instamation.drivers.test.TestController.start() throws java.lang.Exception
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start2],methods=[POST]}" onto public java.lang.String com.instamation.drivers.test.TestController.start2() throws java.lang.Exception
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/drivers]}" onto public java.util.Map<com.instamation.drivers.model.Account, com.instamation.drivers.selenium.Driver> com.instamation.drivers.test.TestController.drivers()
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/accounts]}" onto public java.util.List<com.instamation.drivers.model.Account> com.instamation.drivers.test.TestController.accounts()
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/account]}" onto public com.instamation.drivers.model.Account com.instamation.drivers.test.TestController.account()
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verify(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/recovery],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.recovery(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify-new],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verifyNew(javax.servlet.http.HttpServletRequest)
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/add/{userId}],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.addAccount(com.instamation.drivers.model.Account,java.lang.Long) throws java.lang.Exception
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/all],methods=[GET]}" onto public java.util.Set<com.instamation.drivers.model.Account> com.instamation.drivers.web.controller.DriversController.getAll()
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/close/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.closeDriverByUsername(java.lang.String)
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/running/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isAccountDriverRunning(java.lang.String)
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/loggedin/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isLoggedIn(java.lang.String)
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+20-05-2018 14:43:40 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+20-05-2018 14:43:40 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 14:43:40 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 14:43:40 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 14:43:40 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:104 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+20-05-2018 14:43:41 INFO  OptionalLiveReloadServer:57 - LiveReload server is running on port 35729
+20-05-2018 14:43:41 INFO  AnnotationMBeanExporter:434 - Registering beans for JMX exposure on startup
+20-05-2018 14:43:41 INFO  AnnotationMBeanExporter:896 - Bean with name 'dataSource' has been autodetected for JMX exposure
+20-05-2018 14:43:41 INFO  AnnotationMBeanExporter:669 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+20-05-2018 14:43:41 INFO  ScheduledAnnotationBeanPostProcessor:275 - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+20-05-2018 14:43:41 INFO  TomcatWebServer:205 - Tomcat started on port(s): 8082 (http) with context path ''
+20-05-2018 14:43:41 INFO  InstamationDriversApplication:59 - Started InstamationDriversApplication in 11.53 seconds (JVM running for 12.538)
+20-05-2018 14:44:23 INFO  DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+20-05-2018 14:44:23 INFO  DispatcherServlet:513 - FrameworkServlet 'dispatcherServlet': initialization completed in 25 ms
+20-05-2018 15:02:38 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 6484 (H:\WebApps\instamation-drivers\build\classes\java\main started by Idris in H:\WebApps\instamation-drivers)
+20-05-2018 15:02:38 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+20-05-2018 15:02:38 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@f30d6a2: startup date [Sun May 20 15:02:38 BST 2018]; root of context hierarchy
+20-05-2018 15:02:40 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$5df90c9c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+20-05-2018 15:02:41 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+20-05-2018 15:02:41 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 3364 ms
+20-05-2018 15:02:41 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+20-05-2018 15:02:41 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+20-05-2018 15:02:41 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+20-05-2018 15:02:41 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+20-05-2018 15:02:41 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+20-05-2018 15:02:41 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+20-05-2018 15:02:42 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+20-05-2018 15:02:44 INFO  LocalContainerEntityManagerFactoryBean:394 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20-05-2018 15:02:46 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/test/**'], []
+20-05-2018 15:02:46 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/account/**'], []
+20-05-2018 15:02:46 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/drivers/**'], []
+20-05-2018 15:02:46 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: Ant [pattern='/automate/**'], []
+20-05-2018 15:02:46 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5c58d755, org.springframework.security.web.context.SecurityContextPersistenceFilter@3a2b43c7, org.springframework.security.web.header.HeaderWriterFilter@6bc2191a, org.springframework.security.web.csrf.CsrfFilter@328045, org.springframework.security.web.authentication.logout.LogoutFilter@46426cb3, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@697dda43, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2d623280, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@b8bc093, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4164ca0e, org.springframework.security.web.session.SessionManagementFilter@578b44e0, org.springframework.security.web.access.ExceptionTranslationFilter@18aa22fc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@305501de]
+20-05-2018 15:02:46 INFO  RequestMappingHandlerAdapter:567 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@f30d6a2: startup date [Sun May 20 15:02:38 BST 2018]; root of context hierarchy
+20-05-2018 15:02:46 WARN  JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start]}" onto public java.lang.String com.instamation.drivers.test.TestController.start() throws java.lang.Exception
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/drivers]}" onto public java.util.Map<com.instamation.drivers.model.Account, com.instamation.drivers.selenium.Driver> com.instamation.drivers.test.TestController.drivers()
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/accounts]}" onto public java.util.List<com.instamation.drivers.model.Account> com.instamation.drivers.test.TestController.accounts()
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/start2],methods=[POST]}" onto public java.lang.String com.instamation.drivers.test.TestController.start2() throws java.lang.Exception
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/test/account]}" onto public com.instamation.drivers.model.Account com.instamation.drivers.test.TestController.account()
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verify(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/add/{userId}],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.addAccount(com.instamation.drivers.model.Account,java.lang.Long) throws java.lang.Exception
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/recovery],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.recovery(javax.servlet.http.HttpServletRequest) throws java.lang.Exception
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/account/verify-new],methods=[POST]}" onto public com.instamation.drivers.model.Response com.instamation.drivers.web.controller.AccountController.verifyNew(javax.servlet.http.HttpServletRequest)
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/all],methods=[GET]}" onto public java.util.Set<com.instamation.drivers.model.Account> com.instamation.drivers.web.controller.DriversController.getAll()
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/close/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.closeDriverByUsername(java.lang.String)
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/running/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isAccountDriverRunning(java.lang.String)
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/drivers/loggedin/{username}],methods=[GET]}" onto public java.lang.Boolean com.instamation.drivers.web.controller.DriversController.isLoggedIn(java.lang.String)
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+20-05-2018 15:02:47 INFO  RequestMappingHandlerMapping:548 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+20-05-2018 15:02:47 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 15:02:47 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 15:02:47 INFO  SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+20-05-2018 15:02:47 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:104 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+20-05-2018 15:02:47 INFO  OptionalLiveReloadServer:57 - LiveReload server is running on port 35729
+20-05-2018 15:02:48 INFO  AnnotationMBeanExporter:434 - Registering beans for JMX exposure on startup
+20-05-2018 15:02:48 INFO  AnnotationMBeanExporter:896 - Bean with name 'dataSource' has been autodetected for JMX exposure
+20-05-2018 15:02:48 INFO  AnnotationMBeanExporter:669 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+20-05-2018 15:02:48 INFO  ScheduledAnnotationBeanPostProcessor:275 - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+20-05-2018 15:02:48 INFO  TomcatWebServer:205 - Tomcat started on port(s): 8082 (http) with context path ''
+20-05-2018 15:02:48 INFO  InstamationDriversApplication:59 - Started InstamationDriversApplication in 10.497 seconds (JVM running for 11.329)
+20-05-2018 15:03:04 INFO  DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+20-05-2018 15:03:04 INFO  DispatcherServlet:513 - FrameworkServlet 'dispatcherServlet': initialization completed in 23 ms
+20-05-2018 15:13:48 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 15:13:56 INFO  Action:53 - repostgymmemes has an unusual attempt when logging in
+20-05-2018 15:17:54 INFO  Action:30 - idris2573@gmail.com is attempting to log in
+20-05-2018 15:22:55 INFO  Action:30 - repostgymmemes is attempting to log in
+20-05-2018 15:23:04 INFO  Action:67 - repostgymmemes has logged in successfully

@@ -1,5 +1,7 @@
 package com.instamation.drivers.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.instamation.drivers.config.SpeedSettings;
 import com.instamation.drivers.repository.PostRepository;
 
@@ -18,6 +20,7 @@ public class Setting {
     @Id
     private Long id;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "account_id")
     private Account account;

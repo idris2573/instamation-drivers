@@ -24,6 +24,119 @@ public class Actions {
 
     private static final Logger logger = Logger.getLogger(Action.class);
 
+    ////////////////////////////////////////////////ACCOUNT METHODS////////////////////////////////////////////////////////////
+
+    public static String login(Driver driver, Account account) throws Exception{
+        logger.info(account.getUsername() + " is attempting to log in");
+        driver.getDriver().get("https://www.instagram.com/accounts/login/");
+
+        Thread.sleep(1000);
+        // if already logged in
+        if (!Actions.doesButtonExist(driver, "Log In")) {
+            logger.info(account.getUsername() + " is already logged in");
+            return "success";
+        }
+        clickLogin(driver);
+        Thread.sleep(1000);
+
+        LogInMethods.inputLoginInfo(driver, account);
+
+        clickButton(driver, "Log in");
+        Thread.sleep(3000);
+
+        // check if wrong credentials
+        if(LogInMethods.isWrongCredentials(driver)){
+            logger.info(account.getUsername() + " failed to log in with the wrong credentials");
+            return "wrong-credentials";
+        }
+
+        if(LogInMethods.isUnusualAttempt(driver)){
+            logger.info(account.getUsername() + " has an unusual attempt when logging in");
+            return LogInMethods.getUnusualAttemptRecoveryType(driver);
+        }
+
+        // click something (cant remember)
+        try{
+            driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > button")).click();
+        }catch (Exception e){}
+
+        // add your phone number check
+        clickButton(driver, "Close");
+
+        clickNotNow(driver);
+        isSaveLoginInfo(driver);
+        logger.info(account.getUsername() + " has logged in successfully");
+
+        return "success";
+    }
+
+
+    public static void updateProfileDetails(Driver driver, Account account) throws Exception{
+        // select profile tab
+
+        driver.getDriver().get("https://instagram.com/" + account.getUsername());
+
+        Thread.sleep(600);
+
+        String username = driver.getDriver().findElement(By.tagName("h1")).getText();
+        //String bio = driver.getDriver().findElement(By.cssSelector("div._tb97a")).findElement(By.tagName("span")).getText().replaceAll("[^a-zA-Z0-9 ,-]","");
+        String image = getImage(driver);
+        String postsString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(0).getText().replace(",", "");
+        String followersString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(1).getText().replace(",", "");
+        String followingString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(2).getText().replace(",", "");
+
+        int posts = Integer.parseInt(postsString);
+        int followers = Integer.parseInt(followersString);
+        int following = Integer.parseInt(followingString);
+
+        account.setUsername(username);
+        //account.setBio(bio);
+        account.setPostCount(posts);
+        account.setFollowers(followers);
+        account.setFollowing(following);
+        account.setProfilePic(image);
+    }
+
+    public static void updateFollowers(Driver driver, Account account, FollowerRepository followerRepository){
+
+        //click followers
+        try {
+            driver.getDriver().findElement(By.cssSelector("#react-root > section > main > article > ul > li:nth-child(2)")).click();
+        }catch (Exception e){}
+        try {
+            driver.getDriver().findElement(By.cssSelector("a._t98z6._sf8d3")).click();
+        }catch (Exception e){}
+
+        //scroll through followers
+        int i = 1;
+        while(i < 200){
+            scroll(driver, 500*i);
+            i++;
+        }
+
+        List<WebElement> elements = driver.getDriver().findElements(By.cssSelector("div._2nunc"));
+
+        for(WebElement element : elements){
+            if(followerRepository.findByAccountAndUsername(account, element.getText()) == null){
+                Follower follower = new Follower();
+                follower.setAccount(account);
+                follower.setUsername(element.getText());
+                followerRepository.save(follower);
+            }
+        }
+
+    }
+
+    public static boolean isNotAvailable(Driver driver){
+        try {
+            if (driver.getDriver().findElement(By.tagName("h2")).getText().equalsIgnoreCase("Sorry, this page isn't available.")) {
+                return true;
+            }
+        }catch (Exception e){}
+        return false;
+    }
+
+
     ////////////////////////////////////////////////PROFILE AUTOMATION METHODS////////////////////////////////////////////////////////////
 
     public static void followProfile(Driver driver, Profile profile){
@@ -65,8 +178,10 @@ public class Actions {
         for(int i = 0; i < commentsPerPage; i++){
             driver.getDriver().get(postUrl.get(i));
             clickComment(driver);
-            driver.getDriver().findElement(By.tagName("textarea")).sendKeys(comment.getDescription());
-            clickButton(driver, "Post");
+            try {
+                driver.getDriver().findElement(By.tagName("textarea")).sendKeys(comment.decodeStringUrl());
+                clickButton(driver, "Post");
+            }catch (Exception e){}
         }
 
         driver.getDriver().get("https://instagram.com/" + profile.getUsername());
@@ -306,176 +421,6 @@ public class Actions {
 
 
 
-    ////////////////////////////////////////////////ACCOUNT METHODS////////////////////////////////////////////////////////////
-
-    public static String loginFirstTime(Driver driver, Account account) throws Exception{
-        logger.info(account.getUsername() + " is attempting to log in for the first time");
-        driver.getDriver().get("https://www.instagram.com/accounts/login/");
-
-        Thread.sleep(1000);
-        clickLogin(driver);
-        Thread.sleep(1000);
-
-        boolean loaded = false;
-
-        do{
-            try{
-                driver.getDriver().findElement(By.name("username")).sendKeys(account.getUsername());
-                loaded = true;
-            }catch (Exception e){}
-        }while (!loaded);
-
-        driver.getDriver().findElement(By.name("password")).sendKeys(account.getPassword());
-        clickButton(driver, "Log in");
-        Thread.sleep(3000);
-
-        if(driver.getDriver().getCurrentUrl().equalsIgnoreCase("https://www.instagram.com/accounts/login/")){
-            if(wrongCredentials(driver)){
-                logger.info(account.getUsername() + " has logged in with the wrong credentials");
-                return "wrong-credentials";
-            }
-        }
-
-        if(isUnusualAttempt(driver)){
-            logger.info(account.getUsername() + " has an unusual attempt in the first time log in.");
-            try {
-                for (WebElement element : driver.getDriver().findElements(By.tagName("label"))) {
-                    if(element.getText().contains("Email") && element.getText().contains("Phone")){
-                        return "unusual-attempt-phone-and-email";
-                    }
-                    if(element.getText().contains("Email")){
-                        return "unusual-attempt-email";
-                    }
-                    if(element.getText().contains("Phone")){
-                        return "unusual-attempt-phone";
-                    }
-                }
-            }catch (Exception e){}
-            return "unusual-attempt";
-        }
-
-        try{
-            driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > button")).click();
-        }catch (Exception e){}
-
-        // add your phone number check
-        clickButton(driver, "Close");
-
-        clickNotNow(driver);
-        isSaveLoginInfo(driver);
-        logger.info(account.getUsername() + " has logged in successfully for the first time");
-
-        return "success";
-    }
-
-    public static void login(Driver driver, Account account) throws Exception{
-        logger.info(account.getUsername() + " is attempting to log in");
-        driver.getDriver().get("https://www.instagram.com/accounts/login/");
-
-        Thread.sleep(1000);
-        clickLogin(driver);
-        Thread.sleep(1000);
-        driver.getDriver().findElement(By.name("username")).sendKeys(account.getUsername());
-        driver.getDriver().findElement(By.name("password")).sendKeys(account.getPassword());
-        clickButton(driver, "Log in");
-        Thread.sleep(1500);
-
-        driver.getDriver().findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
-        if(isUnusualAttempt(driver)){
-            logger.info(account.getUsername() + " has an unusual attempt log in");
-        }
-
-        try{
-            driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > button")).click();
-        }catch (Exception e){}
-
-        // add your phone number check
-        clickButton(driver, "Close");
-
-        clickNotNow(driver);
-        System.out.println(6);
-        isSaveLoginInfo(driver);
-        System.out.println(7);
-        logger.info(account.getUsername() + " logged in");
-    }
-
-    public static void updateProfileDetails(Driver driver, Account account) throws Exception{
-        // select profile tab
-        
-        if(account.getUsername() == null){
-            login(driver, account);
-            driver.getDriver().findElements(By.cssSelector("a._ttgfw")).get(3).click();
-        } else if(account.getUsername().contains("@")){
-            driver.getDriver().findElements(By.cssSelector("a._ttgfw")).get(3).click();
-        } else {
-            driver.getDriver().get("https://instagram.com/" + account.getUsername());
-        }
-
-
-        Thread.sleep(600);
-
-        String username = driver.getDriver().findElement(By.tagName("h1")).getText();
-        String bio = driver.getDriver().findElement(By.cssSelector("div._tb97a")).findElement(By.tagName("span")).getText().replaceAll("[^a-zA-Z0-9 ,-]","");
-        String image = getImage(driver);
-        String postsString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(0).getText().replace(",", "");
-        String followersString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(1).getText().replace(",", "");
-        String followingString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(2).getText().replace(",", "");
-
-        int posts = Integer.parseInt(postsString);
-        int followers = Integer.parseInt(followersString);
-        int following = Integer.parseInt(followingString);
-
-        account.setUsername(username);
-        account.setBio(bio);
-        account.setPostCount(posts);
-        account.setFollowers(followers);
-        account.setFollowing(following);
-        account.setProfilePic(image);
-    }
-
-    public static void setProfileDetails(Driver driver, Account account){
-        String bio = driver.getDriver().findElement(By.cssSelector("div._tb97a")).findElement(By.tagName("span")).getText();
-
-    }
-
-    public static void updateFollowers(Driver driver, Account account, FollowerRepository followerRepository){
-
-        //click followers
-        try {
-            driver.getDriver().findElement(By.cssSelector("#react-root > section > main > article > ul > li:nth-child(2)")).click();
-        }catch (Exception e){}
-        try {
-            driver.getDriver().findElement(By.cssSelector("a._t98z6._sf8d3")).click();
-        }catch (Exception e){}
-
-        //scroll through followers
-        int i = 1;
-        while(i < 200){
-            scroll(driver, 500*i);
-            i++;
-        }
-
-        List<WebElement> elements = driver.getDriver().findElements(By.cssSelector("div._2nunc"));
-
-        for(WebElement element : elements){
-            if(followerRepository.findByAccountAndUsername(account, element.getText()) == null){
-                Follower follower = new Follower();
-                follower.setAccount(account);
-                follower.setUsername(element.getText());
-                followerRepository.save(follower);
-            }
-        }
-
-    }
-
-    public static boolean isNotAvailable(Driver driver){
-        try {
-            if (driver.getDriver().findElement(By.tagName("h2")).getText().equalsIgnoreCase("Sorry, this page isn't available.")) {
-                return true;
-            }
-        }catch (Exception e){}
-        return false;
-    }
 
     ////////////////////////////////////////////////PRIVATE METHODS////////////////////////////////////////////////////////////
 
@@ -525,6 +470,17 @@ public class Actions {
 
         for(WebElement element : elements) {
             if(element.getText().equalsIgnoreCase(buttonText)){
+                element.click();
+                break;
+            }
+        }
+    }
+
+    public static void clickLink(Driver driver, String linkText){
+        List<WebElement> elements = driver.getDriver().findElements(By.tagName("a"));
+
+        for(WebElement element : elements) {
+            if(element.getText().equalsIgnoreCase(linkText)){
                 element.click();
                 break;
             }
@@ -641,21 +597,6 @@ public class Actions {
         }catch (Exception e){}
     }
 
-    private static boolean wrongCredentials(Driver driver){
-        try{
-            if(driver.getDriver().findElement(By.id("slfErrorAlert")).getText().contains("Sorry, your password was incorrect")){
-                return true;
-            }
-        }catch (Exception e){}
-
-        try{
-            if(driver.getDriver().findElement(By.id("slfErrorAlert")).getText().contains("The username you entered doesn't belong to an account")){
-                return true;
-            }
-        }catch (Exception e){}
-
-        return false;
-    }
 
     private static boolean isSaveLoginInfo(Driver driver){
         if (driver.getDriver().findElement(By.tagName("body")).getText().contains("Save Your Login Info?")) {
@@ -665,10 +606,38 @@ public class Actions {
         return false;
     }
 
-    private static boolean isUnusualAttempt(Driver driver){
-        if(driver.getDriver().findElement(By.tagName("body")).getText().contains("We Detected An Unusual Login Attempt")){
-            return true;
-        }
-        return false;
-    }
+
+
+    //    public static void login(Driver driver, Account account) throws Exception{
+//        logger.info(account.getUsername() + " is attempting to log in");
+//        driver.getDriver().get("https://www.instagram.com/accounts/login/");
+//
+//        Thread.sleep(1000);
+//        clickLogin(driver);
+//        Thread.sleep(1000);
+//        driver.getDriver().findElement(By.name("username")).sendKeys(account.getUsername());
+//        driver.getDriver().findElement(By.name("password")).sendKeys(account.getPassword());
+//        clickButton(driver, "Log in");
+//        Thread.sleep(1500);
+//
+//        driver.getDriver().findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
+//        if(LogInMethods.isUnusualAttempt(driver)){
+//            logger.info(account.getUsername() + " has an unusual attempt log in");
+//        }
+//
+//        try{
+//            driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > button")).click();
+//        }catch (Exception e){}
+//
+//        // add your phone number check
+//        clickButton(driver, "Close");
+//
+//        clickNotNow(driver);
+//        System.out.println(6);
+//        isSaveLoginInfo(driver);
+//        System.out.println(7);
+//        logger.info(account.getUsername() + " logged in");
+//    }
+
+
 }

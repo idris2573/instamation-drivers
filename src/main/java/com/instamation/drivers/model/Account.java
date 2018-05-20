@@ -1,5 +1,7 @@
 package com.instamation.drivers.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.instamation.drivers.repository.StatsRepository;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -7,6 +9,7 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "accounts")
@@ -21,7 +24,7 @@ public class Account {
     @JoinColumn(name="user_id")
     private User user;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "password")
@@ -64,7 +67,7 @@ public class Account {
     private Integer followersGained = 0;
 
     @Column(name = "enabled")
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     @OneToOne
     @JoinColumn(name = "settings_id")
@@ -86,6 +89,9 @@ public class Account {
 
     @Column(name = "automation_lock")
     private boolean automationLock = false;
+
+    @Column(name = "logged_in")
+    private boolean loggedIn = false;
 
     public Long getId() {
         return id;
@@ -296,6 +302,14 @@ public class Account {
 
     public void setAutomationLock(boolean automationLock) {
         this.automationLock = automationLock;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 
     @Override

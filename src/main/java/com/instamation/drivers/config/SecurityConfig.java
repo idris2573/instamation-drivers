@@ -37,16 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/test/**");
-        web.ignoring().antMatchers("/account/add/**");
-        web.ignoring().antMatchers("/account/save-settings");
-        web.ignoring().antMatchers("/recovery");
-        web.ignoring().antMatchers("/activate/**");
-        web.ignoring().antMatchers("/forgot-password");
-        web.ignoring().antMatchers("/recovery-success");
-        web.ignoring().antMatchers("/unsubscribe/**");
+        web.ignoring().antMatchers("/account/**");
+        web.ignoring().antMatchers("/drivers/**");
+
         web.ignoring().antMatchers("/automate/**");
-        web.ignoring().antMatchers("/account/seed/**");
-        web.ignoring().antMatchers("/account/comment/**");
+
 
     }
 
