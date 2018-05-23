@@ -169,8 +169,6 @@ public class AutomationController {
                     try {
 
                         if(i % 30 == 0) {
-                            updateStats(driver, account);
-
                             // if account is not logged in, skip account and set logged in and running as false.
                             driver.getDriver().get("https://instagram.com");
                             if (Actions.doesButtonExist(driver, "Log In")) {
@@ -206,6 +204,8 @@ public class AutomationController {
                         if (!setting.isFollow() && !setting.isLikes() && !setting.isUnfollow() && !setting.isComment()){
                             break;
                         }
+
+                        updateStats(driver, account);
 
                         // UNFOLLOW - Unfollow first because its polling from a queue.
                         if(setting.isUnfollow() && !unfollowProfiles.isEmpty()) {

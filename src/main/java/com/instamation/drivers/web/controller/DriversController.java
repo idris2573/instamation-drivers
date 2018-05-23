@@ -6,6 +6,7 @@ import com.instamation.drivers.repository.AccountRepository;
 import com.instamation.drivers.selenium.Actions;
 import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +17,14 @@ import java.util.*;
 @CrossOrigin(origins = {"http://localhost:8081", "https://insta-mation.com"})
 public class DriversController {
 
+    private static final Logger logger = Logger.getLogger(AutomationController.class);
+
     @Autowired
     private AccountRepository accountRepository;
 
     @GetMapping(value = "/all")
     public Set<Account> getAll(){
+        logger.info("REQUEST: get all accounts");
         Set<Account> accounts = new HashSet<>(DriverList.getDrivers().keySet());
         return accounts;
     }
@@ -28,23 +32,29 @@ public class DriversController {
     @GetMapping(value = "/running/{username}")
     public Boolean isAccountDriverRunning(@PathVariable String username) {
         Account account = accountRepository.findByUsername(username);
-        return DriverList.containsKey(account);
+        boolean isRunning = DriverList.containsKey(account);
+        logger.info("REQUEST: Check if account" + username + "'s driver is running. || RESPONSE: " + isRunning);
+        return isRunning;
     }
 
     @GetMapping(value = "/close/{username}")
     public Boolean closeDriverByUsername(@PathVariable String username) {
         Account account = accountRepository.findByUsername(username);
         if(account == null){
+            logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + false);
             return false;
         }
 
         Driver driver = DriverList.get(account);
         if(driver == null){
+            logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + false);
             return false;
         }
 
         driver.close();
         DriverList.remove(account);
+
+        logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + true);
         return true;
     }
 
@@ -53,18 +63,22 @@ public class DriversController {
     public Boolean isLoggedIn(@PathVariable String username) {
         Account account = accountRepository.findByUsername(username);
         if(account == null){
+            logger.info("REQUEST: Is" + username + "logged into a driver. || RESPONSE: " + false);
             return false;
         }
 
         Driver driver = DriverList.get(account);
         if(driver == null || driver.isClosed()){
+            logger.info("REQUEST: Is" + username + "logged into a driver. || RESPONSE: " + false);
             return false;
         }
 
         driver.getDriver().get("https://instagram.com");
         if(!Actions.doesButtonExist(driver, "Log In")) {
+            logger.info("REQUEST: Is" + username + "logged into a driver. || RESPONSE: " + true);
             return true;
         }else {
+            logger.info("REQUEST: Is" + username + "logged into a driver. || RESPONSE: " + false);
             return false;
         }
     }
