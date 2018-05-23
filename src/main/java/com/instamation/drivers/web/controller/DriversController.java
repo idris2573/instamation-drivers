@@ -34,8 +34,17 @@ public class DriversController {
     @GetMapping(value = "/close/{username}")
     public Boolean closeDriverByUsername(@PathVariable String username) {
         Account account = accountRepository.findByUsername(username);
-        DriverList.get(account).close();
-         DriverList.remove(account);
+        if(account == null){
+            return false;
+        }
+
+        Driver driver = DriverList.get(account);
+        if(driver == null){
+            return false;
+        }
+
+        driver.close();
+        DriverList.remove(account);
         return true;
     }
 
@@ -43,6 +52,10 @@ public class DriversController {
     @GetMapping(value = "/loggedin/{username}")
     public Boolean isLoggedIn(@PathVariable String username) {
         Account account = accountRepository.findByUsername(username);
+        if(account == null){
+            return false;
+        }
+
         Driver driver = DriverList.get(account);
         if(driver == null || driver.isClosed()){
             return false;
