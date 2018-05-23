@@ -44,57 +44,6 @@ public class ScheduleController {
     @Autowired
     private ActionRepository actionRepository;
 
-
-//    @RequestMapping("/update-stats")
-//    @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
-    public void updateStats() throws Exception{
-        logger.info("Updating stats for all account");
-        List<Account> accounts = accountRepository.findByEnabled(true);
-
-        for(Account account : accounts){
-            Driver driver;
-
-            if(DriverList.containsKey(account)){
-                driver = DriverList.get(account);
-            } else if(account.getProxy() != null){
-                driver = new Driver(false, account.getProxy().getIp());
-                DriverList.put(account, driver);
-            } else {
-                driver = new Driver();
-                DriverList.put(account, driver);
-            }
-
-            try {
-                Actions.login(driver, account);
-            }catch (Exception e){
-                logger.info(account.getUsername() + " failed to login");
-            }
-            try{
-                Actions.updateProfileDetails(driver, account);
-            }catch (Exception e){
-                logger.info(account.getUsername() + " failed to updateProfileDetails");
-            }
-            try{
-                account.updateStats(statsRepository);
-            }catch (Exception e){
-                logger.info(account.getUsername() + " failed to updateStats");
-            }
-            try{
-                Actions.updateFollowers(driver, account, followerRepository);
-            }catch (Exception e){
-                logger.info(account.getUsername() + " failed to updateFollowers");
-            }
-
-            accountRepository.save(account);
-
-            logger.info(account.getUsername() + " stats have been updated");
-        }
-
-        logger.info("Completed stats update - All account stats have been updated");
-
-    }
-
-
     @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
     public void deleteUnused() throws Exception{
         List<Driver> deleteDrivers = new ArrayList<>();

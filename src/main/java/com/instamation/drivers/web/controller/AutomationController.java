@@ -59,7 +59,7 @@ public class AutomationController {
         for(Account account : accounts){
 
             Driver driver = DriverList.get(account);
-            if(!account.isAutomationLock()) {
+            if(!account.isAutomationLock() && account.getSetting().isWorkingTime()) {
                 account.setAutomationLock(true);
                 accountRepository.save(account);
 
