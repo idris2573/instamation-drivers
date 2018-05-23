@@ -58,12 +58,12 @@ public class AutomationController {
 
         for(Account account : accounts){
 
-            Driver driver = DriverList.get(account);
             if(!account.isAutomationLock() && account.getSetting().isWorkingTime()) {
+                Driver driver = DriverList.get(account);
                 account.setAutomationLock(true);
                 accountRepository.save(account);
 
-                // is the account does not have a driver or is not logged in,
+                // if the account does not have a driver or is not logged in,
                 // set the accounts automation off. Also set the account as not logged in.
                 if(driver == null || !account.isLoggedIn()){
                     account.setRunning(false);
@@ -71,6 +71,15 @@ public class AutomationController {
                     account.setAutomationLock(false);
                     accountRepository.save(account);
                     continue;
+                }
+
+                // if account is not available its been deleted or blocked by instagram
+                driver.getDriver().get("https://instagram.com/" + account.getUsername());
+                if(Actions.isNotAvailable(driver)){
+                    account.setRunning(false);
+                    account.setLoggedIn(false);
+                    account.setAutomationLock(false);
+                    accountRepository.save(account);
                 }
 
                 // if account is not logged in, skip account and set logged in and running as false.
