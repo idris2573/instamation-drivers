@@ -21,6 +21,10 @@ public class Proxy {
     @JoinColumn(name = "account_id")
     private Account account;
 
+    public Long getId() {
+        return id;
+    }
+
     public String getIp() {
         return ip;
     }

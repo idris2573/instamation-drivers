@@ -5,6 +5,7 @@ import com.instamation.drivers.repository.*;
 import com.instamation.drivers.selenium.Actions;
 import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import java.sql.Date;
 @CrossOrigin(origins = {"http://localhost:8081", "https://insta-mation.com"})
 @RequestMapping(value = "/account")
 public class AccountController {
+
+    private static final Logger logger = Logger.getLogger(AccountController.class);
 
     @Autowired
     private AccountRepository accountRepository;
@@ -130,6 +133,12 @@ public class AccountController {
             return new Response(response);
         }
 
+        // check if actually logged in
+        driver.getDriver().get("https://instagram.com");
+        if(Actions.doesButtonExist(driver, "Log In")) {
+            Actions.login(driver, account);
+        }
+
         account.setLoggedIn(true);
         accountRepository.save(account);
 
@@ -194,6 +203,12 @@ public class AccountController {
                 return new Response("wrong-code");
             }
         }catch (Exception e){}
+
+        // check if actually logged in
+        driver.getDriver().get("https://instagram.com");
+        if(Actions.doesButtonExist(driver, "Log In")) {
+            Actions.login(driver, account);
+        }
 
         account.setLoggedIn(true);
         accountRepository.save(account);
