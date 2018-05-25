@@ -77,13 +77,30 @@ public class AccountController {
             DriverList.getNewDrivers().add(driver);
         }
 
-        String response = Actions.login(driver, account);
+
+        String response;
+
+        try{
+            response = Actions.login(driver, account);
+        }catch (Exception e){
+            driver.close();
+            if(DriverList.getNewDrivers().contains(driver)){
+                DriverList.getNewDrivers().remove(driver);
+            }
+            if(DriverList.containsKey(account)){
+                DriverList.remove(account);
+            }
+            logger.info(account.getUsername() + " failed to login");
+            return new Response("login-fail");
+        }
 
         // user enters the wrong credentials
         if(response.equalsIgnoreCase("wrong-credentials")){
             // close drive and remove it from driver list if its already in the driver list.
             driver.close();
-            DriverList.getNewDrivers().remove(driver);
+            if(DriverList.getNewDrivers().contains(driver)){
+                DriverList.getNewDrivers().remove(driver);
+            }
             if(DriverList.containsKey(account)){
                 DriverList.remove(account);
             }
