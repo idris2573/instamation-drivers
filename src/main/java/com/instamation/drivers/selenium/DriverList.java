@@ -1,6 +1,8 @@
 package com.instamation.drivers.selenium;
 
 import com.instamation.drivers.model.Account;
+import com.instamation.drivers.web.controller.ScheduleController;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public class DriverList {
+
+    private static final Logger logger = Logger.getLogger(DriverList.class);
 
     private static Map<Account, Driver> drivers = new HashMap<>();
     private static List<Driver> newDrivers = new ArrayList<>();
@@ -64,6 +68,7 @@ public class DriverList {
         for(Map.Entry driver : drivers.entrySet()){
             Account accountEntry = (Account) driver.getKey();
             if(account.getId().equals(accountEntry.getId())){
+                logger.info(account.getUsername() + " is being removed from DriverList");
                 drivers.remove(accountEntry);
             }
         }
@@ -77,13 +82,54 @@ public class DriverList {
         for(Map.Entry driver1 : drivers.entrySet()){
             Account accountEntry = (Account) driver1.getKey();
             if(account.getId().equals(accountEntry.getId())){
+                logger.info(account.getUsername() + " is getting updated in DriverList");
                 drivers.put(accountEntry, driver);
             }
         }
+
+        logger.info(account.getUsername() + " is being added to the DriverList");
         drivers.put(account, driver);
     }
 
+
     public static List<Driver> getNewDrivers() {
         return newDrivers;
+    }
+
+    public static boolean newDriversContain(Driver driver){
+        if(driver == null || driver.isClosed()){
+            return false;
+        }
+
+        if(driver.getAccount() == null){
+            return false;
+        }
+
+        for(Driver driver1 : newDrivers){
+            if(driver1.getAccount().getUsername().equalsIgnoreCase(driver.getAccount().getUsername())){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean driversContainNewDriver(Driver driver){
+        if(driver == null || driver.isClosed()){
+            return false;
+        }
+
+        if(driver.getAccount() == null){
+            return false;
+        }
+
+        for(Map.Entry driverMap : drivers.entrySet()){
+            Driver driverEntry = (Driver) driverMap.getValue();
+            if(driverEntry.getAccount().getUsername().equalsIgnoreCase(driver.getAccount().getUsername())){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

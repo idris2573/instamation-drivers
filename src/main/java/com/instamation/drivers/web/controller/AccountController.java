@@ -71,9 +71,9 @@ public class AccountController {
         if(driver == null) {
             // if proxy exists, give the driver the proxy.
             if (proxy != null) {
-                driver = new Driver(false, proxy.getIp());
+                driver = new Driver(false, proxy.getIp(), account);
             } else {
-                driver = new Driver();
+                driver = new Driver(account);
             }
             DriverList.getNewDrivers().add(driver);
         }
@@ -91,7 +91,7 @@ public class AccountController {
             if(DriverList.containsKey(account)){
                 DriverList.remove(account);
             }
-            logger.info(account.getUsername() + " failed to login");
+            logger.info(account.getUsername() + " crashed and failed to login");
             return new Response("login-fail");
         }
 

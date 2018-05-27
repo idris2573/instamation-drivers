@@ -586,8 +586,10 @@ public class Actions {
     }
 
     private static void scroll(Driver driver, int scrollAmount){
-        JavascriptExecutor js = ((JavascriptExecutor) driver.getDriver());
-        js.executeScript("window.scrollTo(0, " + scrollAmount + ")");
+        try {
+            JavascriptExecutor js = ((JavascriptExecutor) driver.getDriver());
+            js.executeScript("window.scrollTo(0, " + scrollAmount + ")");
+        }catch (Exception e){}
     }
 
     private static void clickLike(Driver driver){

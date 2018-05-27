@@ -41,9 +41,10 @@ public class PostController {
     @PostMapping(value = "/scrape/{id}")
     public String scrape(@PathVariable Long id, HttpServletRequest request, RedirectAttributes redirectAttributes) throws Exception{
 
+        Account account = accountRepository.findById(id).get();
         String search = request.getParameter("search");
-        Driver driver = new Driver();
-        Actions.getAutomatedPosts(driver, search, accountRepository.findById(id).get(), postRepository);
+        Driver driver = new Driver(account);
+        Actions.getAutomatedPosts(driver, search, account, postRepository);
         driver.close();
 
 //        redirectAttributes.addFlashAttribute("alert", new Alert(Alert.Status.PRIMARY,"Added " + search + " posts"));
@@ -77,7 +78,7 @@ public class PostController {
             Post post = postRepository.findFirstByAccountAndPosted(account, false);
 
             if(post != null) {
-                Driver driver = new Driver();
+                Driver driver = new Driver(account);
                 try {
                     Actions.post(driver, post, account, captionRepository.findRandom(), true);
 
@@ -105,7 +106,7 @@ public class PostController {
 
         Account account = accountRepository.findById(id).get();
         Setting setting = account.getSetting();
-        Driver driver = new Driver();
+        Driver driver = new Driver(account);
         Actions.login(driver, account);
 
         while (account.getPostCount() < 9) {

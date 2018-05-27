@@ -1,6 +1,8 @@
 package com.instamation.drivers.selenium;
 
 import com.instamation.drivers.model.Account;
+import com.instamation.drivers.web.controller.ScheduleController;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,23 +16,31 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Driver {
-    private WebDriver driver;
-    private Set<Cookie> cookies = new TreeSet<>();
+    private static final Logger logger = Logger.getLogger(Driver.class);
 
-    public Driver() throws Exception {
+    private WebDriver driver;
+    private Account account;
+
+    public Driver(Account account) throws Exception {
+        this.account = account;
+        logger.info(account.getUsername() + " has started up a new driver");
         driver = driver(false);
         driver.manage().window().setPosition(new Point(-500,0));
         driver.manage().window().setSize(new Dimension(374,650));
     }
 
-    public Driver(boolean headless) throws Exception {
+    public Driver(boolean headless, Account account) throws Exception {
+        this.account = account;
+        logger.info(account.getUsername() + " has started up a new driver");
         driver = driver(headless);
 
         driver.manage().window().setPosition(new Point(-500, 0));
         driver.manage().window().setSize(new Dimension(374, 650));
     }
 
-    public Driver(boolean headless, String proxy) throws Exception {
+    public Driver(boolean headless, String proxy, Account account) throws Exception {
+        this.account = account;
+        logger.info(account.getUsername() + " has started up a new driver");
         driver = driver(headless, proxy);
 
         driver.manage().window().setPosition(new Point(-500, 0));
@@ -104,7 +114,11 @@ public class Driver {
     }
 
     public void close(){
-        cookies = driver.manage().getCookies();
+        if(driver == null || isClosed()){
+            return;
+        }
+
+        logger.info(account.getUsername() + " driver has been closed");
         driver.close();
         driver.quit();
     }
@@ -118,24 +132,15 @@ public class Driver {
         }
     }
 
-    public static boolean containsAccount(Map<Account, Driver> drivers, Account account){
-
-        for(Map.Entry entry : drivers.entrySet()){
-            Account driverAccount = (Account) entry.getKey();
-            if(driverAccount.equals(account)){
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public void setDriver(WebDriver driver) {
         this.driver = driver;
     }
 
-    public Set<Cookie> getCookies() {
-        return cookies;
+    public Account getAccount() {
+        return account;
     }
 
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

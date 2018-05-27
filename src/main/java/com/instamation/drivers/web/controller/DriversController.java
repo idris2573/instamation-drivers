@@ -1,6 +1,7 @@
 package com.instamation.drivers.web.controller;
 
 import com.instamation.drivers.model.Account;
+import com.instamation.drivers.model.DriverInfo;
 import com.instamation.drivers.model.Response;
 import com.instamation.drivers.repository.AccountRepository;
 import com.instamation.drivers.selenium.Actions;
@@ -8,9 +9,11 @@ import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
 import com.instamation.drivers.selenium.LogInMethods;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @RestController
@@ -24,10 +27,41 @@ public class DriversController {
     private AccountRepository accountRepository;
 
     @GetMapping(value = "/all")
-    public Set<Account> getAll(){
+    public Map<Account, DriverInfo> getAll(){
         logger.info("REQUEST: get all accounts");
-        Set<Account> accounts = new HashSet<>(DriverList.getDrivers().keySet());
-        return accounts;
+        Map<Account, DriverInfo> drivers = new HashMap<>();
+
+        for(Map.Entry driver : DriverList.getDrivers().entrySet()){
+            Account accountEntry = (Account) driver.getKey();
+            Driver driverEntry = (Driver) driver.getValue();
+
+            if(driverEntry == null || accountEntry == null || driverEntry.isClosed() || accountEntry.getUsername() == null){
+                continue;
+            }
+
+            DriverInfo driverInfo = new DriverInfo();
+            try {
+                driverInfo.setUrl(driverEntry.getDriver().getCurrentUrl());
+            }catch (Exception e){}
+            try {
+                driverInfo.setTitle(driverEntry.getDriver().getTitle());
+            }catch (Exception e){}
+            try {
+                driverInfo.setH1(driverEntry.getDriver().findElement(By.tagName("h1")).getText());
+            }catch (Exception e){}
+            try {
+                driverInfo.setH2(driverEntry.getDriver().findElement(By.tagName("h2")).getText());
+            }catch (Exception e){}
+            try {
+                driverInfo.setBody(driverEntry.getDriver().findElement(By.tagName("body")).getText());
+            }catch (Exception e){}
+            try {
+                driverInfo.setHtml(driverEntry.getDriver().findElement(By.tagName("html")).getAttribute("innerHTML"));
+            }catch (Exception e){}
+
+            drivers.put(accountEntry, driverInfo);
+        }
+        return drivers;
     }
 
     @GetMapping(value = "/running/{username}")
@@ -63,7 +97,6 @@ public class DriversController {
         return true;
     }
 
-
     @GetMapping(value = "/loggedin/{username}")
     public Boolean isLoggedIn(@PathVariable String username) {
         Account account = accountRepository.findByUsername(username);
@@ -87,6 +120,23 @@ public class DriversController {
         }
     }
 
+    @GetMapping(value = "/get/{username}")
+    public Boolean get(@PathVariable String username, HttpServletRequest request){
+        String url = request.getParameter("url");
+        Account account = accountRepository.findByUsername(username);
+
+        if(DriverList.containsKey(account)){
+            Driver driver = DriverList.get(account);
+            if(driver == null || driver.isClosed()){
+                return false;
+            }
+
+            driver.getDriver().get(url);
+            return true;
+        }
+
+        return false;
+    }
 
 
 

@@ -85,7 +85,12 @@ public class LogInMethods {
     }
 
     public static boolean isLoggedIn(Driver driver){
-        driver.getDriver().get("https://www.instagram.com/accounts/login/");
+
+        try {
+            driver.getDriver().get("https://www.instagram.com/accounts/login/");
+        }catch (Exception e){
+            return false;
+        }
 
         try{
             Thread.sleep(1000);
