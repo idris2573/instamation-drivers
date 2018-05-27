@@ -5,6 +5,7 @@ import com.instamation.drivers.repository.*;
 import com.instamation.drivers.selenium.Actions;
 import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
+import com.instamation.drivers.selenium.LogInMethods;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -151,12 +152,13 @@ public class AccountController {
         }
 
         // check if actually logged in
-        driver.getDriver().get("https://instagram.com");
-        if(Actions.doesButtonExist(driver, "Log In")) {
+        if(!LogInMethods.isLoggedIn(driver)) {
+            logger.info(account.getUsername() + " is retrying logging in");
             Actions.login(driver, account);
         }
 
         account.setLoggedIn(true);
+        account.setAvailable(true);
         accountRepository.save(account);
 
         // successful login
@@ -222,12 +224,12 @@ public class AccountController {
         }catch (Exception e){}
 
         // check if actually logged in
-        driver.getDriver().get("https://instagram.com");
-        if(Actions.doesButtonExist(driver, "Log In")) {
+        if(!LogInMethods.isLoggedIn(driver)) {
             Actions.login(driver, account);
         }
 
         account.setLoggedIn(true);
+        account.setAvailable(true);
         accountRepository.save(account);
 
         // user is confirmed via code. add user

@@ -5,6 +5,7 @@ import com.instamation.drivers.repository.*;
 import com.instamation.drivers.selenium.Actions;
 import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
+import com.instamation.drivers.selenium.LogInMethods;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -44,7 +45,7 @@ public class ScheduleController {
     @Autowired
     private ActionRepository actionRepository;
 
-    @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
+    @Scheduled(cron="0 0 */5 * * *", zone="Europe/London")
     public void deleteUnused() throws Exception{
         List<Driver> deleteDrivers = new ArrayList<>();
 
@@ -60,4 +61,77 @@ public class ScheduleController {
         }
     }
 
+    @RequestMapping("/update-stats")
+    @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
+    public void updateStats() throws Exception{
+        logger.info("Updating stats for all accounts");
+        List<Account> accounts = accountRepository.findByEnabled(true);
+        Driver driver;
+        Boolean isLoggedIn;
+
+        for(Account account : accounts) {
+            if (!account.getSetting().isWorkingTime() && !account.isAutomationLock()) {
+
+                // check if account has a driver and is logged in.
+                if(DriverList.containsKey(account)){
+                    driver = DriverList.get(account);
+                    if(LogInMethods.isLoggedIn(driver)){
+                        isLoggedIn = true;
+                        account.setLoggedIn(true);
+                    } else {
+                        isLoggedIn = false;
+                    }
+                } else {
+                    isLoggedIn = false;
+                    driver = new Driver();
+                    account.setLoggedIn(false);
+                }
+
+                // check if account is available, if not skip account
+                driver.getDriver().get("https://instagram.com/" + account.getUsername());
+                if(Actions.isNotAvailable(driver)){
+                    account.setAvailable(false);
+                    account.setRunning(false);
+                    account.setLoggedIn(false);
+                    accountRepository.save(account);
+                    logger.info(account.getUsername() + " is unavaliable");
+                    continue;
+                }
+
+                logger.info(account.getUsername() + " isLoggedIn = " + isLoggedIn);
+
+                try {
+                    Actions.updateProfileDetails(driver, account);
+                } catch (Exception e) {
+                    logger.info(account.getUsername() + " failed to updateProfileDetails");
+                }
+
+                if(isLoggedIn) {
+                    try {
+                        Actions.updateFollowers(driver, account, followerRepository);
+                    } catch (Exception e) {
+                        logger.info(account.getUsername() + " failed to updateFollowers");
+                    }
+                }
+
+                try {
+                    account.updateStats(statsRepository);
+                } catch (Exception e) {
+                    logger.info(account.getUsername() + " failed to updateStats");
+                }
+
+                accountRepository.save(account);
+
+                logger.info(account.getUsername() + " stats have been updated");
+
+                if(!isLoggedIn) {
+                    driver.close();
+                }
+            }
+
+        }
+
+        logger.info("Completed stats update - All account stats have been updated");
+
+    }
 }

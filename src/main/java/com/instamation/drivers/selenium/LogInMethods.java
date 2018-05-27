@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class LogInMethods {
 
     private static final Logger logger = Logger.getLogger(LogInMethods.class);
@@ -80,5 +82,31 @@ public class LogInMethods {
             }
         }catch (Exception e){}
         return "unusual-attempt";
+    }
+
+    public static boolean isLoggedIn(Driver driver){
+        driver.getDriver().get("https://www.instagram.com/accounts/login/");
+
+        try{
+            Thread.sleep(1000);
+        }catch (Exception e){}
+
+        if (Actions.doesButtonExist(driver, "Log In")) {
+            return false;
+        }
+
+        if(Actions.doesButtonExist(driver, "Continue with Facebook")){
+            return false;
+        }
+
+        if(!driver.getDriver().findElements(By.name("username")).isEmpty()){
+            return false;
+        }
+
+        if(!driver.getDriver().findElements(By.name("password")).isEmpty()){
+            return false;
+        }
+
+        return true;
     }
 }

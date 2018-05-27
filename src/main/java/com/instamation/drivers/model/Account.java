@@ -93,6 +93,9 @@ public class Account {
     @Column(name = "logged_in")
     private boolean loggedIn = false;
 
+    @Column(name = "available")
+    private boolean available = true;
+
     public Long getId() {
         return id;
     }
@@ -310,6 +313,14 @@ public class Account {
 
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     @Override

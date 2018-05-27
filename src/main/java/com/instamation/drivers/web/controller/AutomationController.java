@@ -5,6 +5,7 @@ import com.instamation.drivers.repository.*;
 import com.instamation.drivers.selenium.Actions;
 import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
+import com.instamation.drivers.selenium.LogInMethods;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -59,17 +60,30 @@ public class AutomationController {
         for(Account account : accounts){
 
             if(!account.isAutomationLock() && account.getSetting().isWorkingTime()) {
-                Driver driver = DriverList.get(account);
+                logger.info("Checking " + account.getUsername() + " for automation");
                 account.setAutomationLock(true);
                 accountRepository.save(account);
 
+                Driver driver = DriverList.get(account);
+
                 // if the account does not have a driver or is not logged in,
                 // set the accounts automation off. Also set the account as not logged in.
-                if(driver == null || !account.isLoggedIn()){
+                if(driver == null){
                     account.setRunning(false);
                     account.setLoggedIn(false);
                     account.setAutomationLock(false);
                     accountRepository.save(account);
+                    logger.info(account.getUsername() + "account does not have a driver, skipping automation..." );
+                    continue;
+                }
+
+                // if account is not logged in, skip account and set logged in and running as false.
+                if(!LogInMethods.isLoggedIn(driver)){
+                    account.setRunning(false);
+                    account.setLoggedIn(false);
+                    account.setAutomationLock(false);
+                    accountRepository.save(account);
+                    logger.info(account.getUsername() + " is not logged in, skipping automation...");
                     continue;
                 }
 
@@ -79,67 +93,42 @@ public class AutomationController {
                     account.setRunning(false);
                     account.setLoggedIn(false);
                     account.setAutomationLock(false);
+                    account.setAvailable(false);
                     accountRepository.save(account);
-                }
-
-                // if account is not logged in, skip account and set logged in and running as false.
-                driver.getDriver().get("https://instagram.com");
-                if(Actions.doesButtonExist(driver, "Log In")){
-                    account.setRunning(false);
-                    account.setLoggedIn(false);
-                    account.setAutomationLock(false);
-                    accountRepository.save(account);
+                    logger.info(account.getUsername() + " is not available, skipping automation...");
                     continue;
                 }
 
+                Setting setting = settingRepository.findByAccount(account);
+                List<Profile> profiles = profileRepository.findByAccountAndFollowingAndUnfollowed(account, false, false);
+
                 // get profiles using profile seeds
+                getProfileSeeds(account, driver, profiles);
+
                 try {
-                    Setting setting = settingRepository.findByAccount(account);
-                    List<Profile> profiles = profileRepository.findByAccountAndFollowingAndUnfollowed(account, false, false);
-
-                    if (profiles.isEmpty()) {
-                        logger.info(account.getUsername() + "has no profiles, adding new profiles.");
-
-                        for (ProfileSeed profileSeed : profileSeedRepository.findByAccountAndUsed(account, false)) {
-                            String prepend = (profileSeed.getType().equalsIgnoreCase("username")) ? "@" : "#";
-                            logger.info(account.getUsername() + " adding profiles using '" + prepend + profileSeed.getName() + "' seed");
-
-                            Actions.getProfiles(driver, account, profileSeed, profileRepository);
-
-                            if (profileRepository.findByAccountAndFollowingAndUnfollowed(account, false, false).size() > 2000) {
-                                break;
-                            }
-
-                            profileSeed.setUsed(true);
-                            profileSeedRepository.save(profileSeed);
-
-                            logger.info(account.getUsername() + " finished getting profiles");
-                        }
-                    }
-
                     // CHECK IF
                     // account is enabled
                     // account actions is less than actions per day
                     // accounts settings working time is true
                     // account HAS list of profile to work with
                     // accounts settings has 1 of the four actions active
-                    logger.info(account.getUsername() + String.format("'s automation settings: \nenabled: %s, \nactions available: %s, \nis working time: %s, \nprofile list is not empty: %s, \nFULC action: %s",
+                    logger.info(account.getUsername() + String.format("'s automation settings: \nusername: %s \nenabled: %s, \nactions available: %s, \nisWorkingTime: %s, \nprofile list notEmpty: %s, \nFULC action: %s",
+                            account.getUsername(),
                             account.isEnabled(),
                             (account.getActions() < setting.getActionsPerDay()),
                             setting.isWorkingTime(),
                             !profiles.isEmpty(),
                             (setting.isFollow() || setting.isLikes() || setting.isUnfollow() || setting.isComment())));
 
+                    // if account passes all automation checks
                     if (account.isEnabled() && account.getActions() < setting.getActionsPerDay() && setting.isWorkingTime() && !profiles.isEmpty()
                             && (setting.isFollow() || setting.isLikes() || setting.isUnfollow() || setting.isComment())) {
 
-                        logger.info(account.getUsername() + " starting automation");
-                        DriverList.put(account, driver);
-
-
+                        logger.info(account.getUsername() + " has passed all checks and is starting automation");
                         automate(account);
                     }
                 }catch (Exception e){
+                    logger.info(account.getUsername() + " ran into an error on automation checks, skipping...");
                     account.setAutomationLock(false);
                     accountRepository.save(account);
                 }
@@ -168,44 +157,16 @@ public class AutomationController {
                 for (Profile profile : profiles) {
                     try {
 
-                        if(i % 30 == 0) {
-                            // if account is not logged in, skip account and set logged in and running as false.
-                            driver.getDriver().get("https://instagram.com");
-                            if (Actions.doesButtonExist(driver, "Log In")) {
-                                account.setRunning(false);
-                                account.setLoggedIn(false);
-                                accountRepository.save(account);
-                                break;
-                            }
-
-                            // check if user is not available
-                            driver.getDriver().get("https://instagram.com/" + account.getUsername());
-                            if(Actions.isNotAvailable(driver)){
-                                account.setRunning(false);
-                                account.setLoggedIn(false);
-                                accountRepository.save(account);
-                                break;
-                            }
+                        // if account is not running.
+                        if(!isAccountRunning(account, driver)){
+                            break;
                         }
 
+                        if(i % 30 == 0) {
+                            updateStats(driver, account);
+                        }
                         i++;
 
-                        // if account is not running.
-                        if(!accountRepository.findById(account.getId()).get().isRunning()){
-                            break;
-                        }
-
-                        // If account has reached is actions per day limit or is not working, break the loop.
-                        if (account.getActions() >= setting.getActionsPerDay() || !setting.isWorkingTime()) {
-                            break;
-                        }
-
-                        // If all settings are off, break loop.
-                        if (!setting.isFollow() && !setting.isLikes() && !setting.isUnfollow() && !setting.isComment()){
-                            break;
-                        }
-
-                        updateStats(driver, account);
 
                         // UNFOLLOW - Unfollow first because its polling from a queue.
                         if(setting.isUnfollow() && !unfollowProfiles.isEmpty()) {
@@ -217,7 +178,10 @@ public class AutomationController {
                                 unfollowProfile.setFollowing(false);
                                 unfollowProfile.setUnfollowed(true);
                                 profileRepository.save(unfollowProfile);
-                                accountRepository.save(account);
+
+                                if(!isAccountRunning(account, driver)){
+                                    break;
+                                }
 
                                 Action action = new Action();
                                 action.setAccount(account);
@@ -243,7 +207,11 @@ public class AutomationController {
                             profile.setFollowing(true);
                             profile.setFollowDate(new Date(System.currentTimeMillis()));
                             profileRepository.save(profile);
-                            accountRepository.save(account);
+
+                            if(!isAccountRunning(account, driver)){
+                                break;
+                            }
+                            driver.getDriver().get("https://instagram.com/" + profile.getUsername());
 
                             Action action = new Action();
                             action.setAccount(account);
@@ -265,7 +233,11 @@ public class AutomationController {
                             account.setActions(account.getActions() + 1);
                             profile.setLiked(true);
                             profileRepository.save(profile);
-                            accountRepository.save(account);
+
+                            if(!isAccountRunning(account, driver)){
+                                break;
+                            }
+                            driver.getDriver().get("https://instagram.com/" + profile.getUsername());
 
                             Action action = new Action();
                             action.setAccount(account);
@@ -283,7 +255,11 @@ public class AutomationController {
                             account.setActions(account.getActions() + 1);
                             profile.setCommented(true);
                             profileRepository.save(profile);
-                            accountRepository.save(account);
+
+                            if(!isAccountRunning(account, driver)){
+                                break;
+                            }
+                            driver.getDriver().get("https://instagram.com/" + profile.getUsername());
 
                             Action action = new Action();
                             action.setAccount(account);
@@ -296,14 +272,12 @@ public class AutomationController {
                         }
 
                     } catch (Exception e) {
-//                        System.out.println("Driver has been closed");
                         driver = DriverList.get(account);
-//                        drivers.remove(account);
                     }
                 }
 
-                logger.info(account.getUsername() + " has stopped automation");
                 account.setAutomationLock(false);
+                logger.info(account.getUsername() + " has stopped automation");
                 accountRepository.save(account);
             }
         };
@@ -311,6 +285,8 @@ public class AutomationController {
     }
     ///////////THE ACTUAL AUTOMATION/////////////////
 
+
+    // #####################PRIVATE METHODS#######################
     private ActionType getActionType(String type){
         return actionTypeRepository.findByType(type);
     }
@@ -337,6 +313,8 @@ public class AutomationController {
     }
 
     private void updateStats(Driver driver, Account account){
+        logger.info(account.getUsername() + " updating stats (automation)");
+
         try{
             Actions.updateProfileDetails(driver, account);
         }catch (Exception e){
@@ -358,5 +336,100 @@ public class AutomationController {
         logger.info(account.getUsername() + " stats have been updated");
     }
 
+    private boolean isAccountRunning(Account account, Driver driver) throws Exception{
 
+        Account accountUpdated = accountRepository.findById(account.getId()).get();
+
+        // if account is not running.
+        if(!accountUpdated.isRunning()){
+            account.setRunning(false);
+            accountRepository.save(account);
+            logger.info(account.getUsername() + " has stopped running");
+            return false;
+        }
+
+        Setting setting = account.getSetting();
+
+        // If account has reached is actions per day limit or is not working, break the loop.
+        if (account.getActions() >= setting.getActionsPerDay()) {
+            accountRepository.save(account);
+            logger.info(account.getUsername() + " has ran out of actions");
+            return false;
+        }
+
+        if(!setting.isWorkingTime()){
+            accountRepository.save(account);
+            logger.info(account.getUsername() + " has completed working time");
+            return false;
+        }
+
+        Setting settingUpdate = accountUpdated.getSetting();
+
+        setting.setLikes(settingUpdate.isLikes());
+        setting.setComment(settingUpdate.isComment());
+        setting.setFollow(settingUpdate.isFollow());
+        setting.setUnfollow(settingUpdate.isUnfollow());
+        setting.setActionSpeed(settingUpdate.getActionSpeed());
+        setting.setMediaType(settingUpdate.getMediaType());
+        setting.setMinLikesFilter(settingUpdate.getMinLikesFilter());
+        setting.setMaxLikesFilter(settingUpdate.getMaxLikesFilter());
+
+        // If all settings are off, break loop.
+        if (!setting.isFollow() && !setting.isLikes() && !setting.isUnfollow() && !setting.isComment()){
+            accountRepository.save(account);
+            logger.info(account.getUsername() + " has turned all actions off");
+            return false;
+        }
+
+        // if account is not logged in, skip account and set logged in and running as false.
+        if (!LogInMethods.isLoggedIn(driver)) {
+            setRunningFalse(account);
+            logger.info(account.getUsername() + " is not logged in");
+            return false;
+        }
+
+        // check if user is not available
+        driver.getDriver().get("https://instagram.com/" + account.getUsername());
+        if(Actions.isNotAvailable(driver)){
+            account.setAvailable(false);
+            setRunningFalse(account);
+            logger.info(account.getUsername() + " is not available");
+            return false;
+        }
+
+        accountRepository.save(account);
+        return true;
+    }
+
+    private void setRunningFalse(Account account){
+        account.setRunning(false);
+        account.setLoggedIn(false);
+        accountRepository.save(account);
+    }
+
+    private void getProfileSeeds(Account account, Driver driver, List<Profile> profiles) throws Exception{
+        if (profiles.isEmpty()) {
+            logger.info(account.getUsername() + "has no profiles, adding new profiles.");
+
+            List<ProfileSeed> profileSeeds = profileSeedRepository.findByAccountAndUsed(account, false);
+
+            for (ProfileSeed profileSeed : profileSeeds) {
+                String prepend = (profileSeed.getType().equalsIgnoreCase("username")) ? "@" : "#";
+                logger.info(account.getUsername() + " adding profiles using '" + prepend + profileSeed.getName() + "' seed");
+
+                Actions.getProfiles(driver, account, profileSeed, profileRepository);
+
+                profileSeed.setUsed(true);
+                profileSeedRepository.save(profileSeed);
+
+                profiles = profileRepository.findByAccountAndFollowingAndUnfollowed(account, false, false);
+
+                if (profiles != null && profiles.size() > 2000) {
+                    break;
+                }
+            }
+
+            logger.info(account.getUsername() + " finished getting profiles from profile seeds. Current profile count is " + profiles.size());
+        }
+    }
 }

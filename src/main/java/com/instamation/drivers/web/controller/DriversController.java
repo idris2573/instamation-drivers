@@ -6,6 +6,7 @@ import com.instamation.drivers.repository.AccountRepository;
 import com.instamation.drivers.selenium.Actions;
 import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
+import com.instamation.drivers.selenium.LogInMethods;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,17 +42,21 @@ public class DriversController {
     public Boolean closeDriverByUsername(@PathVariable String username) {
         Account account = accountRepository.findByUsername(username);
         if(account == null){
-            logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + false);
+            logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + false + " (account does not exist)");
             return false;
         }
 
         Driver driver = DriverList.get(account);
         if(driver == null){
-            logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + false);
+            logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + false + " (account does not have a driver)");
             return false;
         }
 
-        driver.close();
+        try {
+            driver.close();
+        }catch (Exception e){
+            logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + false + " (could not close driver)");
+        }
         DriverList.remove(account);
 
         logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + true);
@@ -63,22 +68,21 @@ public class DriversController {
     public Boolean isLoggedIn(@PathVariable String username) {
         Account account = accountRepository.findByUsername(username);
         if(account == null){
-            logger.info("REQUEST: Is" + username + "logged into a driver. || RESPONSE: " + false);
+            logger.info("REQUEST: Is " + username + " logged into a driver. || RESPONSE: " + false);
             return false;
         }
 
         Driver driver = DriverList.get(account);
         if(driver == null || driver.isClosed()){
-            logger.info("REQUEST: Is" + username + "logged into a driver. || RESPONSE: " + false);
+            logger.info("REQUEST: Is " + username + " logged into a driver. || RESPONSE: " + false);
             return false;
         }
 
-        driver.getDriver().get("https://instagram.com");
-        if(!Actions.doesButtonExist(driver, "Log In")) {
-            logger.info("REQUEST: Is" + username + "logged into a driver. || RESPONSE: " + true);
+        if(LogInMethods.isLoggedIn(driver)) {
+            logger.info("REQUEST: Is " + username + " logged into a driver. || RESPONSE: " + true);
             return true;
         }else {
-            logger.info("REQUEST: Is" + username + "logged into a driver. || RESPONSE: " + false);
+            logger.info("REQUEST: Is " + username + " logged into a driver. || RESPONSE: " + false);
             return false;
         }
     }

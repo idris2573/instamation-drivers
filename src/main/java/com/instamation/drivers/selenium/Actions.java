@@ -28,14 +28,14 @@ public class Actions {
 
     public static String login(Driver driver, Account account) throws Exception{
         logger.info(account.getUsername() + " is attempting to log in");
-        driver.getDriver().get("https://www.instagram.com/accounts/login/");
-
         Thread.sleep(1000);
+
         // if already logged in
-        if (!Actions.doesButtonExist(driver, "Log In")) {
+        if (LogInMethods.isLoggedIn(driver)) {
             logger.info(account.getUsername() + " is already logged in");
             return "success";
         }
+
         clickLogin(driver);
         Thread.sleep(1000);
 
@@ -128,12 +128,23 @@ public class Actions {
     }
 
     public static boolean isNotAvailable(Driver driver){
-        try {
+        if(!driver.getDriver().findElements(By.tagName("h2")).isEmpty()) {
             if (driver.getDriver().findElement(By.tagName("h2")).getText().equalsIgnoreCase("Sorry, this page isn't available.")) {
                 return true;
             }
-        }catch (Exception e){}
+        }
+
+        if(!driver.getDriver().findElements(By.tagName("p")).isEmpty()) {
+            if (driver.getDriver().findElement(By.tagName("p")).getText().equalsIgnoreCase("The link you followed may be broken, or the page may have been removed. Go back to Instagram.")) {
+                return true;
+            }
+        }
+
+        if(driver.getDriver().getTitle().contains("Page Not Found")){
+            return true;
+        }
         return false;
+
     }
 
 
@@ -250,7 +261,6 @@ public class Actions {
     }
 
     public static void getProfiles(Driver driver, Account account, ProfileSeed profileSeed, ProfileRepository profileRepository) throws Exception{
-//        login(driver, account);
         if(profileSeed.getType().equals("username")) {
             driver.getDriver().get("https://instagram.com/" + profileSeed.getName());
         } else {
@@ -281,12 +291,13 @@ public class Actions {
 
             Set<String> profileUsernames = getProfileUsernames(driver);
             if(profileUsernames.isEmpty()){
-                break;
+                continue;
             }
 
             saveProfileUsernames(profileRepository, profileUsernames, profileSeed.getName(), account);
 
-            if(profileRepository.findByAccount(account).size() > 4000){
+            List<Profile> profiles = profileRepository.findByAccount(account);
+            if(profiles != null && profiles.size() > 4000){
                 break;
             }
 
@@ -563,17 +574,11 @@ public class Actions {
 
     private static void saveProfileUsernames(ProfileRepository profileRepository, Set<String> profileUsernames, String parentProfile, Account account){
 
-        List<Profile> profiles = new ArrayList<>();
         for(String profileUsername : profileUsernames){
-
-            if(!profileRepository.findByAccountAndUsername(account, profileUsername).isEmpty()){
-                continue;
-            }
             Profile profile = new Profile();
             profile.setUsername(profileUsername);
             profile.setParentProfile(parentProfile);
             profile.setAccount(account);
-            profiles.add(profile);
             try {
                 profileRepository.save(profile);
             }catch (Exception e){}

@@ -28,6 +28,7 @@ public class StartUpMethods {
         List<Account> accounts = accountRepository.findAll();
         for(Account account : accounts){
             account.setAutomationLock(false);
+            account.setRunning(false);
             account.setLoggedIn(false);
         }
         accountRepository.saveAll(accounts);
