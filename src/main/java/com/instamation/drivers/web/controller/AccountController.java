@@ -45,12 +45,14 @@ public class AccountController {
         Account existingAccount = accountRepository.findByUsername(account.getUsername());
 
         // if existing account exists and the id does not belong to you. Return already exists
-        if(existingAccount != null){
+        if(existingAccount != null && !user.getUserType().getRole().equalsIgnoreCase("ROLE_ADMIN")){
             if(!existingAccount.getUser().getId().equals(user.getId())){
                 return new Response("exists");
             } else {
                 account = existingAccount;
             }
+        }else {
+            account = existingAccount;
         }
 
         Driver driver = DriverList.get(account);
@@ -109,7 +111,12 @@ public class AccountController {
         }
 
         // if account credentials are correct
-        account.setUser(user);
+        if(existingAccount == null){
+            account.setUser(user);
+        }else {
+            account.setUser(existingAccount.getUser());
+        }
+
         if(proxy != null) {
             proxy.setAccount(account);
             account.setProxy(proxy);

@@ -105,6 +105,10 @@ public class AutomationController {
                 // get profiles using profile seeds
                 getProfileSeeds(account, driver, profiles);
 
+                if(profiles.isEmpty()) {
+                    profiles = profileRepository.findByAccountAndFollowingAndUnfollowed(account, false, false);
+                }
+
                 try {
                     // CHECK IF
                     // account is enabled
