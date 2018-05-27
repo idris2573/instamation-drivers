@@ -288,10 +288,12 @@ public class Account {
         stats.setPostCount(getPostCount());
         statsRepository.save(stats);
 
-        List<Stats> followersGainedList = statsRepository.findByAccount(this);
-        if (!followersGainedList.isEmpty()) {
-            int followersGained = followersGainedList.get(followersGainedList.size() - 1).getFollowers() - followersGainedList.get(0).getFollowers();
-            this.setFollowersGained(followersGained);
+        try {
+            int firstStat = statsRepository.findFirstByAccountOrderByIdAsc(this).getFollowers();
+            int lastStat = statsRepository.findFirstByAccountOrderByIdDesc(this).getFollowers();
+            this.setFollowersGained(lastStat - firstStat);
+        }catch (Exception e){
+            this.setFollowersGained(0);
         }
     }
 

@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b50e871-cac3-4430-957a-34dd92abe263" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/instamation-driver.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/instamation-driver.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/instamation/drivers/web/controller/AccountController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AutomationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AutomationController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -76,23 +72,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AccountController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-966">
-              <caret line="116" column="53" selection-start-line="116" selection-start-column="53" selection-end-line="116" selection-end-column="53" />
-              <folding>
-                <element signature="method#recovery#0;class#AccountController#0" />
-                <element signature="method#verifyNew#0;class#AccountController#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DriversController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DriversController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/DriversController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
+            <state relative-caret-position="190">
               <caret line="54" column="13" lean-forward="true" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
             </state>
           </provider>
@@ -101,16 +84,30 @@
       <file leaf-file-name="AutomationController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AutomationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="107" column="37" selection-start-line="107" selection-start-column="37" selection-end-line="107" selection-end-column="37" />
+            <state relative-caret-position="251">
+              <caret line="327" column="22" lean-forward="true" selection-start-line="327" selection-start-column="22" selection-end-line="327" selection-end-column="22" />
               <folding>
                 <element signature="e#802#813#0" />
                 <element signature="e#13522#13523#0" expanded="true" />
                 <element signature="e#13582#13583#0" expanded="true" />
                 <element signature="method#sanatizeAutomatedLists#0;class#AutomationController#0" />
-                <element signature="method#updateStats#0;class#AutomationController#0" />
                 <element signature="method#setRunningFalse#0;class#AutomationController#0" />
                 <element signature="method#getProfileSeeds#0;class#AutomationController#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Account.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Account.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="290">
+              <caret line="294" column="9" lean-forward="true" selection-start-line="294" selection-start-column="9" selection-end-line="294" selection-end-column="9" />
+              <folding>
+                <element signature="e#7014#7015#0" expanded="true" />
+                <element signature="e#7046#7047#0" expanded="true" />
+                <element signature="e#7097#7098#0" expanded="true" />
+                <element signature="e#7139#7140#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -618,9 +615,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/StartUpMethods.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/LogInMethods.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/Actions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/PostController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AutomationController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java" />
       </list>
     </option>
   </component>
@@ -922,12 +919,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526495395702</updated>
-      <workItem from="1526753001030" duration="60617000" />
+      <workItem from="1526753001030" duration="62457000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60617000" />
+    <option name="totallyTimeSpent" value="62457000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -944,24 +941,24 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.30627707" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.30627707" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.32900432" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.40367964" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.40367964" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="right" id="Coverage" sideWeight="0.50078005" side_tool="true" visible="true" weight="0.110341154" />
+      <window_info anchor="right" id="Coverage" sideWeight="0.5009074" side_tool="true" visible="true" weight="0.110341154" />
       <window_info anchor="bottom" id="Spring" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32792208" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49921995" visible="true" weight="0.2707889" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49921995" visible="true" weight="0.2707889" />
       <window_info anchor="bottom" id="Problems" order="7" />
       <window_info anchor="right" id="Bean Validation" />
       <window_info id="Web" sideWeight="0.50078005" side_tool="true" weight="0.27132195" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="right" id="Gradle" order="3" sideWeight="0.49921995" visible="true" weight="0.110341154" />
+      <window_info anchor="right" id="Gradle" order="3" sideWeight="0.49909255" visible="true" weight="0.110341154" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="DB Execution Console" order="7" />
@@ -1505,19 +1502,6 @@ return true;</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Account.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="281" column="16" selection-start-line="281" selection-start-column="16" selection-end-line="281" selection-end-column="16" />
-          <folding>
-            <element signature="e#7014#7015#0" expanded="true" />
-            <element signature="e#7046#7047#0" expanded="true" />
-            <element signature="e#7097#7098#0" expanded="true" />
-            <element signature="e#7139#7140#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/Actions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
@@ -1547,8 +1531,8 @@ return true;</expression-string>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-966">
-          <caret line="116" column="53" selection-start-line="116" selection-start-column="53" selection-end-line="116" selection-end-column="53" />
+        <state relative-caret-position="164">
+          <caret line="283" column="22" lean-forward="true" selection-start-line="283" selection-start-column="22" selection-end-line="283" selection-end-column="22" />
           <folding>
             <element signature="method#recovery#0;class#AccountController#0" />
             <element signature="method#verifyNew#0;class#AccountController#0" />
@@ -1556,26 +1540,38 @@ return true;</expression-string>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/DriversController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="54" column="13" lean-forward="true" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AutomationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="107" column="37" selection-start-line="107" selection-start-column="37" selection-end-line="107" selection-end-column="37" />
+        <state relative-caret-position="251">
+          <caret line="327" column="22" lean-forward="true" selection-start-line="327" selection-start-column="22" selection-end-line="327" selection-end-column="22" />
           <folding>
             <element signature="e#802#813#0" />
             <element signature="e#13522#13523#0" expanded="true" />
             <element signature="e#13582#13583#0" expanded="true" />
             <element signature="method#sanatizeAutomatedLists#0;class#AutomationController#0" />
-            <element signature="method#updateStats#0;class#AutomationController#0" />
             <element signature="method#setRunningFalse#0;class#AutomationController#0" />
             <element signature="method#getProfileSeeds#0;class#AutomationController#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/DriversController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/Account.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="54" column="13" lean-forward="true" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
+        <state relative-caret-position="290">
+          <caret line="294" column="9" lean-forward="true" selection-start-line="294" selection-start-column="9" selection-end-line="294" selection-end-column="9" />
+          <folding>
+            <element signature="e#7014#7015#0" expanded="true" />
+            <element signature="e#7046#7047#0" expanded="true" />
+            <element signature="e#7097#7098#0" expanded="true" />
+            <element signature="e#7139#7140#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
