@@ -65,12 +65,16 @@ public class DriverList {
             return;
         }
 
-        for(Map.Entry driver : drivers.entrySet()){
-            Account accountEntry = (Account) driver.getKey();
-            if(account.getId().equals(accountEntry.getId())){
-                logger.info(account.getUsername() + " is being removed from DriverList");
-                drivers.remove(accountEntry);
+        try {
+            for (Map.Entry driver : drivers.entrySet()) {
+                Account accountEntry = (Account) driver.getKey();
+                if (account.getId().equals(accountEntry.getId())) {
+                    logger.info(account.getUsername() + " is being removed from DriverList");
+                    drivers.remove(accountEntry);
+                }
             }
+        }catch (Exception e){
+            logger.error(account.getUsername() + " crashed when trying to remove from driverList");
         }
     }
 
