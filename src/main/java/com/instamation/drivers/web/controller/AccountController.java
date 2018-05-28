@@ -71,9 +71,19 @@ public class AccountController {
         if(driver == null) {
             // if proxy exists, give the driver the proxy.
             if (proxy != null) {
-                driver = new Driver(false, proxy.getIp(), account);
+                try {
+                    driver = new Driver(false, proxy.getIp(), account);
+                } catch (Exception e){
+                    logger.info(account.getUsername() + " crashed creating a new driver with a proxy");
+                    return new Response("login-fail");
+                }
             } else {
-                driver = new Driver(account);
+                try {
+                    driver = new Driver(account);
+                }catch (Exception e){
+                    logger.info(account.getUsername() + " crashed creating a new driver with NO proxy");
+                    return new Response("login-fail");
+                }
             }
             DriverList.getNewDrivers().add(driver);
         }

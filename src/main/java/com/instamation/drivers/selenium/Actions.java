@@ -575,6 +575,12 @@ public class Actions {
     private static void saveProfileUsernames(ProfileRepository profileRepository, Set<String> profileUsernames, String parentProfile, Account account){
 
         for(String profileUsername : profileUsernames){
+            try {
+                if (profileRepository.findByAccountAndUsername(account, profileUsername) != null) {
+                    continue;
+                }
+            }catch (Exception e){}
+
             Profile profile = new Profile();
             profile.setUsername(profileUsername);
             profile.setParentProfile(parentProfile);

@@ -50,13 +50,12 @@ public class ScheduleController {
         List<Driver> deleteDrivers = new ArrayList<>();
 
         for(Driver driver : DriverList.getNewDrivers()){
-            if(!driver.getAccount().getSetting().isWorkingTime() && !driver.getAccount().isAutomationLock()) {
-                if (!DriverList.contains(driver) || !DriverList.driversContainNewDriver(driver)) {
-                    logger.info(driver.getAccount().getUsername() + " is being removed from new Drivers");
-                    driver.close();
-                    deleteDrivers.add(driver);
-                }
+            if (!DriverList.contains(driver) || !DriverList.driversContainNewDriver(driver)) {
+                logger.info(driver.getAccount().getUsername() + " is being removed from new Drivers");
+                driver.close();
+                deleteDrivers.add(driver);
             }
+
         }
 
         for(Driver driver : deleteDrivers){

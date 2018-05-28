@@ -1,7 +1,6 @@
 package com.instamation.drivers.selenium;
 
 import com.instamation.drivers.model.Account;
-import com.instamation.drivers.web.controller.ScheduleController;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,8 +11,6 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class Driver {
     private static final Logger logger = Logger.getLogger(Driver.class);
@@ -67,7 +64,7 @@ public class Driver {
             chromeOptions.addArguments("--no-sandbox");
             file = new File("resources" + chromeDriver);
         } else {
-            chromeDriver = "/chromedriver-windows.exe";
+            chromeDriver = "/chromedriver-windows2.exe";
             URL resource = Driver.class.getResource(chromeDriver);
             file = Paths.get(resource.toURI()).toFile();
         }
@@ -98,7 +95,7 @@ public class Driver {
             chromeOptions.addArguments("--no-sandbox");
             file = new File("resources" + chromeDriver);
         } else {
-            chromeDriver = "/chromedriver-windows.exe";
+            chromeDriver = "/chromedriver-windows2.exe";
             URL resource = Driver.class.getResource(chromeDriver);
             file = Paths.get(resource.toURI()).toFile();
         }

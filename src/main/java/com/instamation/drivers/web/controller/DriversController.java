@@ -28,7 +28,6 @@ public class DriversController {
 
     @GetMapping(value = "/all")
     public Map<Account, DriverInfo> getAll(){
-        logger.info("REQUEST: get all accounts");
         Map<Account, DriverInfo> drivers = new HashMap<>();
 
         for(Map.Entry driver : DriverList.getDrivers().entrySet()){
@@ -56,11 +55,13 @@ public class DriversController {
                 driverInfo.setBody(driverEntry.getDriver().findElement(By.tagName("body")).getText());
             }catch (Exception e){}
             try {
-                driverInfo.setHtml(driverEntry.getDriver().findElement(By.tagName("html")).getAttribute("innerHTML"));
+                driverInfo.setHtml(driverEntry.getDriver().findElement(By.tagName("body")).getAttribute("innerHTML"));
             }catch (Exception e){}
 
             drivers.put(accountEntry, driverInfo);
         }
+
+        logger.info("REQUEST: get all accounts");
         return drivers;
     }
 

@@ -3079,3 +3079,20 @@ FULC action: true
 27-05-2018 20:47:26 INFO  AutomationController:31 - REQUEST: get all accounts
 27-05-2018 20:47:50 INFO  AutomationController:31 - REQUEST: get all accounts
 27-05-2018 20:48:08 INFO  AutomationController:31 - REQUEST: get all accounts
+27-05-2018 22:49:56 INFO  AnnotationConfigServletWebServerApplicationContext:989 - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3be994ee: startup date [Sun May 27 20:37:11 BST 2018]; root of context hierarchy
+27-05-2018 22:49:56 INFO  AnnotationMBeanExporter:452 - Unregistering JMX-exposed beans on shutdown
+27-05-2018 22:49:56 INFO  AnnotationMBeanExporter:183 - Unregistering JMX-exposed beans
+27-05-2018 22:49:56 INFO  LocalContainerEntityManagerFactoryBean:572 - Closing JPA EntityManagerFactory for persistence unit 'default'
+27-05-2018 22:49:57 INFO  InstamationDriversApplication:50 - Starting InstamationDriversApplication on Idris-PC with PID 11176 (H:\WebApps\instamation-drivers\out\production\classes started by Idris in H:\WebApps\instamation-drivers)
+27-05-2018 22:49:57 INFO  InstamationDriversApplication:652 - No active profile set, falling back to default profiles: default
+27-05-2018 22:49:57 INFO  AnnotationConfigServletWebServerApplicationContext:589 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4c827f47: startup date [Sun May 27 22:49:57 BST 2018]; root of context hierarchy
+27-05-2018 22:49:59 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$6fcfdf25] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+27-05-2018 22:49:59 INFO  TomcatWebServer:91 - Tomcat initialized with port(s): 8082 (http)
+27-05-2018 22:49:59 INFO  ContextLoader:285 - Root WebApplicationContext: initialization completed in 1819 ms
+27-05-2018 22:49:59 INFO  FilterRegistrationBean:243 - Mapping filter: 'characterEncodingFilter' to: [/*]
+27-05-2018 22:49:59 INFO  FilterRegistrationBean:243 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+27-05-2018 22:49:59 INFO  FilterRegistrationBean:243 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+27-05-2018 22:49:59 INFO  FilterRegistrationBean:243 - Mapping filter: 'requestContextFilter' to: [/*]
+27-05-2018 22:49:59 INFO  DelegatingFilterProxyRegistrationBean:243 - Mapping filter: 'springSecurityFilterChain' to: [/*]
+27-05-2018 22:49:59 INFO  ServletRegistrationBean:185 - Servlet dispatcherServlet mapped to [/]
+27-05-2018 22:49:59 INFO  LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
