@@ -86,6 +86,11 @@ public class LogInMethods {
 
     public static boolean isLoggedIn(Driver driver){
 
+        if(driver == null || driver.isClosed()){
+            logger.error("ERROR driver does not exist");
+            return false;
+        }
+
         try {
             driver.getDriver().get("https://www.instagram.com/accounts/login/");
         }catch (Exception e){

@@ -6,8 +6,6 @@ public class DriverInfo {
     private String title;
     private String h1;
     private String h2;
-    private String body;
-    private String html;
 
     public String getUrl() {
         return url;
@@ -41,19 +39,4 @@ public class DriverInfo {
         this.h2 = h2;
     }
 
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public String getHtml() {
-        return html;
-    }
-
-    public void setHtml(String html) {
-        this.html = html;
-    }
 }

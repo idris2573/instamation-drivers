@@ -75,7 +75,7 @@ public class DriverList {
     }
 
     public static void put(Account account, Driver driver){
-        if(account == null || account.getId() == null){
+        if(account == null || account.getId() == null || driver == null){
             return;
         }
 
@@ -84,6 +84,7 @@ public class DriverList {
             if(account.getId().equals(accountEntry.getId())){
                 logger.info(account.getUsername() + " is getting updated in DriverList");
                 drivers.put(accountEntry, driver);
+                return;
             }
         }
 
@@ -91,6 +92,7 @@ public class DriverList {
         drivers.put(account, driver);
     }
 
+//    #######################NEW DRIVERS#######################
 
     public static List<Driver> getNewDrivers() {
         return newDrivers;
@@ -114,7 +116,7 @@ public class DriverList {
         return false;
     }
 
-    public static boolean driversContainNewDriver(Driver driver){
+    public static boolean driversMapContainNewDriver(Driver driver){
         if(driver == null || driver.isClosed()){
             return false;
         }
@@ -131,5 +133,18 @@ public class DriverList {
         }
 
         return false;
+    }
+
+    public static Driver getNewDriver(Account account){
+        if(account == null || newDrivers.isEmpty()){
+            return null;
+        }
+        for(Driver driver : newDrivers){
+            if(driver.getAccount() != null && driver.getAccount().getUsername().equalsIgnoreCase(account.getUsername())){
+                logger.info(account.getUsername() + " is getting a NEW driver after loggin error");
+                return driver;
+            }
+        }
+        return null;
     }
 }

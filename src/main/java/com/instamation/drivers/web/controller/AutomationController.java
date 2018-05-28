@@ -56,6 +56,7 @@ public class AutomationController {
     public void run() throws Exception{
 
         List<Account> accounts = accountRepository.findByRunningAndEnabled(true, true);
+        Driver driver;
 
         for(Account account : accounts){
 
@@ -64,7 +65,7 @@ public class AutomationController {
                 account.setAutomationLock(true);
                 accountRepository.save(account);
 
-                Driver driver = DriverList.get(account);
+                driver = DriverList.get(account);
 
                 // if the account does not have a driver or is not logged in,
                 // set the accounts automation off. Also set the account as not logged in.
@@ -79,12 +80,16 @@ public class AutomationController {
 
                 // if account is not logged in, skip account and set logged in and running as false.
                 if(!LogInMethods.isLoggedIn(driver)){
-                    account.setRunning(false);
-                    account.setLoggedIn(false);
-                    account.setAutomationLock(false);
-                    accountRepository.save(account);
-                    logger.info(account.getUsername() + " is not logged in, skipping automation...");
-                    continue;
+                    driver = DriverList.getNewDriver(account);
+                    DriverList.put(account, driver);
+                    if(driver == null || !LogInMethods.isLoggedIn(driver)){
+                        account.setRunning(false);
+                        account.setLoggedIn(false);
+                        account.setAutomationLock(false);
+                        accountRepository.save(account);
+                        logger.info(account.getUsername() + " is not logged in, skipping automation...");
+                        continue;
+                    }
                 }
 
                 // if account is not available its been deleted or blocked by instagram
@@ -387,9 +392,13 @@ public class AutomationController {
 
         // if account is not logged in, skip account and set logged in and running as false.
         if (!LogInMethods.isLoggedIn(driver)) {
-            setRunningFalse(account);
-            logger.info(account.getUsername() + " is not logged in");
-            return false;
+            driver = DriverList.getNewDriver(account);
+            DriverList.put(account, driver);
+            if(driver == null || !LogInMethods.isLoggedIn(driver)){
+                setRunningFalse(account);
+                logger.info(account.getUsername() + " is not logged in");
+                return false;
+            }
         }
 
         // check if user is not available
@@ -416,9 +425,10 @@ public class AutomationController {
             logger.info(account.getUsername() + "has no profiles, adding new profiles.");
 
             List<ProfileSeed> profileSeeds = profileSeedRepository.findByAccountAndUsed(account, false);
+            String prepend;
 
             for (ProfileSeed profileSeed : profileSeeds) {
-                String prepend = (profileSeed.getType().equalsIgnoreCase("username")) ? "@" : "#";
+                prepend = (profileSeed.getType().equalsIgnoreCase("username")) ? "@" : "#";
                 logger.info(account.getUsername() + " adding profiles using '" + prepend + profileSeed.getName() + "' seed");
 
                 Actions.getProfiles(driver, account, profileSeed, profileRepository);
@@ -428,7 +438,7 @@ public class AutomationController {
 
                 profiles = profileRepository.findByAccountAndFollowingAndUnfollowed(account, false, false);
 
-                if (profiles != null && profiles.size() > 2000) {
+                if (profiles != null && profiles.size() > 4000) {
                     break;
                 }
             }

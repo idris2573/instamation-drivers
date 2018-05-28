@@ -40,6 +40,8 @@ public class AccountController {
 
     @PostMapping(value = "/add/{userId}")
     public Response addAccount(@RequestBody Account account, @PathVariable Long userId) throws Exception{
+        String password = account.getPassword();
+
         // check if account exists and if the account exists and account does not belong to this user
         User user = userRepository.findById(userId).get();
         Account existingAccount = accountRepository.findByUsername(account.getUsername());
@@ -88,7 +90,7 @@ public class AccountController {
             DriverList.getNewDrivers().add(driver);
         }
 
-
+        account.setPassword(password);
         String response;
 
         try{
@@ -140,9 +142,8 @@ public class AccountController {
         }
 
         // if Driverlist does not contain account, add accoung and driver to Driverlist
-        if(!DriverList.containsKey(account)) {
-            DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
-        }
+        DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
+
 
         // skipped to entering security code
         try{
@@ -170,6 +171,8 @@ public class AccountController {
         if(!LogInMethods.isLoggedIn(driver)) {
             logger.info(account.getUsername() + " is retrying logging in");
             Actions.login(driver, account);
+        } else {
+            logger.info(account.getUsername() + " confirmed is logged in");
         }
 
         account.setLoggedIn(true);
@@ -178,6 +181,8 @@ public class AccountController {
 
         // successful login
         loginSuccess(driver, account);
+
+        DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
 
         return new Response("success");
     }
@@ -249,6 +254,8 @@ public class AccountController {
 
         // user is confirmed via code. add user
         loginSuccess(driver, account);
+
+        DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
 
         return new Response("success");
     }
