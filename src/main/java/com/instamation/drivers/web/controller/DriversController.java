@@ -200,20 +200,29 @@ public class DriversController {
     }
 
     @GetMapping(value = "/contains/{username}")
-    public Boolean contains(@PathVariable String username, HttpServletRequest request){
+    public Boolean contains(@PathVariable String username){
+        Account account = accountRepository.findByUsername(username);
+        return DriverList.containsKey(account);
+    }
+
+    @GetMapping(value = "/goto/{username}")
+    public Boolean gotoPage(@PathVariable String username, HttpServletRequest request){
         String url = request.getParameter("url");
         Account account = accountRepository.findByUsername(username);
 
         if(DriverList.containsKey(account)){
             Driver driver = DriverList.get(account);
             if(driver == null || driver.isClosed()){
+                logger.info("REQUEST: Go to page \"" + url + "\" by " + username + " || RESPONSE: " + false + " (driver == null or driver isClosed)");
                 return false;
             }
 
             driver.getDriver().get(url);
+            logger.info("REQUEST: Go to page \"" + url + "\" by " + username + " || RESPONSE: " + true);
             return true;
         }
 
+        logger.info("REQUEST: Go to page \"" + url + "\" by " + username + " || RESPONSE: " + false + " (there is no driver)");
         return false;
     }
 
