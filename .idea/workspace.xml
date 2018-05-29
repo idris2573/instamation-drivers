@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b50e871-cac3-4430-957a-34dd92abe263" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/DriverList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/DriverList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/ScheduleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/ScheduleController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -95,11 +95,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DriverList.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DriverList.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/DriverList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="76" column="95" selection-start-line="76" selection-start-column="95" selection-end-line="76" selection-end-column="95" />
+            <state relative-caret-position="-110">
+              <caret line="76" column="24" selection-start-line="76" selection-start-column="24" selection-end-line="76" selection-end-column="24" />
               <folding>
                 <element signature="method#containsKey#0;class#DriverList#0" />
                 <element signature="method#get#0;class#DriverList#0" />
@@ -109,6 +109,19 @@
                 <element signature="method#newDriversContain#0;class#DriverList#0" />
                 <element signature="method#driversMapContainNewDriver#0;class#DriverList#0" />
                 <element signature="method#getNewDriver#0;class#DriverList#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScheduleController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/ScheduleController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="392">
+              <caret line="142" column="115" selection-start-line="142" selection-start-column="115" selection-end-line="142" selection-end-column="115" />
+              <folding>
+                <element signature="method#deleteUnused#0;class#ScheduleController#0" />
+                <element signature="method#updateStats#0;class#ScheduleController#0" />
               </folding>
             </state>
           </provider>
@@ -616,12 +629,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AccountController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/LogInMethods.java" />
         <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/ScheduleController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/Actions.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/AutomationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/model/DriverInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/DriversController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/DriverList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/ScheduleController.java" />
       </list>
     </option>
   </component>
@@ -931,12 +944,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526495395702</updated>
-      <workItem from="1526753001030" duration="103814000" />
+      <workItem from="1526753001030" duration="104510000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103814000" />
+    <option name="totallyTimeSpent" value="104510000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1546,17 +1559,6 @@ followersString.replace(&quot;m&quot;, &quot;000000&quot;);</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/ScheduleController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="140" column="13" lean-forward="true" selection-start-line="140" selection-start-column="13" selection-end-line="140" selection-end-column="13" />
-          <folding>
-            <element signature="method#deleteUnused#0;class#ScheduleController#0" />
-            <element signature="method#updateStats#0;class#ScheduleController#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/Actions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
@@ -1612,8 +1614,8 @@ followersString.replace(&quot;m&quot;, &quot;000000&quot;);</expression-string>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/selenium/DriverList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="76" column="95" selection-start-line="76" selection-start-column="95" selection-end-line="76" selection-end-column="95" />
+        <state relative-caret-position="-110">
+          <caret line="76" column="24" selection-start-line="76" selection-start-column="24" selection-end-line="76" selection-end-column="24" />
           <folding>
             <element signature="method#containsKey#0;class#DriverList#0" />
             <element signature="method#get#0;class#DriverList#0" />
@@ -1623,6 +1625,17 @@ followersString.replace(&quot;m&quot;, &quot;000000&quot;);</expression-string>
             <element signature="method#newDriversContain#0;class#DriverList#0" />
             <element signature="method#driversMapContainNewDriver#0;class#DriverList#0" />
             <element signature="method#getNewDriver#0;class#DriverList#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/instamation/drivers/web/controller/ScheduleController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="142" column="115" selection-start-line="142" selection-start-column="115" selection-end-line="142" selection-end-column="115" />
+          <folding>
+            <element signature="method#deleteUnused#0;class#ScheduleController#0" />
+            <element signature="method#updateStats#0;class#ScheduleController#0" />
           </folding>
         </state>
       </provider>

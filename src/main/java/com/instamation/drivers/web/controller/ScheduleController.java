@@ -140,7 +140,7 @@ public class ScheduleController {
                 continue;
             }
 
-            if(!DriverList.driversMapContainNewDriver(newDriver) ){
+            if(!DriverList.driversMapContainNewDriver(newDriver)  && !DriverList.containsKey(newDriver.getAccount()) ){
                 DriverList.put(newDriver.getAccount(), newDriver);
                 logger.info(newDriver.getAccount().getUsername() + " has been added to the DriversList from newDrivers");
             }
