@@ -11,4 +11,6 @@ public interface StatsRepository extends PagingAndSortingRepository<Stats, Long>
     List<Stats> findAll();
     List<Stats> findByAccount(Account account);
     List<Stats> findByAccountAndDateGreaterThanEqual(Account account, Date date);
+    Stats findFirstByAccountOrderByIdAsc(Account account);
+    Stats findFirstByAccountOrderByIdDesc(Account account);
 }

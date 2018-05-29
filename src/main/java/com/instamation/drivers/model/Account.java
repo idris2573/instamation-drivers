@@ -93,6 +93,9 @@ public class Account {
     @Column(name = "logged_in")
     private boolean loggedIn = false;
 
+    @Column(name = "available")
+    private boolean available = true;
+
     public Long getId() {
         return id;
     }
@@ -285,10 +288,12 @@ public class Account {
         stats.setPostCount(getPostCount());
         statsRepository.save(stats);
 
-        List<Stats> followersGainedList = statsRepository.findByAccount(this);
-        if (!followersGainedList.isEmpty()) {
-            int followersGained = followersGainedList.get(followersGainedList.size() - 1).getFollowers() - followersGainedList.get(0).getFollowers();
-            this.setFollowersGained(followersGained);
+        try {
+            int firstStat = statsRepository.findFirstByAccountOrderByIdAsc(this).getFollowers();
+            int lastStat = statsRepository.findFirstByAccountOrderByIdDesc(this).getFollowers();
+            this.setFollowersGained(lastStat - firstStat);
+        }catch (Exception e){
+            this.setFollowersGained(0);
         }
     }
 
@@ -310,6 +315,14 @@ public class Account {
 
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     @Override

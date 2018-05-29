@@ -5,6 +5,7 @@ import com.instamation.drivers.repository.*;
 import com.instamation.drivers.selenium.Actions;
 import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
+import com.instamation.drivers.selenium.LogInMethods;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -12,13 +13,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.apache.http.protocol.HTTP.USER_AGENT;
 
 @Controller
 @Component
@@ -44,63 +40,13 @@ public class ScheduleController {
     @Autowired
     private ActionRepository actionRepository;
 
-
-//    @RequestMapping("/update-stats")
-//    @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
-    public void updateStats() throws Exception{
-        logger.info("Updating stats for all account");
-        List<Account> accounts = accountRepository.findByEnabled(true);
-
-        for(Account account : accounts){
-            Driver driver;
-
-            if(DriverList.containsKey(account)){
-                driver = DriverList.get(account);
-            } else if(account.getProxy() != null){
-                driver = new Driver(false, account.getProxy().getIp());
-                DriverList.put(account, driver);
-            } else {
-                driver = new Driver();
-                DriverList.put(account, driver);
-            }
-
-            try {
-                Actions.login(driver, account);
-            }catch (Exception e){
-                logger.info(account.getUsername() + " failed to login");
-            }
-            try{
-                Actions.updateProfileDetails(driver, account);
-            }catch (Exception e){
-                logger.info(account.getUsername() + " failed to updateProfileDetails");
-            }
-            try{
-                account.updateStats(statsRepository);
-            }catch (Exception e){
-                logger.info(account.getUsername() + " failed to updateStats");
-            }
-            try{
-                Actions.updateFollowers(driver, account, followerRepository);
-            }catch (Exception e){
-                logger.info(account.getUsername() + " failed to updateFollowers");
-            }
-
-            accountRepository.save(account);
-
-            logger.info(account.getUsername() + " stats have been updated");
-        }
-
-        logger.info("Completed stats update - All account stats have been updated");
-
-    }
-
-
-    @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
+    @Scheduled(cron="0 0 */5 * * *", zone="Europe/London")
     public void deleteUnused() throws Exception{
         List<Driver> deleteDrivers = new ArrayList<>();
 
         for(Driver driver : DriverList.getNewDrivers()){
-            if(!DriverList.contains(driver)){
+            if (!DriverList.contains(driver) && !DriverList.driversMapContainNewDriver(driver) && !driver.getAccount().isEnabled()) {
+                logger.info(driver.getAccount().getUsername() + " is being removed from new Drivers");
                 driver.close();
                 deleteDrivers.add(driver);
             }
@@ -111,4 +57,93 @@ public class ScheduleController {
         }
     }
 
+    @RequestMapping("/update-stats")
+    @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
+    public void updateStats() throws Exception{
+        logger.info("Updating stats for all accounts");
+        List<Account> accounts = accountRepository.findByEnabled(true);
+        Driver driver;
+        Boolean isLoggedIn;
+
+        for(Account account : accounts) {
+            if (!account.getSetting().isWorkingTime() && !account.isAutomationLock()) {
+
+                // check if account has a driver and is logged in.
+                if(DriverList.containsKey(account)){
+                    driver = DriverList.get(account);
+                    if(LogInMethods.isLoggedIn(driver)){
+                        isLoggedIn = true;
+                        account.setLoggedIn(true);
+                    } else {
+                        isLoggedIn = false;
+                    }
+                } else {
+                    isLoggedIn = false;
+                    driver = new Driver(account);
+                    account.setLoggedIn(false);
+                }
+
+                // check if account is available, if not skip account
+                driver.getDriver().get("https://instagram.com/" + account.getUsername());
+                if(Actions.isNotAvailable(driver)){
+                    account.setAvailable(false);
+                    account.setRunning(false);
+                    account.setLoggedIn(false);
+                    accountRepository.save(account);
+                    logger.info(account.getUsername() + " is unavaliable");
+                    continue;
+                }
+
+                logger.info(account.getUsername() + " isLoggedIn = " + isLoggedIn);
+
+                try {
+                    Actions.updateProfileDetails(driver, account);
+                } catch (Exception e) {
+                    logger.info(account.getUsername() + " failed to updateProfileDetails");
+                }
+
+                if(isLoggedIn) {
+                    try {
+                        Actions.updateFollowers(driver, account, followerRepository);
+                    } catch (Exception e) {
+                        logger.info(account.getUsername() + " failed to updateFollowers");
+                    }
+                }
+
+                try {
+                    account.updateStats(statsRepository);
+                } catch (Exception e) {
+                    logger.info(account.getUsername() + " failed to updateStats");
+                }
+
+                accountRepository.save(account);
+
+                logger.info(account.getUsername() + " stats have been updated");
+
+                if(!isLoggedIn) {
+                    driver.close();
+                }
+            }
+
+        }
+
+        logger.info("Completed stats update - All account stats have been updated");
+
+    }
+
+    @Scheduled(fixedRate = 60000)
+    public void relinkDrivers(){
+        List<Driver> newDrivers = DriverList.getNewDrivers();
+
+        for(Driver newDriver : newDrivers){
+            if(newDriver == null || newDriver.getAccount() == null || !newDriver.getAccount().isEnabled()){
+                continue;
+            }
+
+            if(!DriverList.driversMapContainNewDriver(newDriver)  && !DriverList.containsKey(newDriver.getAccount()) ){
+                DriverList.put(newDriver.getAccount(), newDriver);
+                logger.info(newDriver.getAccount().getUsername() + " has been added to the DriversList from newDrivers");
+            }
+        }
+    }
 }

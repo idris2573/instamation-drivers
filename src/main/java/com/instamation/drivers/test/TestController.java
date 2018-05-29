@@ -29,8 +29,8 @@ public class TestController {
     @ResponseBody
     public String start() throws Exception{
 
-        Driver driver = new Driver();
-        DriverList.put(accountRepository.findById(1L).get(), driver);
+//        Driver driver = new Driver();
+//        DriverList.put(accountRepository.findById(1L).get(), driver);
         return "ok";
     }
 
@@ -38,8 +38,8 @@ public class TestController {
     @ResponseBody
     public String start2() throws Exception{
 
-        Driver driver = new Driver();
-        DriverList.put(accountRepository.findById(1L).get(), driver);
+//        Driver driver = new Driver();
+//        DriverList.put(accountRepository.findById(1L).get(), driver);
         return "ok";
     }
 

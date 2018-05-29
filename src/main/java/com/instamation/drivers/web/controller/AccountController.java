@@ -5,6 +5,8 @@ import com.instamation.drivers.repository.*;
 import com.instamation.drivers.selenium.Actions;
 import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
+import com.instamation.drivers.selenium.LogInMethods;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import java.sql.Date;
 @CrossOrigin(origins = {"http://localhost:8081", "https://insta-mation.com"})
 @RequestMapping(value = "/account")
 public class AccountController {
+
+    private static final Logger logger = Logger.getLogger(AccountController.class);
 
     @Autowired
     private AccountRepository accountRepository;
@@ -36,13 +40,15 @@ public class AccountController {
 
     @PostMapping(value = "/add/{userId}")
     public Response addAccount(@RequestBody Account account, @PathVariable Long userId) throws Exception{
+        String password = account.getPassword();
+
         // check if account exists and if the account exists and account does not belong to this user
         User user = userRepository.findById(userId).get();
         Account existingAccount = accountRepository.findByUsername(account.getUsername());
 
         // if existing account exists and the id does not belong to you. Return already exists
-        if(existingAccount != null){
-            if(!existingAccount.getUser().getId().equals(user.getId())){
+        if(existingAccount != null ){
+            if(!existingAccount.getUser().getId().equals(user.getId()) && !user.getUserType().getRole().equalsIgnoreCase("ROLE_ADMIN")){
                 return new Response("exists");
             } else {
                 account = existingAccount;
@@ -67,20 +73,47 @@ public class AccountController {
         if(driver == null) {
             // if proxy exists, give the driver the proxy.
             if (proxy != null) {
-                driver = new Driver(false, proxy.getIp());
+                try {
+                    driver = new Driver(false, proxy.getIp(), account);
+                } catch (Exception e){
+                    logger.info(account.getUsername() + " crashed creating a new driver with a proxy");
+                    return new Response("login-fail");
+                }
             } else {
-                driver = new Driver();
+                try {
+                    driver = new Driver(account);
+                }catch (Exception e){
+                    logger.info(account.getUsername() + " crashed creating a new driver with NO proxy");
+                    return new Response("login-fail");
+                }
             }
             DriverList.getNewDrivers().add(driver);
         }
 
-        String response = Actions.login(driver, account);
+        account.setPassword(password);
+        String response;
+
+        try{
+            response = Actions.login(driver, account);
+        }catch (Exception e){
+            driver.close();
+            if(DriverList.getNewDrivers().contains(driver)){
+                DriverList.getNewDrivers().remove(driver);
+            }
+            if(DriverList.containsKey(account)){
+                DriverList.remove(account);
+            }
+            logger.info(account.getUsername() + " crashed and failed to login");
+            return new Response("login-fail");
+        }
 
         // user enters the wrong credentials
         if(response.equalsIgnoreCase("wrong-credentials")){
             // close drive and remove it from driver list if its already in the driver list.
             driver.close();
-            DriverList.getNewDrivers().remove(driver);
+            if(DriverList.getNewDrivers().contains(driver)){
+                DriverList.getNewDrivers().remove(driver);
+            }
             if(DriverList.containsKey(account)){
                 DriverList.remove(account);
             }
@@ -88,7 +121,12 @@ public class AccountController {
         }
 
         // if account credentials are correct
-        account.setUser(user);
+        if(existingAccount == null){
+            account.setUser(user);
+        }else {
+            account.setUser(existingAccount.getUser());
+        }
+
         if(proxy != null) {
             proxy.setAccount(account);
             account.setProxy(proxy);
@@ -104,9 +142,8 @@ public class AccountController {
         }
 
         // if Driverlist does not contain account, add accoung and driver to Driverlist
-        if(!DriverList.containsKey(account)) {
-            DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
-        }
+        DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
+
 
         // skipped to entering security code
         try{
@@ -130,11 +167,22 @@ public class AccountController {
             return new Response(response);
         }
 
+        // check if actually logged in
+        if(!LogInMethods.isLoggedIn(driver)) {
+            logger.info(account.getUsername() + " is retrying logging in");
+            Actions.login(driver, account);
+        } else {
+            logger.info(account.getUsername() + " confirmed is logged in");
+        }
+
         account.setLoggedIn(true);
+        account.setAvailable(true);
         accountRepository.save(account);
 
         // successful login
         loginSuccess(driver, account);
+
+        DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
 
         return new Response("success");
     }
@@ -195,11 +243,19 @@ public class AccountController {
             }
         }catch (Exception e){}
 
+        // check if actually logged in
+        if(!LogInMethods.isLoggedIn(driver)) {
+            Actions.login(driver, account);
+        }
+
         account.setLoggedIn(true);
+        account.setAvailable(true);
         accountRepository.save(account);
 
         // user is confirmed via code. add user
         loginSuccess(driver, account);
+
+        DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
 
         return new Response("success");
     }

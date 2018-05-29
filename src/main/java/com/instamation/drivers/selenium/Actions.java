@@ -28,14 +28,14 @@ public class Actions {
 
     public static String login(Driver driver, Account account) throws Exception{
         logger.info(account.getUsername() + " is attempting to log in");
-        driver.getDriver().get("https://www.instagram.com/accounts/login/");
-
         Thread.sleep(1000);
+
         // if already logged in
-        if (!Actions.doesButtonExist(driver, "Log In")) {
+        if (LogInMethods.isLoggedIn(driver)) {
             logger.info(account.getUsername() + " is already logged in");
             return "success";
         }
+
         clickLogin(driver);
         Thread.sleep(1000);
 
@@ -74,27 +74,52 @@ public class Actions {
     public static void updateProfileDetails(Driver driver, Account account) throws Exception{
         // select profile tab
 
-        driver.getDriver().get("https://instagram.com/" + account.getUsername());
+        try{
+            driver.getDriver().get("https://instagram.com/" + account.getUsername());
 
-        Thread.sleep(600);
+            Thread.sleep(600);
 
-        String username = driver.getDriver().findElement(By.tagName("h1")).getText();
-        //String bio = driver.getDriver().findElement(By.cssSelector("div._tb97a")).findElement(By.tagName("span")).getText().replaceAll("[^a-zA-Z0-9 ,-]","");
-        String image = getImage(driver);
-        String postsString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(0).getText().replace(",", "");
-        String followersString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(1).getText().replace(",", "");
-        String followingString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(2).getText().replace(",", "");
+            String username = driver.getDriver().findElement(By.tagName("h1")).getText();
+            //String bio = driver.getDriver().findElement(By.cssSelector("div._tb97a")).findElement(By.tagName("span")).getText().replaceAll("[^a-zA-Z0-9 ,-]","");
+            String image = getImage(driver);
+            String postsString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(0).getText().replace(",", "");
+            String followersString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(1).getText().replace(",", "");
+            String followingString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(2).getText().replace(",", "");
 
-        int posts = Integer.parseInt(postsString);
-        int followers = Integer.parseInt(followersString);
-        int following = Integer.parseInt(followingString);
+            int posts = Integer.parseInt(postsString);
 
-        account.setUsername(username);
-        //account.setBio(bio);
-        account.setPostCount(posts);
-        account.setFollowers(followers);
-        account.setFollowing(following);
-        account.setProfilePic(image);
+            if(followersString.contains(".")){
+                String point = followersString.substring(followersString.indexOf("."));
+                point = point.substring(0, 2);
+                followersString = followersString.replace(point, "");
+            }
+            followersString = followersString.replace("k", "000");
+            followersString = followersString.replace("m", "000000");
+            followersString = followersString.replace(",", "");
+
+            if(followingString.contains(".")){
+                String point = followingString.substring(followingString.indexOf("."));
+                point = point.substring(0, 2);
+                followingString = followingString.replace(point, "");
+            }
+            followingString = followingString.replace("k", "000");
+            followingString = followingString.replace("m", "000000");
+            followingString = followingString.replace(",", "");
+
+            int followers = Integer.parseInt(followersString);
+            int following = Integer.parseInt(followingString);
+
+            account.setUsername(username);
+            //account.setBio(bio);
+            account.setPostCount(posts);
+            account.setFollowers(followers);
+            account.setFollowing(following);
+            account.setProfilePic(image);
+            logger.info(account.getUsername() + " update profile details");
+        }catch (Exception e){
+            logger.info(account.getUsername() + " failed to update profile details");
+            e.printStackTrace();
+        }
     }
 
     public static void updateFollowers(Driver driver, Account account, FollowerRepository followerRepository){
@@ -109,8 +134,9 @@ public class Actions {
 
         //scroll through followers
         int i = 1;
+        JavascriptExecutor js = ((JavascriptExecutor) driver.getDriver());
         while(i < 200){
-            scroll(driver, 500*i);
+            scroll(500*i, js);
             i++;
         }
 
@@ -128,12 +154,23 @@ public class Actions {
     }
 
     public static boolean isNotAvailable(Driver driver){
-        try {
+        if(!driver.getDriver().findElements(By.tagName("h2")).isEmpty()) {
             if (driver.getDriver().findElement(By.tagName("h2")).getText().equalsIgnoreCase("Sorry, this page isn't available.")) {
                 return true;
             }
-        }catch (Exception e){}
+        }
+
+        if(!driver.getDriver().findElements(By.tagName("p")).isEmpty()) {
+            if (driver.getDriver().findElement(By.tagName("p")).getText().equalsIgnoreCase("The link you followed may be broken, or the page may have been removed. Go back to Instagram.")) {
+                return true;
+            }
+        }
+
+        if(driver.getDriver().getTitle().contains("Page Not Found")){
+            return true;
+        }
         return false;
+
     }
 
 
@@ -250,7 +287,6 @@ public class Actions {
     }
 
     public static void getProfiles(Driver driver, Account account, ProfileSeed profileSeed, ProfileRepository profileRepository) throws Exception{
-//        login(driver, account);
         if(profileSeed.getType().equals("username")) {
             driver.getDriver().get("https://instagram.com/" + profileSeed.getName());
         } else {
@@ -261,9 +297,13 @@ public class Actions {
             return;
         }
 
+        Set<String> profileUsernames;
+        List<Profile> profiles;
+
+        JavascriptExecutor js = ((JavascriptExecutor) driver.getDriver());
         for(String postUrl : getPostUrls(driver)){
             driver.getDriver().get(postUrl);
-            scroll(driver, 200);
+            scroll(200, js);
 
             try {
                 driver.getDriver().findElement(By.cssSelector("a._nzn1h")).click();
@@ -275,18 +315,19 @@ public class Actions {
 
             int i = 1;
             while(i < 1000){
-                scroll(driver, 500*i);
+                scroll(500*i, js);
                 i++;
             }
 
-            Set<String> profileUsernames = getProfileUsernames(driver);
+            profileUsernames = getProfileUsernames(driver);
             if(profileUsernames.isEmpty()){
-                break;
+                continue;
             }
 
             saveProfileUsernames(profileRepository, profileUsernames, profileSeed.getName(), account);
 
-            if(profileRepository.findByAccount(account).size() > 4000){
+            profiles = profileRepository.findByAccount(account);
+            if(profiles != null && profiles.size() > 4000){
                 break;
             }
 
@@ -553,7 +594,12 @@ public class Actions {
     }
 
     private static Set<String> getProfileUsernames(Driver driver){
-        List<WebElement> profiles = driver.getDriver().findElements(By.cssSelector("a._2g7d5.notranslate._o5iw8"));
+        List<WebElement> profiles = new ArrayList<>();
+        try{
+            profiles = driver.getDriver().findElements(By.cssSelector("a._2g7d5.notranslate._o5iw8"));
+        }catch (Exception e){
+            logger.info(driver.getAccount() + " error on getting profile usernames");
+        }
         Set<String> profileUsernames = new HashSet<>();
         for(WebElement profile : profiles){
             profileUsernames.add(profile.getText());
@@ -562,27 +608,28 @@ public class Actions {
     }
 
     private static void saveProfileUsernames(ProfileRepository profileRepository, Set<String> profileUsernames, String parentProfile, Account account){
-
-        List<Profile> profiles = new ArrayList<>();
+        Profile profile;
         for(String profileUsername : profileUsernames){
+            try {
+                if (!profileRepository.findByAccountAndUsername(account, profileUsername).isEmpty()) {
+                    continue;
+                }
+            }catch (Exception e){}
 
-            if(!profileRepository.findByAccountAndUsername(account, profileUsername).isEmpty()){
-                continue;
-            }
-            Profile profile = new Profile();
+            profile = new Profile();
             profile.setUsername(profileUsername);
             profile.setParentProfile(parentProfile);
             profile.setAccount(account);
-            profiles.add(profile);
             try {
                 profileRepository.save(profile);
             }catch (Exception e){}
         }
     }
 
-    private static void scroll(Driver driver, int scrollAmount){
-        JavascriptExecutor js = ((JavascriptExecutor) driver.getDriver());
-        js.executeScript("window.scrollTo(0, " + scrollAmount + ")");
+    private static void scroll(int scrollAmount, JavascriptExecutor js){
+        try {
+            js.executeScript("window.scrollTo(0, " + scrollAmount + ")");
+        }catch (Exception e){}
     }
 
     private static void clickLike(Driver driver){
