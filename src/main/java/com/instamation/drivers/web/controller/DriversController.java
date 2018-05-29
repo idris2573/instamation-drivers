@@ -122,6 +122,7 @@ public class DriversController {
             return driver.getDriver().findElement(By.tagName("html")).getAttribute("innerHTML");
         }catch (Exception e){
             logger.info("REQUEST: Get html from driver for " + username + " || RESPONSE: " + false + " : failed returning html");
+            e.printStackTrace();
             return "failed returning html";
         }
     }
