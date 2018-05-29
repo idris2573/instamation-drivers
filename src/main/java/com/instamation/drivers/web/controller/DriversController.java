@@ -2,9 +2,7 @@ package com.instamation.drivers.web.controller;
 
 import com.instamation.drivers.model.Account;
 import com.instamation.drivers.model.DriverInfo;
-import com.instamation.drivers.model.Response;
 import com.instamation.drivers.repository.AccountRepository;
-import com.instamation.drivers.selenium.Actions;
 import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
 import com.instamation.drivers.selenium.LogInMethods;
@@ -26,33 +24,34 @@ public class DriversController {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private DriverList driverList;
+
     @GetMapping(value = "/all")
     public Map<Account, DriverInfo> getAll(){
         Map<Account, DriverInfo> drivers = new HashMap<>();
 
-        for(Map.Entry driver : DriverList.getDrivers().entrySet()){
-            Account accountEntry = (Account) driver.getKey();
-            Driver driverEntry = (Driver) driver.getValue();
+        for(Driver driver : driverList.getDrivers()){
 
-            if(driverEntry == null || accountEntry == null || driverEntry.isClosed() || accountEntry.getUsername() == null){
+            if(driver == null || driver.getAccount() == null || driver.isClosed() || driver.getAccount().getUsername() == null){
                 continue;
             }
 
             DriverInfo driverInfo = new DriverInfo();
             try {
-                driverInfo.setUrl(driverEntry.getDriver().getCurrentUrl());
+                driverInfo.setUrl(driver.getDriver().getCurrentUrl());
             }catch (Exception e){}
             try {
-                driverInfo.setTitle(driverEntry.getDriver().getTitle());
+                driverInfo.setTitle(driver.getDriver().getTitle());
             }catch (Exception e){}
             try {
-                driverInfo.setH1(driverEntry.getDriver().findElement(By.tagName("h1")).getText());
+                driverInfo.setH1(driver.getDriver().findElement(By.tagName("h1")).getText());
             }catch (Exception e){}
             try {
-                driverInfo.setH2(driverEntry.getDriver().findElement(By.tagName("h2")).getText());
+                driverInfo.setH2(driver.getDriver().findElement(By.tagName("h2")).getText());
             }catch (Exception e){}
 
-            drivers.put(accountEntry, driverInfo);
+            drivers.put(driver.getAccount(), driverInfo);
         }
 
         logger.info("REQUEST: get all accounts and drivers");
@@ -62,7 +61,7 @@ public class DriversController {
     @GetMapping(value = "/account-usernames")
     public List<String> accountUsernames(){
         List<String> usernames = new ArrayList<>();
-        Set<Account> accounts = DriverList.getDrivers().keySet();
+        List<Account> accounts = driverList.getAccounts();
         for(Account account : accounts){
             usernames.add(account.getUsername());
         }
@@ -71,9 +70,9 @@ public class DriversController {
     }
 
     @GetMapping(value = "/accounts")
-    public Set<Account> accounts(){
+    public List<Account> accounts(){
         logger.info("REQUEST: get all accounts");
-        return DriverList.getDrivers().keySet();
+        return driverList.getAccounts();
     }
 
     @GetMapping(value = "/get/{username}")
@@ -81,7 +80,7 @@ public class DriversController {
         Account account = accountRepository.findByUsername(username);
         Map<Account, DriverInfo> drivers = new HashMap<>();
 
-        Driver driver = DriverList.get(account);
+        Driver driver = driverList.get(account);
 
         DriverInfo driverInfo = new DriverInfo();
         try {
@@ -110,7 +109,7 @@ public class DriversController {
             logger.info("REQUEST: Get html from driver for " + username + " || RESPONSE: " + false + " : account == null");
             return "account == null";
         }
-        Driver driver = DriverList.get(account);
+        Driver driver = driverList.get(account);
 
         if(driver == null){
             logger.info("REQUEST: Get html from driver for " + username + " || RESPONSE: " + false + " : driver == null");
@@ -129,13 +128,13 @@ public class DriversController {
 
     @GetMapping(value = "/size")
     public Integer size(){
-        return DriverList.getDrivers().size();
+        return driverList.getDrivers().size();
     }
 
     @GetMapping(value = "/running/{username}")
     public Boolean isAccountDriverRunning(@PathVariable String username) {
         Account account = accountRepository.findByUsername(username);
-        boolean isRunning = DriverList.containsKey(account);
+        boolean isRunning = driverList.contains(account);
         logger.info("REQUEST: Check if account" + username + "'s driver is running. || RESPONSE: " + isRunning);
         return isRunning;
     }
@@ -148,7 +147,7 @@ public class DriversController {
             return false;
         }
 
-        Driver driver = DriverList.get(account);
+        Driver driver = driverList.get(account);
         if(driver == null){
             logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + false + " (account does not have a driver)");
             return false;
@@ -159,7 +158,7 @@ public class DriversController {
         }catch (Exception e){
             logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + false + " (could not close driver)");
         }
-        DriverList.remove(account);
+        driverList.remove(account);
 
         logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + true);
         return true;
@@ -173,24 +172,13 @@ public class DriversController {
             return false;
         }
 
-        Driver driver = DriverList.get(account);
+        Driver driver = driverList.get(account);
         if(driver == null || driver.isClosed()){
-            driver = DriverList.getNewDriver(account);
-            DriverList.put(account, driver);
-            if(driver == null || driver.isClosed() || !LogInMethods.isLoggedIn(driver)){
-                logger.info("REQUEST: Is " + username + " logged into a driver. || RESPONSE: " + false);
-                return false;
-            }
+            logger.info("REQUEST: Is " + username + " logged into a driver. || RESPONSE: " + false);
+            return false;
         }
 
         if(LogInMethods.isLoggedIn(driver)) {
-            logger.info("REQUEST: Is " + username + " logged into a driver. || RESPONSE: " + true);
-            return true;
-        }
-
-        driver = DriverList.getNewDriver(account);
-        DriverList.put(account, driver);
-        if(driver != null && LogInMethods.isLoggedIn(driver)) {
             logger.info("REQUEST: Is " + username + " logged into a driver. || RESPONSE: " + true);
             return true;
         }
@@ -202,7 +190,7 @@ public class DriversController {
     @GetMapping(value = "/contains/{username}")
     public Boolean contains(@PathVariable String username){
         Account account = accountRepository.findByUsername(username);
-        return DriverList.containsKey(account);
+        return driverList.contains(account);
     }
 
     @GetMapping(value = "/goto/{username}")
@@ -210,8 +198,8 @@ public class DriversController {
         String url = request.getParameter("url");
         Account account = accountRepository.findByUsername(username);
 
-        if(DriverList.containsKey(account)){
-            Driver driver = DriverList.get(account);
+        if(driverList.contains(account)){
+            Driver driver = driverList.get(account);
             if(driver == null || driver.isClosed()){
                 logger.info("REQUEST: Go to page \"" + url + "\" by " + username + " || RESPONSE: " + false + " (driver == null or driver isClosed)");
                 return false;
@@ -226,19 +214,6 @@ public class DriversController {
         return false;
     }
 
-    @GetMapping(value = "/new-drivers-size")
-    public Integer newDriversSize(){
-        return DriverList.getNewDrivers().size();
-    }
-
-    @GetMapping(value = "/new-drivers")
-    public List<Account> newDrivers(){
-        List<Account> accounts = new ArrayList<>();
-        for(Driver driver : DriverList.getNewDrivers()){
-            accounts.add(driver.getAccount());
-        }
-        return accounts;
-    }
 
 
 

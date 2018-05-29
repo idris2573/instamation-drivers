@@ -60,6 +60,9 @@ public class Account {
     @Column(name = "running")
     private Boolean running = false;
 
+    @Column(name = "running_user")
+    private Boolean runningUser = false;
+
     @Column(name = "actions")
     private Integer actions = 0;
 
@@ -98,6 +101,10 @@ public class Account {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -212,6 +219,14 @@ public class Account {
         this.running = running;
     }
 
+    public Boolean isRunningUser() {
+        return runningUser;
+    }
+
+    public void setRunningUser(Boolean runningUser) {
+        this.runningUser = runningUser;
+    }
+
     public Integer getActions() {
         return actions;
     }
@@ -249,7 +264,11 @@ public class Account {
 
         Account account = (Account) obj;
 
-        if(this.getId().equals(account.getId())){
+        if(id != null && id.equals(account.getId())){
+            return true;
+        }
+
+        if(username != null && username.equalsIgnoreCase(account.getUsername())){
             return true;
         }
         return false;

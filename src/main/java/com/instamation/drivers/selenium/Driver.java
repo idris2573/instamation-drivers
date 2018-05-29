@@ -44,6 +44,8 @@ public class Driver {
         driver.manage().window().setSize(new Dimension(374, 650));
     }
 
+
+
     private WebDriver driver(boolean headless)  throws Exception{
 
         Map<String, String> mobileEmulation = new HashMap<>();
@@ -139,5 +141,14 @@ public class Driver {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Driver driver = (Driver) obj;
+        if(driver.getAccount().equals(account)){
+            return true;
+        }
+        return false;
     }
 }

@@ -25,12 +25,15 @@ public class TestController {
     @Autowired
     private ProxyRepository proxyRepository;
 
+    @Autowired
+    private DriverList driverList;
+
     @RequestMapping(value = "/start")
     @ResponseBody
     public String start() throws Exception{
 
 //        Driver driver = new Driver();
-//        DriverList.put(accountRepository.findById(1L).get(), driver);
+//        DriverList.save(accountRepository.findById(1L).get(), driver);
         return "ok";
     }
 
@@ -39,14 +42,14 @@ public class TestController {
     public String start2() throws Exception{
 
 //        Driver driver = new Driver();
-//        DriverList.put(accountRepository.findById(1L).get(), driver);
+//        DriverList.save(accountRepository.findById(1L).get(), driver);
         return "ok";
     }
 
 
     @RequestMapping(value = "/drivers")
-    public Map<Account, Driver> drivers(){
-        return DriverList.getDrivers();
+    public List<Driver> drivers(){
+        return driverList.getDrivers();
     }
 
 
@@ -61,4 +64,20 @@ public class TestController {
         return accountRepository.findById(1L).get();
     }
 
+    @RequestMapping(value = "/equals")
+    public boolean equals() throws Exception{
+        Account account = new Account();
+        account.setUsername("Idris");
+        account.setId(1L);
+        Driver driver = new Driver(account);
+        driverList.save(driver);
+
+        Account account2 = new Account();
+        account2.setUsername("Honesty");
+        account2.setId(2L);
+        Driver driver2 = new Driver(account2);
+        driverList.save(driver2);
+
+        return driver.equals(driver2);
+    }
 }

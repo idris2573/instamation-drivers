@@ -40,12 +40,15 @@ public class ScheduleController {
     @Autowired
     private ActionRepository actionRepository;
 
+    @Autowired
+    private DriverList driverList;
+
     @Scheduled(cron="0 0 */5 * * *", zone="Europe/London")
     public void deleteUnused() throws Exception{
         List<Driver> deleteDrivers = new ArrayList<>();
 
-        for(Driver driver : DriverList.getNewDrivers()){
-            if (!DriverList.contains(driver) && !DriverList.driversMapContainNewDriver(driver) && !driver.getAccount().isEnabled()) {
+        for(Driver driver : driverList.getDrivers()){
+            if (!driver.getAccount().isEnabled()) {
                 logger.info(driver.getAccount().getUsername() + " is being removed from new Drivers");
                 driver.close();
                 deleteDrivers.add(driver);
@@ -53,7 +56,7 @@ public class ScheduleController {
         }
 
         for(Driver driver : deleteDrivers){
-            DriverList.getNewDrivers().remove(driver);
+            driverList.remove(driver);
         }
     }
 
@@ -69,8 +72,8 @@ public class ScheduleController {
             if (!account.getSetting().isWorkingTime() && !account.isAutomationLock()) {
 
                 // check if account has a driver and is logged in.
-                if(DriverList.containsKey(account)){
-                    driver = DriverList.get(account);
+                if(driverList.contains(account)){
+                    driver = driverList.get(account);
                     if(LogInMethods.isLoggedIn(driver)){
                         isLoggedIn = true;
                         account.setLoggedIn(true);
@@ -131,19 +134,4 @@ public class ScheduleController {
 
     }
 
-    @Scheduled(fixedRate = 60000)
-    public void relinkDrivers(){
-        List<Driver> newDrivers = DriverList.getNewDrivers();
-
-        for(Driver newDriver : newDrivers){
-            if(newDriver == null || newDriver.getAccount() == null || !newDriver.getAccount().isEnabled()){
-                continue;
-            }
-
-            if(!DriverList.driversMapContainNewDriver(newDriver)  && !DriverList.containsKey(newDriver.getAccount()) ){
-                DriverList.put(newDriver.getAccount(), newDriver);
-                logger.info(newDriver.getAccount().getUsername() + " has been added to the DriversList from newDrivers");
-            }
-        }
-    }
 }

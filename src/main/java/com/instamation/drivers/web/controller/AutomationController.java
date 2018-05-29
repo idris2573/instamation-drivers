@@ -12,9 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.util.*;
 
@@ -52,6 +50,9 @@ public class AutomationController {
     @Autowired
     private ProfileSeedRepository profileSeedRepository;
 
+    @Autowired
+    private DriverList driverList;
+
     @Scheduled(fixedRate = 5000)
     public void run() throws Exception{
 
@@ -65,7 +66,7 @@ public class AutomationController {
                 account.setAutomationLock(true);
                 accountRepository.save(account);
 
-                driver = DriverList.get(account);
+                driver = driverList.get(account);
 
                 // if the account does not have a driver or is not logged in,
                 // set the accounts automation off. Also set the account as not logged in.
@@ -80,16 +81,13 @@ public class AutomationController {
 
                 // if account is not logged in, skip account and set logged in and running as false.
                 if(!LogInMethods.isLoggedIn(driver)){
-                    driver = DriverList.getNewDriver(account);
-                    DriverList.put(account, driver);
-                    if(driver == null || !LogInMethods.isLoggedIn(driver)){
-                        account.setRunning(false);
-                        account.setLoggedIn(false);
-                        account.setAutomationLock(false);
-                        accountRepository.save(account);
-                        logger.info(account.getUsername() + " is not logged in, skipping automation...");
-                        continue;
-                    }
+                    account.setRunning(false);
+                    account.setLoggedIn(false);
+                    account.setAutomationLock(false);
+                    accountRepository.save(account);
+                    logger.info(account.getUsername() + " is not logged in, skipping automation...");
+                    continue;
+
                 }
 
                 // if account is not available its been deleted or blocked by instagram
@@ -152,7 +150,7 @@ public class AutomationController {
             public void run() {
 
                 Setting setting = settingRepository.findByAccount(account);
-                Driver driver = DriverList.get(account);
+                Driver driver = driverList.get(account);
 
                 // Gets a list of profiles that have not been unfollowed
                 List<Profile> profiles = profileRepository.findByAccountAndUnfollowed(account, false);
@@ -281,7 +279,7 @@ public class AutomationController {
                         }
 
                     } catch (Exception e) {
-                        driver = DriverList.get(account);
+                        driver = driverList.get(account);
                     }
                 }
 
@@ -392,13 +390,10 @@ public class AutomationController {
 
         // if account is not logged in, skip account and set logged in and running as false.
         if (!LogInMethods.isLoggedIn(driver)) {
-            driver = DriverList.getNewDriver(account);
-            DriverList.put(account, driver);
-            if(driver == null || !LogInMethods.isLoggedIn(driver)){
-                setRunningFalse(account);
-                logger.info(account.getUsername() + " is not logged in");
-                return false;
-            }
+            setRunningFalse(account);
+            logger.info(account.getUsername() + " is not logged in");
+            return false;
+
         }
 
         // check if user is not available

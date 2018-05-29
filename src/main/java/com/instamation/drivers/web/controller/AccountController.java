@@ -37,6 +37,8 @@ public class AccountController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private DriverList driverList;
 
     @PostMapping(value = "/add/{userId}")
     public Response addAccount(@RequestBody Account account, @PathVariable Long userId) throws Exception{
@@ -55,7 +57,7 @@ public class AccountController {
             }
         }
 
-        Driver driver = DriverList.get(account);
+        Driver driver = driverList.get(account);
         Proxy proxy;
         // if account has proxy, set proxy as accounts proxy. If not find a new proxy without an account.
         if(account.getProxy() != null){
@@ -87,7 +89,6 @@ public class AccountController {
                     return new Response("login-fail");
                 }
             }
-            DriverList.getNewDrivers().add(driver);
         }
 
         account.setPassword(password);
@@ -97,11 +98,8 @@ public class AccountController {
             response = Actions.login(driver, account);
         }catch (Exception e){
             driver.close();
-            if(DriverList.getNewDrivers().contains(driver)){
-                DriverList.getNewDrivers().remove(driver);
-            }
-            if(DriverList.containsKey(account)){
-                DriverList.remove(account);
+            if(driverList.contains(account)){
+                driverList.remove(account);
             }
             logger.info(account.getUsername() + " crashed and failed to login");
             return new Response("login-fail");
@@ -111,11 +109,8 @@ public class AccountController {
         if(response.equalsIgnoreCase("wrong-credentials")){
             // close drive and remove it from driver list if its already in the driver list.
             driver.close();
-            if(DriverList.getNewDrivers().contains(driver)){
-                DriverList.getNewDrivers().remove(driver);
-            }
-            if(DriverList.containsKey(account)){
-                DriverList.remove(account);
+            if(driverList.contains(account)){
+                driverList.remove(account);
             }
             return new Response("wrong-credentials");
         }
@@ -141,9 +136,10 @@ public class AccountController {
             account = accountRepository.findByUsername(account.getUsername());
         }
 
-        // if Driverlist does not contain account, add accoung and driver to Driverlist
-        DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
-
+        // if driverList does not contain account, add account and driver to driverList
+        account = accountRepository.findByUsername(account.getUsername());
+        driver.setAccount(account);
+        driverList.save(driver);
 
         // skipped to entering security code
         try{
@@ -182,7 +178,9 @@ public class AccountController {
         // successful login
         loginSuccess(driver, account);
 
-        DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
+        account = accountRepository.findByUsername(account.getUsername());
+        driver.setAccount(account);
+        driverList.save(driver);
 
         return new Response("success");
     }
@@ -192,7 +190,7 @@ public class AccountController {
         String type = request.getParameter("type");
         String username = request.getParameter("username");
 
-        Driver driver = DriverList.get(accountRepository.findByUsername(username));
+        Driver driver = driverList.get(accountRepository.findByUsername(username));
 
         // click the recovery type
         if(type.equalsIgnoreCase("email")){
@@ -229,7 +227,7 @@ public class AccountController {
         String username = request.getParameter("username");
 
         Account account = accountRepository.findByUsername(username);
-        Driver driver = DriverList.get(account);
+        Driver driver = driverList.get(account);
 
         driver.getDriver().findElement(By.id("security_code")).clear();
         driver.getDriver().findElement(By.id("security_code")).sendKeys(code);
@@ -255,7 +253,9 @@ public class AccountController {
         // user is confirmed via code. add user
         loginSuccess(driver, account);
 
-        DriverList.put(accountRepository.findByUsername(account.getUsername()), driver);
+        account = accountRepository.findByUsername(account.getUsername());
+        driver.setAccount(account);
+        driverList.save(driver);
 
         return new Response("success");
     }
@@ -265,7 +265,7 @@ public class AccountController {
         String username = request.getParameter("username");
 
         Account account = accountRepository.findByUsername(username);
-        Driver driver = DriverList.get(account);
+        Driver driver = driverList.get(account);
 
         Actions.clickLink(driver, "Get a new one");
 
@@ -307,6 +307,5 @@ public class AccountController {
         statsRepository.save(stats);
 
     }
-
 
 }
