@@ -559,6 +559,10 @@ public class Actions {
             return image;
         }
 
+        if(!driver.getDriver().findElements(By.cssSelector("#react-root > section > main > div > header > div > div > div > button > img")).isEmpty()){
+            image = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > header > div > div > div > button > img")).getAttribute("src");
+            return image;
+        }
         return null;
     }
 
