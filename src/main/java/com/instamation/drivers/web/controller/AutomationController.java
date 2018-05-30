@@ -61,7 +61,7 @@ public class AutomationController {
 
         for(Account account : accounts){
 
-            if(!account.isAutomationLock() && account.getSetting().isWorkingTime()) {
+            if(account.isLoggedIn() && !account.isAutomationLock() && account.getSetting().isWorkingTime()) {
                 logger.info("Checking " + account.getUsername() + " for automation");
                 account.setAutomationLock(true);
                 accountRepository.save(account);
@@ -401,7 +401,6 @@ public class AutomationController {
             setRunningFalse(account);
             logger.info(account.getUsername() + " is not logged in");
             return false;
-
         }
 
         // check if user is not available
@@ -413,6 +412,7 @@ public class AutomationController {
             return false;
         }
 
+        account.setLoggedIn(true);
         accountRepository.save(account);
         return true;
     }
