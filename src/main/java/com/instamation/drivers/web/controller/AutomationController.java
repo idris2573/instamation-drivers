@@ -61,7 +61,7 @@ public class AutomationController {
 
         for(Account account : accounts){
 
-            if(account.isLoggedIn() && !account.isAutomationLock() && account.getSetting().isWorkingTime()) {
+            if(!account.isAutomationLock() && account.getSetting().isWorkingTime()) {
                 logger.info("Checking " + account.getUsername() + " for automation");
                 account.setAutomationLock(true);
                 accountRepository.save(account);

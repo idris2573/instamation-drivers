@@ -71,6 +71,20 @@ public class ScheduleController {
         }
     }
 
+    @Scheduled(cron="0 15 */1 * * *", zone="Europe/London")
+    public void checkLoggedIn() throws Exception{
+        logger.info("Checking logged in drivers...");
+        List<Driver> deleteDrivers = new ArrayList<>();
+        for(Driver driver : driverList.getDrivers()){
+            if(LogInMethods.isLoggedIn(driver)){
+                driver.getAccount().setLoggedIn(true);
+                accountRepository.save(driver.getAccount());
+                logger.info("setting " + driver.getAccount().getUsername() + " as loggeed in");
+            }
+        }
+
+    }
+
     @RequestMapping("/update-stats")
     @Scheduled(cron="0 0 */4 * * *", zone="Europe/London")
     public void updateStats() throws Exception{
