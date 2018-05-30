@@ -143,24 +143,24 @@ public class DriversController {
     public Boolean closeDriverByUsername(@PathVariable String username) {
         Account account = accountRepository.findByUsername(username);
         if(account == null){
-            logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + false + " (account does not exist)");
+            logger.info("REQUEST: Close " + username + "'s driver. || RESPONSE: " + false + " (account does not exist)");
             return false;
         }
 
         Driver driver = driverList.get(account);
         if(driver == null || driver.getDriver() == null){
-            logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + false + " (account does not have a driver)");
+            logger.info("REQUEST: Close " + username + "'s driver. || RESPONSE: " + false + " (account does not have a driver)");
             return false;
         }
 
         try {
             driver.close();
         }catch (Exception e){
-            logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + false + " (could not close driver)");
+            logger.info("REQUEST: Close " + username + "'s driver. || RESPONSE: " + false + " (could not close driver)");
         }
         driverList.remove(account);
 
-        logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + true);
+        logger.info("REQUEST: Close " + username + "'s driver. || RESPONSE: " + true);
         return true;
     }
 
