@@ -86,8 +86,8 @@ public class LogInMethods {
 
     public static boolean isLoggedIn(Driver driver){
 
-        if(driver == null || driver.isClosed()){
-            logger.error("ERROR driver does not exist");
+        if(driver == null || driver.getDriver() == null || driver.isClosed()){
+            logger.error("ERROR driver is not logged in because driver does not exist - " + driver.getAccount());
             return false;
         }
 

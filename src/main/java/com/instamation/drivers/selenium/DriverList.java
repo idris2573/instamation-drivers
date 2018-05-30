@@ -42,7 +42,7 @@ public class DriverList {
     }
 
     public boolean contains(Driver driver){
-        if(driver == null || driver.getAccount() == null){
+        if(driver == null || driver.getDriver() == null || driver.getAccount() == null){
             return false;
         }
         for(Driver driverEntry : drivers){
@@ -60,6 +60,7 @@ public class DriverList {
         for(Driver driver : drivers){
             if(account.equals(driver.getAccount())){
                 logger.info(account.getUsername() + " is being removed from DriverList");
+                driver.close();
                 drivers.remove(driver);
                 return;
             }
@@ -67,12 +68,13 @@ public class DriverList {
     }
 
     public void remove(Driver driver){
-        if(driver == null || driver.getAccount() == null){
+        if(driver == null || driver.getDriver() == null || driver.getAccount() == null){
             return;
         }
         for(Driver driverEntry : drivers){
             if(driver.equals(driverEntry)){
                 logger.info(driver.getAccount().getUsername() + " is being removed from DriverList");
+                driver.close();
                 drivers.remove(driverEntry);
                 return;
             }
@@ -80,7 +82,7 @@ public class DriverList {
     }
 
     public void save(Driver driver){
-        if(driver == null || driver.getAccount() == null || (driver.getAccount().getId() == null && driver.getAccount().getUsername() == null)){
+        if(driver == null || driver.getDriver() == null || driver.getAccount() == null || (driver.getAccount().getId() == null && driver.getAccount().getUsername() == null)){
             return;
         }
 
@@ -107,6 +109,14 @@ public class DriverList {
             accounts.add(driver.getAccount());
         }
         return accounts;
+    }
+
+    public boolean isDriverReady(Driver driver){
+        if(driver == null || driver.getDriver() == null || driver.isClosed() || driver.getAccount() == null){
+            return false;
+        }
+
+        return true;
     }
 
 }

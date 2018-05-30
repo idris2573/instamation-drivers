@@ -63,7 +63,7 @@ public class AccountController {
         if(account.getProxy() != null){
             proxy = account.getProxy();
         }else {
-            proxy = proxyRepository.findFirstByAccount(null);
+            proxy = proxyRepository.findRandom();
         }
 
         // if driver is closed, set driver as null.
@@ -72,7 +72,7 @@ public class AccountController {
         }
 
         // if a driver is null create a new driver.
-        if(driver == null) {
+        if(driver == null || driver.getDriver() == null) {
             // if proxy exists, give the driver the proxy.
             if (proxy != null) {
                 try {
@@ -123,10 +123,8 @@ public class AccountController {
         }
 
         if(proxy != null) {
-            proxy.setAccount(account);
             account.setProxy(proxy);
             accountRepository.save(account);
-            proxyRepository.save(account.getProxy());
         }
 
         // save or update an account;
@@ -163,6 +161,11 @@ public class AccountController {
             return new Response(response);
         }
 
+        if(!driverList.isDriverReady(driver)){
+            logger.error("driver is not ready and failed to login");
+            return new Response("login-fail");
+        }
+
         // check if actually logged in
         if(!LogInMethods.isLoggedIn(driver)) {
             logger.info(account.getUsername() + " is retrying logging in");
@@ -176,7 +179,10 @@ public class AccountController {
         accountRepository.save(account);
 
         // successful login
-        loginSuccess(driver, account);
+        if(!loginSuccess(driver, account)){
+            logger.error("failed to login at loginSuccess");
+            return new Response("login-fail");
+        }
 
         account = accountRepository.findByUsername(account.getUsername());
         driver.setAccount(account);
@@ -250,6 +256,11 @@ public class AccountController {
         account.setAvailable(true);
         accountRepository.save(account);
 
+        if(!loginSuccess(driver, account)){
+            logger.error("failed to login at loginSuccess");
+            return new Response("login-fail");
+        }
+
         // user is confirmed via code. add user
         loginSuccess(driver, account);
 
@@ -272,13 +283,21 @@ public class AccountController {
         return new Response("success");
     }
 
-    private void loginSuccess(Driver driver, Account account) throws Exception{
+    private boolean loginSuccess(Driver driver, Account account) throws Exception{
         // update profile details
         Actions.updateProfileDetails(driver, account);
 
-        // like instamation
-        driver.getDriver().get("https://www.instagram.com/instamation8/");
-        Actions.clickButton(driver, "Follow");
+        if(!driverList.isDriverReady(driver)) {
+            return false;
+        }
+
+            try {
+            // like instamation
+            driver.getDriver().get("https://www.instagram.com/instamation8/");
+            Actions.clickButton(driver, "Follow");
+        }catch (Exception e){
+            return false;
+        }
 
         // create settings for the account and vice versa, setting has to be saved to the database first.
         if(account.getSetting() == null) {
@@ -306,6 +325,7 @@ public class AccountController {
         stats.setPostCount(account.getPostCount());
         statsRepository.save(stats);
 
+        return true;
     }
 
 }

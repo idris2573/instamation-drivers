@@ -5,10 +5,7 @@ import com.instamation.drivers.repository.FollowerRepository;
 import com.instamation.drivers.repository.PostRepository;
 import com.instamation.drivers.repository.ProfileRepository;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +33,7 @@ public class Actions {
             return "success";
         }
 
-        clickLogin(driver);
+        clickButton(driver, "Log In");
         Thread.sleep(1000);
 
         LogInMethods.inputLoginInfo(driver, account);
@@ -82,32 +79,10 @@ public class Actions {
             String username = driver.getDriver().findElement(By.tagName("h1")).getText();
             //String bio = driver.getDriver().findElement(By.cssSelector("div._tb97a")).findElement(By.tagName("span")).getText().replaceAll("[^a-zA-Z0-9 ,-]","");
             String image = getImage(driver);
-            String postsString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(0).getText().replace(",", "");
-            String followersString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(1).getText().replace(",", "");
-            String followingString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(2).getText().replace(",", "");
 
-            int posts = Integer.parseInt(postsString);
-
-            if(followersString.contains(".")){
-                String point = followersString.substring(followersString.indexOf("."));
-                point = point.substring(0, 2);
-                followersString = followersString.replace(point, "");
-            }
-            followersString = followersString.replace("k", "000");
-            followersString = followersString.replace("m", "000000");
-            followersString = followersString.replace(",", "");
-
-            if(followingString.contains(".")){
-                String point = followingString.substring(followingString.indexOf("."));
-                point = point.substring(0, 2);
-                followingString = followingString.replace(point, "");
-            }
-            followingString = followingString.replace("k", "000");
-            followingString = followingString.replace("m", "000000");
-            followingString = followingString.replace(",", "");
-
-            int followers = Integer.parseInt(followersString);
-            int following = Integer.parseInt(followingString);
+            int posts = getCount(driver, "posts");
+            int followers = getCount(driver, "followers");
+            int following = getCount(driver, "following");
 
             account.setUsername(username);
             //account.setBio(bio);
@@ -495,45 +470,43 @@ public class Actions {
         }while(!ready);
     }
 
-    private static void clickLogin(Driver driver){
-        List<WebElement> elements = driver.getDriver().findElements(By.tagName("button"));
-
-        for(WebElement element : elements) {
-            if(element.getText().equalsIgnoreCase("Log In")){
-                element.click();
-                break;
-            }
-        }
-    }
 
     public static void clickButton(Driver driver, String buttonText){
-        List<WebElement> elements = driver.getDriver().findElements(By.tagName("button"));
-
-        for(WebElement element : elements) {
-            if(element.getText().equalsIgnoreCase(buttonText)){
-                element.click();
+        for(int i = 0; i < driver.getDriver().findElements(By.tagName("button")).size(); i++) {
+            if(driver.getDriver().findElements(By.tagName("button")).get(i).getText().equalsIgnoreCase(buttonText)){
+                try {
+                    driver.getDriver().findElements(By.tagName("button")).get(i).click();
+                }catch (StaleElementReferenceException ex){
+                    driver.getDriver().findElements(By.tagName("button")).get(i).click();
+                }
                 break;
             }
         }
     }
 
     public static void clickLink(Driver driver, String linkText){
-        List<WebElement> elements = driver.getDriver().findElements(By.tagName("a"));
-
-        for(WebElement element : elements) {
-            if(element.getText().equalsIgnoreCase(linkText)){
-                element.click();
+        for(int i = 0; i < driver.getDriver().findElements(By.tagName("a")).size(); i++) {
+            if(driver.getDriver().findElements(By.tagName("a")).get(i).getText().equalsIgnoreCase(linkText)){
+                try {
+                    driver.getDriver().findElements(By.tagName("a")).get(i).click();
+                }catch (StaleElementReferenceException ex){
+                    driver.getDriver().findElements(By.tagName("a")).get(i).click();
+                }
                 break;
             }
         }
     }
 
     public static boolean doesButtonExist(Driver driver, String buttonText){
-        List<WebElement> elements = driver.getDriver().findElements(By.tagName("button"));
-
-        for(WebElement element : elements) {
-            if(element.getText().equalsIgnoreCase(buttonText)){
-                return true;
+        for(int i = 0; i < driver.getDriver().findElements(By.tagName("button")).size(); i++) {
+            try {
+                if(driver.getDriver().findElements(By.tagName("button")).get(i).getText().equalsIgnoreCase(buttonText)) {
+                    return true;
+                }
+            }catch (StaleElementReferenceException ex){
+                if(driver.getDriver().findElements(By.tagName("button")).get(i).getText().equalsIgnoreCase(buttonText)) {
+                    return true;
+                }
             }
         }
 
@@ -576,12 +549,17 @@ public class Actions {
     private static String getImage(Driver driver){
 
         String image = "";
-        try{
+        if(!driver.getDriver().findElements(By.cssSelector("img._cuacn")).isEmpty()){
             image = driver.getDriver().findElement(By.cssSelector("img._cuacn")).getAttribute("src");
-        }catch (Exception e){
-            image = driver.getDriver().findElement(By.cssSelector("img._rewi8")).getAttribute("src");
+            return image;
         }
-        return image;
+
+        if(!driver.getDriver().findElements(By.cssSelector("img._rewi8")).isEmpty()){
+            image = driver.getDriver().findElement(By.cssSelector("img._rewi8")).getAttribute("src");
+            return image;
+        }
+
+        return null;
     }
 
     private static List<String> getPostUrls(Driver driver){
@@ -686,5 +664,55 @@ public class Actions {
 //        logger.info(account.getUsername() + " logged in");
 //    }
 
+
+    private static int getCount(Driver driver, String infoType){
+
+        int type;
+        switch(infoType){
+            case "posts": type = 0;
+                break;
+            case "followers": type = 1;
+                break;
+            case "following": type = 2;
+                break;
+            default: type = 0;
+        }
+        String countString = null;
+        if(!driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).isEmpty()) {
+            countString = driver.getDriver().findElements(By.cssSelector("span._fd86t._he56w")).get(type).getText().replace(",", "");
+        }
+
+        if(countString == null){
+            try {
+                switch (infoType) {
+                    case "posts":
+                        countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(1) > span > span")).getText();
+                        break;
+                    case "followers":
+                        countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(2) > a > span")).getText();
+                        break;
+                    case "following":
+                        countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(3) > a > span")).getText();
+                        break;
+                    default:
+                        ;
+                }
+            }catch (Exception e){
+                return 0;
+            }
+        }
+
+        if(countString.contains(".")){
+            String point = countString.substring(countString.indexOf("."));
+            point = point.substring(0, 2);
+            countString = countString.replace(point, "");
+        }
+        countString = countString.replace("k", "000");
+        countString = countString.replace("m", "000000");
+        countString = countString.replace(",", "");
+
+        return Integer.parseInt(countString);
+
+    }
 
 }

@@ -70,7 +70,7 @@ public class AutomationController {
 
                 // if the account does not have a driver or is not logged in,
                 // set the accounts automation off. Also set the account as not logged in.
-                if(driver == null){
+                if(driver == null || driver.getDriver() == null){
                     account.setRunning(false);
                     account.setLoggedIn(false);
                     account.setAutomationLock(false);
@@ -346,6 +346,11 @@ public class AutomationController {
     private boolean isAccountRunning(Account account, Driver driver) throws Exception{
 
         Account accountUpdated = accountRepository.findById(account.getId()).get();
+
+        if(!driverList.isDriverReady(driver)){
+            logger.error(account.getUsername() + " driver is not ready");
+            return false;
+        }
 
         // if account is not running.
         if(!accountUpdated.isRunning()){

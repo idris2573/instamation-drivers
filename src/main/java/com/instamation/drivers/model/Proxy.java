@@ -16,11 +16,6 @@ public class Proxy {
     @Column(name = "ip", unique = true)
     private String ip;
 
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
-
     public Long getId() {
         return id;
     }
@@ -33,11 +28,4 @@ public class Proxy {
         this.ip = ip;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 }

@@ -33,7 +33,7 @@ public class DriversController {
 
         for(Driver driver : driverList.getDrivers()){
 
-            if(driver == null || driver.getAccount() == null || driver.isClosed() || driver.getAccount().getUsername() == null){
+            if(driver == null || driver.getDriver() == null || driver.getAccount() == null || driver.isClosed() || driver.getAccount().getUsername() == null){
                 continue;
             }
 
@@ -111,7 +111,7 @@ public class DriversController {
         }
         Driver driver = driverList.get(account);
 
-        if(driver == null){
+        if(driver == null || driver.getDriver() == null){
             logger.info("REQUEST: Get html from driver for " + username + " || RESPONSE: " + false + " : driver == null");
             return "driver == null";
         }
@@ -148,7 +148,7 @@ public class DriversController {
         }
 
         Driver driver = driverList.get(account);
-        if(driver == null){
+        if(driver == null || driver.getDriver() == null){
             logger.info("REQUEST: Close" + username + "'s driver. || RESPONSE: " + false + " (account does not have a driver)");
             return false;
         }
@@ -173,7 +173,7 @@ public class DriversController {
         }
 
         Driver driver = driverList.get(account);
-        if(driver == null || driver.isClosed()){
+        if(driver == null || driver.getDriver() == null || driver.isClosed()){
             logger.info("REQUEST: Is " + username + " logged into a driver. || RESPONSE: " + false);
             return false;
         }
@@ -200,7 +200,7 @@ public class DriversController {
 
         if(driverList.contains(account)){
             Driver driver = driverList.get(account);
-            if(driver == null || driver.isClosed()){
+            if(driver == null || driver.getDriver() == null || driver.isClosed()){
                 logger.info("REQUEST: Go to page \"" + url + "\" by " + username + " || RESPONSE: " + false + " (driver == null or driver isClosed)");
                 return false;
             }

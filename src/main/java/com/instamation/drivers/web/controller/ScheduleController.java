@@ -43,13 +43,24 @@ public class ScheduleController {
     @Autowired
     private DriverList driverList;
 
-    @Scheduled(cron="0 0 */5 * * *", zone="Europe/London")
-    public void deleteUnused() throws Exception{
-        List<Driver> deleteDrivers = new ArrayList<>();
+    @Scheduled(cron="0 25 */2 * * *", zone="Europe/London")
+    public void deleteNullDrivers() throws Exception{
+        logger.info("Deleting null drivers...");
 
+        List<Driver> deleteDrivers = new ArrayList<>();
         for(Driver driver : driverList.getDrivers()){
-            if (!driver.getAccount().isEnabled()) {
-                logger.info(driver.getAccount().getUsername() + " is being removed from new Drivers");
+
+            // driver is not ready
+            // drivers account is not enabled
+            // driver is on unusal account enter code page
+            if (!driverList.isDriverReady(driver) || !driver.getAccount().isEnabled() || driver.getDriver().getCurrentUrl().contains("com/challenge/")) {
+
+                try {
+                    driver.getAccount().setLoggedIn(false);
+                    driver.getAccount().setRunning(false);
+                    accountRepository.save(driver.getAccount());
+                }catch (Exception e){}
+
                 driver.close();
                 deleteDrivers.add(driver);
             }
@@ -84,6 +95,11 @@ public class ScheduleController {
                     isLoggedIn = false;
                     driver = new Driver(account);
                     account.setLoggedIn(false);
+                }
+
+                if(!driverList.isDriverReady(driver)){
+                    logger.error(account.getUsername() + " driver is not ready");
+                    continue;
                 }
 
                 // check if account is available, if not skip account
