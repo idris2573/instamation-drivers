@@ -175,15 +175,21 @@ public class DriversController {
         Driver driver = driverList.get(account);
         if(driver == null || driver.getDriver() == null || driver.isClosed()){
             logger.info("REQUEST: Is " + username + " logged into a driver. || RESPONSE: " + false);
+            account.setLoggedIn(false);
+            accountRepository.save(account);
             return false;
         }
 
         if(LogInMethods.isLoggedIn(driver)) {
             logger.info("REQUEST: Is " + username + " logged into a driver. || RESPONSE: " + true);
+            account.setLoggedIn(true);
+            accountRepository.save(account);
             return true;
         }
 
         logger.info("REQUEST: Is " + username + " logged into a driver. || RESPONSE: " + false);
+        account.setLoggedIn(false);
+        accountRepository.save(account);
         return false;
     }
 

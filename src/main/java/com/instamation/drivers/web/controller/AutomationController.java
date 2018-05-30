@@ -102,6 +102,9 @@ public class AutomationController {
                     continue;
                 }
 
+                account.setLoggedIn(true);
+                accountRepository.save(account);
+
                 Setting setting = settingRepository.findByAccount(account);
                 List<Profile> profiles = profileRepository.findByAccountAndFollowingAndUnfollowed(account, false, false);
 
