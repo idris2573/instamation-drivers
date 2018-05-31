@@ -79,7 +79,7 @@ public class ScheduleController {
             if(LogInMethods.isLoggedIn(driver)){
                 driver.getAccount().setLoggedIn(true);
                 accountRepository.save(driver.getAccount());
-                logger.info("setting " + driver.getAccount().getUsername() + " as loggeed in");
+                logger.info("setting " + driver.getAccount().getUsername() + " as logged in");
             }
         }
 
