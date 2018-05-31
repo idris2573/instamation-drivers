@@ -88,7 +88,7 @@ public class PostController {
                     post.setPosted(true);
                     postRepository.save(post);
 
-                    Actions.updateProfileDetails(driver, account);
+                    Actions.updateProfileDetails(driver, account, accountRepository);
                     account.updateStats(statsRepository);
                     accountRepository.save(account);
                     driver.close();
@@ -120,7 +120,7 @@ public class PostController {
             if (post != null) {
                 try {
                     Actions.post(driver, post, account, captionRepository.findRandom(), false);
-                    Actions.updateProfileDetails(driver, account);
+                    Actions.updateProfileDetails(driver, account, accountRepository);
 
                     setting.setPostActions(setting.getPostActions() + 1);
                     settingRepository.save(setting);

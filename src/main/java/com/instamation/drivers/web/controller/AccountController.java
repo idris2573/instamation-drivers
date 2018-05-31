@@ -285,7 +285,7 @@ public class AccountController {
 
     private boolean loginSuccess(Driver driver, Account account) throws Exception{
         // update profile details
-        Actions.updateProfileDetails(driver, account);
+        Actions.updateProfileDetails(driver, account, accountRepository);
 
         if(!driverList.isDriverReady(driver)) {
             return false;

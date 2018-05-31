@@ -130,7 +130,7 @@ public class ScheduleController {
                 logger.info(account.getUsername() + " isLoggedIn = " + isLoggedIn);
 
                 try {
-                    Actions.updateProfileDetails(driver, account);
+                    Actions.updateProfileDetails(driver, account, accountRepository);
                 } catch (Exception e) {
                     logger.info(account.getUsername() + " failed to updateProfileDetails");
                 }

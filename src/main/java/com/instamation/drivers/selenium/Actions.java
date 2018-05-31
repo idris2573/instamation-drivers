@@ -1,6 +1,7 @@
 package com.instamation.drivers.selenium;
 
 import com.instamation.drivers.model.*;
+import com.instamation.drivers.repository.AccountRepository;
 import com.instamation.drivers.repository.FollowerRepository;
 import com.instamation.drivers.repository.PostRepository;
 import com.instamation.drivers.repository.ProfileRepository;
@@ -68,7 +69,7 @@ public class Actions {
     }
 
 
-    public static void updateProfileDetails(Driver driver, Account account) throws Exception{
+    public static void updateProfileDetails(Driver driver, Account account, AccountRepository accountRepository) throws Exception{
         // select profile tab
 
         try{
@@ -90,6 +91,7 @@ public class Actions {
             account.setFollowers(followers);
             account.setFollowing(following);
             account.setProfilePic(image);
+            accountRepository.save(account);
             logger.info(account.getUsername() + " update profile details");
         }catch (Exception e){
             logger.info(account.getUsername() + " failed to update profile details");
@@ -280,9 +282,7 @@ public class Actions {
             driver.getDriver().get(postUrl);
             scroll(200, js);
 
-            try {
-                driver.getDriver().findElement(By.cssSelector("a._nzn1h")).click();
-            }catch (Exception e){
+            if(!clickLinkContains(driver, " like")){
                 continue;
             }
 
@@ -497,6 +497,23 @@ public class Actions {
         }
     }
 
+    public static boolean clickLinkContains(Driver driver, String linkText){
+        try {
+            for (int i = 0; i < driver.getDriver().findElements(By.tagName("a")).size(); i++) {
+                if (driver.getDriver().findElements(By.tagName("a")).get(i).getText().contains(linkText)) {
+                    try {
+                        driver.getDriver().findElements(By.tagName("a")).get(i).click();
+                    } catch (StaleElementReferenceException ex) {
+                        driver.getDriver().findElements(By.tagName("a")).get(i).click();
+                    }
+                    return true;
+                }
+            }
+        }catch (Exception e){}
+
+        return false;
+    }
+
     public static boolean doesButtonExist(Driver driver, String buttonText){
         for(int i = 0; i < driver.getDriver().findElements(By.tagName("button")).size(); i++) {
             try {
@@ -563,25 +580,34 @@ public class Actions {
             image = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > header > div > div > div > button > img")).getAttribute("src");
             return image;
         }
+
+        if(!driver.getDriver().findElements(By.tagName("header")).isEmpty()){
+            image = driver.getDriver().findElement(By.tagName("header")).findElement(By.tagName("img")).getAttribute("src");
+            return image;
+        }
         return null;
     }
 
     private static List<String> getPostUrls(Driver driver){
-        List<WebElement> posts = driver.getDriver().findElements(By.cssSelector("div._mck9w._gvoze._tn0ps"));
+        List<WebElement> posts = driver.getDriver().findElements(By.tagName("a"));
         List<String> postUrls = new ArrayList<>();
         for(WebElement post : posts){
-            postUrls.add(post.findElement(By.tagName("a")).getAttribute("href"));
+            String postUrl = post.getAttribute("href");
+            if(postUrl.startsWith("https://www.instagram.com/p/")){
+                postUrls.add(postUrl);
+            }
         }
         return postUrls;
     }
 
     private static Set<String> getProfileUsernames(Driver driver){
         List<WebElement> profiles = new ArrayList<>();
-        try{
-            profiles = driver.getDriver().findElements(By.cssSelector("a._2g7d5.notranslate._o5iw8"));
-        }catch (Exception e){
-            logger.info(driver.getAccount() + " error on getting profile usernames");
+        profiles = driver.getDriver().findElements(By.cssSelector("a._2g7d5.notranslate._o5iw8"));
+
+        if(profiles.isEmpty()){
+            profiles = driver.getDriver().findElements(By.cssSelector("div.FsskP"));
         }
+
         Set<String> profileUsernames = new HashSet<>();
         for(WebElement profile : profiles){
             profileUsernames.add(profile.getText());

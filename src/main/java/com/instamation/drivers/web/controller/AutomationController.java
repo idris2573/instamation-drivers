@@ -326,7 +326,7 @@ public class AutomationController {
         logger.info(account.getUsername() + " updating stats (automation)");
 
         try{
-            Actions.updateProfileDetails(driver, account);
+            Actions.updateProfileDetails(driver, account, accountRepository);
         }catch (Exception e){
             logger.info(account.getUsername() + " failed to updateProfileDetails");
         }
