@@ -11,6 +11,7 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, L
     List<Account> findByRunningAndEnabled(boolean running, boolean enabled);
     List<Account> findByEnabled(boolean enabled);
     List<Account> findByUser(User user);
+    List<Account> findByUsernameOrderByIdAsc(String username);
     Account findByUsername(String username);
     Account findByUsernameAndUser(String username, User user);
 }

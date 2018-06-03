@@ -69,6 +69,8 @@ public class ScheduleController {
         for(Driver driver : deleteDrivers){
             driverList.remove(driver);
         }
+
+        driverList.deleteUnusedPids();
     }
 
     @Scheduled(cron="0 15 */1 * * *", zone="Europe/London")

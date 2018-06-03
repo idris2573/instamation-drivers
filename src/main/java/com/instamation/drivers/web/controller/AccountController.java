@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:8081", "https://insta-mation.com"})
@@ -73,6 +74,10 @@ public class AccountController {
 
         // if a driver is null create a new driver.
         if(driver == null || driver.getDriver() == null) {
+
+            // get list of pids and save in array
+            List<String> pids = driverList.checkChromeProcessPIDList();
+
             // if proxy exists, give the driver the proxy.
             if (proxy != null) {
                 try {
@@ -88,6 +93,13 @@ public class AccountController {
                     logger.info(account.getUsername() + " crashed creating a new driver with NO proxy");
                     return new Response("login-fail");
                 }
+
+                // compare list of pids and remove all but new pids
+                List<String> accountPids = driverList.checkChromeProcessPIDList();
+                for(String pid : pids){
+                    accountPids.remove(pid);
+                }
+                driver.setPid(accountPids);
             }
         }
 
@@ -235,10 +247,15 @@ public class AccountController {
         Account account = accountRepository.findByUsername(username);
         Driver driver = driverList.get(account);
 
-        driver.getDriver().findElement(By.id("security_code")).clear();
-        driver.getDriver().findElement(By.id("security_code")).sendKeys(code);
+        try {
+            driver.getDriver().findElement(By.id("security_code")).clear();
+            driver.getDriver().findElement(By.id("security_code")).sendKeys(code);
 
-        Actions.clickButton(driver, "Submit");
+            Actions.clickButton(driver, "Submit");
+        }catch (Exception e){
+            logger.error(username + " failed to login at security code clear, send and click");
+            return new Response("login-fail");
+        }
 
         Thread.sleep(500);
         try {
@@ -284,9 +301,6 @@ public class AccountController {
     }
 
     private boolean loginSuccess(Driver driver, Account account) throws Exception{
-        // update profile details
-        Actions.updateProfileDetails(driver, account, accountRepository);
-
         if(!driverList.isDriverReady(driver)) {
             return false;
         }
@@ -298,6 +312,9 @@ public class AccountController {
         }catch (Exception e){
             return false;
         }
+
+        // update profile details
+        Actions.updateProfileDetails(driver, account, accountRepository);
 
         // create settings for the account and vice versa, setting has to be saved to the database first.
         if(account.getSetting() == null) {

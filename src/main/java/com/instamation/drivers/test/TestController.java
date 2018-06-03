@@ -6,13 +6,11 @@ import com.instamation.drivers.repository.ProxyRepository;
 import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
 import java.util.List;
 
 @RestController
@@ -79,5 +77,28 @@ public class TestController {
         driverList.save(driver2);
 
         return driver.equals(driver2);
+    }
+
+
+    @RequestMapping("/pid")
+    @ResponseBody
+    public boolean pid() throws Exception {
+
+        Account account = new Account();
+        account.setId(1L);
+        account.setUsername("TeddyRae");
+
+        List<String> pids = driverList.checkChromeProcessPIDList();
+        // get list of pids and save in array
+        Driver driver = new Driver(account);
+        List<String> accountPids = driverList.checkChromeProcessPIDList();
+        for(String pid : pids){
+            accountPids.remove(pid);
+        }
+        driver.setPid(accountPids);
+        driver.setPid(null);
+
+
+        return true;
     }
 }

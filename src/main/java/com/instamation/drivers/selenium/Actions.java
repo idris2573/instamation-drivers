@@ -295,7 +295,7 @@ public class Actions {
             }
 
             profileUsernames = getProfileUsernames(driver);
-            if(profileUsernames.isEmpty()){
+            if(profileUsernames == null || profileUsernames.isEmpty()){
                 continue;
             }
 
@@ -515,16 +515,20 @@ public class Actions {
     }
 
     public static boolean doesButtonExist(Driver driver, String buttonText){
-        for(int i = 0; i < driver.getDriver().findElements(By.tagName("button")).size(); i++) {
-            try {
-                if(driver.getDriver().findElements(By.tagName("button")).get(i).getText().equalsIgnoreCase(buttonText)) {
-                    return true;
-                }
-            }catch (StaleElementReferenceException ex){
-                if(driver.getDriver().findElements(By.tagName("button")).get(i).getText().equalsIgnoreCase(buttonText)) {
-                    return true;
+        try {
+            for (int i = 0; i < driver.getDriver().findElements(By.tagName("button")).size(); i++) {
+                try {
+                    if (driver.getDriver().findElements(By.tagName("button")).get(i).getText().equalsIgnoreCase(buttonText)) {
+                        return true;
+                    }
+                } catch (StaleElementReferenceException ex) {
+                    if (driver.getDriver().findElements(By.tagName("button")).get(i).getText().equalsIgnoreCase(buttonText)) {
+                        return true;
+                    }
                 }
             }
+        }catch (Exception e){
+            logger.error(driver.getAccount() + " doesButtonExist errored || buttonText: " + buttonText);
         }
 
         return false;
@@ -602,17 +606,23 @@ public class Actions {
 
     private static Set<String> getProfileUsernames(Driver driver){
         List<WebElement> profiles = new ArrayList<>();
-        profiles = driver.getDriver().findElements(By.cssSelector("a._2g7d5.notranslate._o5iw8"));
+        try {
+            profiles = driver.getDriver().findElements(By.cssSelector("a._2g7d5.notranslate._o5iw8"));
 
-        if(profiles.isEmpty()){
-            profiles = driver.getDriver().findElements(By.cssSelector("div.FsskP"));
+            if (profiles.isEmpty()) {
+                profiles = driver.getDriver().findElements(By.cssSelector("div.FsskP"));
+            }
+
+            Set<String> profileUsernames = new HashSet<>();
+            for (WebElement profile : profiles) {
+                profileUsernames.add(profile.getText());
+            }
+            return profileUsernames;
+        }catch (Exception e){
+            logger.error(driver.getAccount() + " errored at getProfileUsernames");
         }
 
-        Set<String> profileUsernames = new HashSet<>();
-        for(WebElement profile : profiles){
-            profileUsernames.add(profile.getText());
-        }
-        return profileUsernames;
+        return null;
     }
 
     private static void saveProfileUsernames(ProfileRepository profileRepository, Set<String> profileUsernames, String parentProfile, Account account){

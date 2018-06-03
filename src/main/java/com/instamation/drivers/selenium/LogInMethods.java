@@ -101,7 +101,11 @@ public class LogInMethods {
             Thread.sleep(1000);
         }catch (Exception e){}
 
-        if (Actions.doesButtonExist(driver, "Log In")) {
+        try {
+            if (Actions.doesButtonExist(driver, "Log In")) {
+                return false;
+            }
+        }catch (Exception e){
             return false;
         }
 

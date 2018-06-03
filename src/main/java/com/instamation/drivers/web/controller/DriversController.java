@@ -166,7 +166,14 @@ public class DriversController {
 
     @GetMapping(value = "/loggedin/{username}")
     public Boolean isLoggedIn(@PathVariable String username) {
-        Account account = accountRepository.findByUsername(username);
+        List<Account> accounts = accountRepository.findByUsernameOrderByIdAsc(username);
+
+        if(accounts.size() > 1){
+            logger.error("REQUEST: Is " + username + " logged into a driver. || RESPONSE: HAS MULTIPLE USERS");
+        }
+
+        Account account = accounts.get(0);
+
         if(account == null){
             logger.info("REQUEST: Is " + username + " logged into a driver. || RESPONSE: " + false);
             return false;
@@ -219,8 +226,6 @@ public class DriversController {
         logger.info("REQUEST: Go to page \"" + url + "\" by " + username + " || RESPONSE: " + false + " (there is no driver)");
         return false;
     }
-
-
 
 
 }

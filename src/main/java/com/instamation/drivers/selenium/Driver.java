@@ -10,6 +10,7 @@ import java.io.File;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Driver {
@@ -17,6 +18,7 @@ public class Driver {
 
     private WebDriver driver;
     private Account account;
+    private List<String> pid;
 
     public Driver(Account account) throws Exception {
         this.account = account;
@@ -120,6 +122,12 @@ public class Driver {
         logger.info(account.getUsername() + " driver has been closed");
         driver.close();
         driver.quit();
+
+        if (pid == null || pid.isEmpty()) {
+            return;
+        }
+
+        deletePids();
     }
 
     public boolean isClosed(){
@@ -150,5 +158,40 @@ public class Driver {
             return true;
         }
         return false;
+    }
+
+    public List<String> getPid() {
+        return pid;
+    }
+
+    public void setPid(List<String> pids) {
+        if (this.pid == null || this.pid.isEmpty()) {
+            this.pid = pids;
+            return;
+        }
+
+        deletePids();
+
+        for(String pid: pids){
+            logger.info(account + "'s adding new PID " + pid);
+        }
+
+        this.pid = pids;
+    }
+
+    private void deletePids(){
+        for(String pid : pid){
+            try{
+                String cmd;
+                if(System.getProperty("os.name").equals("Linux")) {
+                    cmd = "kill " + pid;
+                } else {
+                    cmd = "taskkill /F /PID " + pid;
+                }
+                Runtime.getRuntime().exec(cmd);
+                logger.info(account + "'s driver killing PID " + pid);
+            }catch (Exception e){}
+        }
+
     }
 }
