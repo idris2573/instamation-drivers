@@ -95,8 +95,8 @@ public class TestController {
         for(String pid : pids){
             accountPids.remove(pid);
         }
-        driver.setPid(accountPids);
-        driver.setPid(null);
+        driver.setPids(accountPids);
+        driver.setPids(null);
 
 
         return true;

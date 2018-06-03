@@ -1,16 +1,13 @@
 package com.instamation.drivers.selenium;
 
 import com.instamation.drivers.model.Account;
-import com.instamation.drivers.web.controller.ScheduleController;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class DriverList {
@@ -141,9 +138,8 @@ public class DriverList {
 
                 if(System.getProperty("os.name").equals("Linux")) {
                     if(line.contains("chrome")) {
-                        info = line.split("\\?");
+                        info = line.split(" ");
                         processlist.add(info[0].replace(" ", ""));
-                        System.out.println(info[0].replace(" ", ""));
                     }
                 } else {
                     if(line.contains("chrome.exe")){
@@ -184,7 +180,7 @@ public class DriverList {
     private List<String> getAllPids(){
         List<String> allPids = new ArrayList<>();
         for(Driver driver : drivers){
-            allPids.addAll(driver.getPid());
+            allPids.addAll(driver.getPids());
         }
         return allPids;
     }

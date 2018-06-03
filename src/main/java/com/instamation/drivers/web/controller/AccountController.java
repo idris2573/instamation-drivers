@@ -99,7 +99,7 @@ public class AccountController {
                 for(String pid : pids){
                     accountPids.remove(pid);
                 }
-                driver.setPid(accountPids);
+                driver.setPids(accountPids);
             }
         }
 

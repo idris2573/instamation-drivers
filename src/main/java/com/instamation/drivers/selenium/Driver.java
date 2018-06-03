@@ -18,7 +18,7 @@ public class Driver {
 
     private WebDriver driver;
     private Account account;
-    private List<String> pid;
+    private List<String> pids;
 
     public Driver(Account account) throws Exception {
         this.account = account;
@@ -123,7 +123,7 @@ public class Driver {
         driver.close();
         driver.quit();
 
-        if (pid == null || pid.isEmpty()) {
+        if (pids == null || pids.isEmpty()) {
             return;
         }
 
@@ -160,27 +160,31 @@ public class Driver {
         return false;
     }
 
-    public List<String> getPid() {
-        return pid;
+    public List<String> getPids() {
+        return pids;
     }
 
-    public void setPid(List<String> pids) {
-        if (this.pid == null || this.pid.isEmpty()) {
-            this.pid = pids;
+    public void setPids(List<String> pids) {
+
+        if(pids == null || pids.isEmpty()){
+            return;
+        }
+        for(String pid: pids){
+            logger.info(account.getUsername() + "'s adding new PID " + pid);
+        }
+
+        if (this.pids == null || this.pids.isEmpty()) {
+            this.pids = pids;
             return;
         }
 
         deletePids();
 
-        for(String pid: pids){
-            logger.info(account + "'s adding new PID " + pid);
-        }
-
-        this.pid = pids;
+        this.pids = pids;
     }
 
     private void deletePids(){
-        for(String pid : pid){
+        for(String pid : pids){
             try{
                 String cmd;
                 if(System.getProperty("os.name").equals("Linux")) {
@@ -189,7 +193,7 @@ public class Driver {
                     cmd = "taskkill /F /PID " + pid;
                 }
                 Runtime.getRuntime().exec(cmd);
-                logger.info(account + "'s driver killing PID " + pid);
+                logger.info(account.getUsername() + "'s driver killing PID " + pid);
             }catch (Exception e){}
         }
 
