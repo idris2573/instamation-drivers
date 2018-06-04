@@ -77,10 +77,12 @@ public class ScheduleController {
     public void checkLoggedIn() throws Exception{
         logger.info("Checking logged in drivers...");
         for(Driver driver : driverList.getDrivers()){
-            if(!driver.getAccount().isAutomationLock() && LogInMethods.isLoggedIn(driver)){
-                driver.getAccount().setLoggedIn(true);
-                accountRepository.save(driver.getAccount());
-                logger.info("setting " + driver.getAccount().getUsername() + " as logged in");
+            if(!driver.getAccount().isAutomationLock()){
+                if(LogInMethods.isLoggedIn(driver)) {
+                    driver.getAccount().setLoggedIn(true);
+                    accountRepository.save(driver.getAccount());
+                    logger.info("setting " + driver.getAccount().getUsername() + " as logged in");
+                }
             }
         }
     }

@@ -121,6 +121,7 @@ public class DriverList {
     public List<String> checkChromeProcessPIDList(){
         String line;
         String[] info;
+        String pid;
         List<String> processlist = new ArrayList<>();
 
         try {
@@ -138,8 +139,10 @@ public class DriverList {
 
                 if(System.getProperty("os.name").equals("Linux")) {
                     if(line.contains("chrome")) {
-                        info = line.split(" ");
-                        processlist.add(info[0].replace(" ", ""));
+                        pid = line.substring(0, line.indexOf(" "));
+                        if(!pid.isEmpty()) {
+                            processlist.add(pid.replace(" ", ""));
+                        }
                     }
                 } else {
                     if(line.contains("chrome.exe")){
@@ -180,7 +183,9 @@ public class DriverList {
     private List<String> getAllPids(){
         List<String> allPids = new ArrayList<>();
         for(Driver driver : drivers){
-            allPids.addAll(driver.getPids());
+            if(driver.getPids() != null) {
+                allPids.addAll(driver.getPids());
+            }
         }
         return allPids;
     }
