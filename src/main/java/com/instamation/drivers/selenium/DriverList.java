@@ -118,50 +118,8 @@ public class DriverList {
         return true;
     }
 
-    public List<String> checkChromeProcessPIDList(){
-        String line;
-        String[] info;
-        String pid;
-        List<String> processlist = new ArrayList<>();
-
-        try {
-            Process p;
-
-            if(System.getProperty("os.name").equals("Linux")) {
-                p = Runtime.getRuntime().exec("ps -e");
-            } else {
-                p = Runtime.getRuntime().exec(System.getenv("windir") +"\\system32\\"+"tasklist.exe");
-
-            }
-
-            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = input.readLine()) != null) {
-
-                if(System.getProperty("os.name").equals("Linux")) {
-                    if(line.contains("chrome")) {
-                        pid = line.substring(0, line.indexOf(" "));
-                        if(!pid.isEmpty()) {
-                            processlist.add(pid.replace(" ", ""));
-                        }
-                    }
-                } else {
-                    if(line.contains("chrome.exe")){
-                        info = line.split("[ ]{2,}");
-                        processlist.add(info[1].split(" ")[0]);
-                    }
-                }
-
-            }
-            input.close();
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
-
-        return processlist;
-    }
-
     public void deleteUnusedPids(){
-        List<String> checkChromeProcessPIDList = checkChromeProcessPIDList();
+        List<String> checkChromeProcessPIDList = StaticMethods.checkChromeProcessPIDList();
         List<String> allPids = getAllPids();
 
         for(String pid : checkChromeProcessPIDList){
@@ -180,11 +138,13 @@ public class DriverList {
         }
     }
 
-    private List<String> getAllPids(){
+    public List<String> getAllPids(){
         List<String> allPids = new ArrayList<>();
         for(Driver driver : drivers){
             if(driver.getPids() != null) {
-                allPids.addAll(driver.getPids());
+                for(String pid : driver.getPids()){
+                    allPids.add(pid);
+                }
             }
         }
         return allPids;

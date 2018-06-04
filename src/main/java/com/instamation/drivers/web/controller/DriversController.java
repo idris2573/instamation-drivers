@@ -6,6 +6,7 @@ import com.instamation.drivers.repository.AccountRepository;
 import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
 import com.instamation.drivers.selenium.LogInMethods;
+import com.instamation.drivers.selenium.StaticMethods;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +101,28 @@ public class DriversController {
 
         logger.info("REQUEST: get account driver " + account.getUsername());
         return drivers;
+    }
+
+    @GetMapping(value = "/pids/{username}")
+    public Map<Account, List<String>> pids(@PathVariable String username){
+        Map<Account, List<String>> pids = new HashMap<>();
+
+        if(username.equalsIgnoreCase("all")){
+            for(Driver driver : driverList.getDrivers()){
+                pids.put(driver.getAccount(), driver.getPids());
+            }
+            logger.info("REQUEST: get all account drivers pids");
+        }else {
+            Account account = accountRepository.findByUsername(username);
+            pids.put(account, driverList.get(account).getPids());
+            logger.info("REQUEST: get account driver pids " + account.getUsername());
+        }
+        return pids;
+    }
+
+    @GetMapping(value = "/all-chrome-pids")
+    public List<String> allChromePids(){
+        return StaticMethods.checkChromeProcessPIDList();
     }
 
     @GetMapping(value = "/html/{username}")

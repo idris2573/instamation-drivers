@@ -5,6 +5,7 @@ import com.instamation.drivers.repository.AccountRepository;
 import com.instamation.drivers.repository.ProxyRepository;
 import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
+import com.instamation.drivers.selenium.StaticMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -88,10 +89,10 @@ public class TestController {
         account.setId(1L);
         account.setUsername("TeddyRae");
 
-        List<String> pids = driverList.checkChromeProcessPIDList();
+        List<String> pids = StaticMethods.checkChromeProcessPIDList();
         // get list of pids and save in array
         Driver driver = new Driver(account);
-        List<String> accountPids = driverList.checkChromeProcessPIDList();
+        List<String> accountPids = StaticMethods.checkChromeProcessPIDList();
         for(String pid : pids){
             accountPids.remove(pid);
         }

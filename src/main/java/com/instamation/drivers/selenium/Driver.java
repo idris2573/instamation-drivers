@@ -23,7 +23,19 @@ public class Driver {
     public Driver(Account account) throws Exception {
         this.account = account;
         logger.info(account.getUsername() + " has started up a new driver");
+
+        // get list of pids and save in array
+        List<String> allChromePids = StaticMethods.checkChromeProcessPIDList();
+
         driver = driver(false);
+
+        // compare list of pids and remove all but new pids
+        List<String> pids = StaticMethods.checkChromeProcessPIDList();
+        for(String pid : allChromePids){
+            pids.remove(pid);
+        }
+        this.pids = pids;
+
         driver.manage().window().setPosition(new Point(-500,0));
         driver.manage().window().setSize(new Dimension(374,650));
     }
@@ -31,7 +43,18 @@ public class Driver {
     public Driver(boolean headless, Account account) throws Exception {
         this.account = account;
         logger.info(account.getUsername() + " has started up a new driver");
+
+        // get list of pids and save in array
+        List<String> allChromePids = StaticMethods.checkChromeProcessPIDList();
+
         driver = driver(headless);
+
+        // compare list of pids and remove all but new pids
+        List<String> pids = StaticMethods.checkChromeProcessPIDList();
+        for(String pid : allChromePids){
+            pids.remove(pid);
+        }
+        this.pids = pids;
 
         driver.manage().window().setPosition(new Point(-500, 0));
         driver.manage().window().setSize(new Dimension(374, 650));
@@ -40,7 +63,18 @@ public class Driver {
     public Driver(boolean headless, String proxy, Account account) throws Exception {
         this.account = account;
         logger.info(account.getUsername() + " has started up a new driver");
+
+        // get list of pids and save in array
+        List<String> allChromePids = StaticMethods.checkChromeProcessPIDList();
+
         driver = driver(headless, proxy);
+
+        // compare list of pids and remove all but new pids
+        List<String> pids = StaticMethods.checkChromeProcessPIDList();
+        for(String pid : allChromePids){
+            pids.remove(pid);
+        }
+        this.pids = pids;
 
         driver.manage().window().setPosition(new Point(-500, 0));
         driver.manage().window().setSize(new Dimension(374, 650));
@@ -193,7 +227,7 @@ public class Driver {
                     cmd = "taskkill /F /PID " + pid;
                 }
                 Runtime.getRuntime().exec(cmd);
-                logger.info(account.getUsername() + "'s driver killing PID " + pid);
+//                logger.info(account.getUsername() + "'s driver killing PID " + pid);
             }catch (Exception e){}
         }
 

@@ -1,6 +1,9 @@
 package com.instamation.drivers.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "tickets")
@@ -29,6 +32,10 @@ public class Ticket {
     @Lob
     @Column(name = "message")
     private String message;
+
+    @Column(name = "date", nullable = false, updatable = false)
+    @CreationTimestamp
+    private Timestamp date;
 
     public Long getId() {
         return id;
@@ -72,5 +79,9 @@ public class Ticket {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Timestamp getDate() {
+        return date;
     }
 }

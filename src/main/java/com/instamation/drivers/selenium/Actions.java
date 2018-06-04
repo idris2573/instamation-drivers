@@ -70,23 +70,18 @@ public class Actions {
 
 
     public static void updateProfileDetails(Driver driver, Account account, AccountRepository accountRepository) throws Exception{
-        // select profile tab
 
         try{
             driver.getDriver().get("https://instagram.com/" + account.getUsername());
 
             Thread.sleep(600);
 
-            String username = driver.getDriver().findElement(By.tagName("h1")).getText();
-            //String bio = driver.getDriver().findElement(By.cssSelector("div._tb97a")).findElement(By.tagName("span")).getText().replaceAll("[^a-zA-Z0-9 ,-]","");
             String image = getImage(driver);
 
             int posts = getCount(driver, "posts");
             int followers = getCount(driver, "followers");
             int following = getCount(driver, "following");
 
-            account.setUsername(username);
-            //account.setBio(bio);
             account.setPostCount(posts);
             account.setFollowers(followers);
             account.setFollowing(following);
@@ -94,8 +89,8 @@ public class Actions {
             accountRepository.save(account);
             logger.info(account.getUsername() + " update profile details");
         }catch (Exception e){
-            logger.info(account.getUsername() + " failed to update profile details");
-            e.printStackTrace();
+            logger.error(account.getUsername() + " failed to update profile details");
+//            e.printStackTrace();
         }
     }
 

@@ -75,9 +75,6 @@ public class AccountController {
         // if a driver is null create a new driver.
         if(driver == null || driver.getDriver() == null) {
 
-            // get list of pids and save in array
-            List<String> pids = driverList.checkChromeProcessPIDList();
-
             // if proxy exists, give the driver the proxy.
             if (proxy != null) {
                 try {
@@ -94,12 +91,7 @@ public class AccountController {
                     return new Response("login-fail");
                 }
 
-                // compare list of pids and remove all but new pids
-                List<String> accountPids = driverList.checkChromeProcessPIDList();
-                for(String pid : pids){
-                    accountPids.remove(pid);
-                }
-                driver.setPids(accountPids);
+
             }
         }
 
