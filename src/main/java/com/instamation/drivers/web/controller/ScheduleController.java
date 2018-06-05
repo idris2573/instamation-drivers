@@ -77,7 +77,7 @@ public class ScheduleController {
     public void checkLoggedIn() throws Exception{
         logger.info("Checking logged in drivers...");
         for(Driver driver : driverList.getDrivers()){
-            if(!driver.getAccount().getRunning() && !driver.getAccount().isAutomationLock()){
+            if(!driver.getAccount().isLoggedIn() && !driver.getAccount().isAutomationLock()){
                 if(LogInMethods.isLoggedIn(driver)) {
                     driver.getAccount().setLoggedIn(true);
                     accountRepository.save(driver.getAccount());
