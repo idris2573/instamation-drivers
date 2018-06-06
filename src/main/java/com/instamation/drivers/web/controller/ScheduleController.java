@@ -62,12 +62,14 @@ public class ScheduleController {
                     accountRepository.save(account);
                 }catch (Exception e){}
 
-                driver.close();
+                driver.setAccount(account);
+                driverList.save(driver);
                 deleteDrivers.add(driver);
             }
         }
 
         for(Driver driver : deleteDrivers){
+            driver.close();
             driverList.remove(driver);
         }
 
@@ -78,27 +80,36 @@ public class ScheduleController {
     @Scheduled(cron="0 15 */1 * * *", zone="Europe/London")
     public void checkLoggedIn(){
         logger.info("Checking logged in drivers...");
+        List<Driver> deleteDrivers = new ArrayList<>();
+
         for(Driver driver : driverList.getDrivers()){
             Account account = accountRepository.findByUsername(driver.getAccount().getUsername());
+
             if(!driver.getAccount().isAutomationLock()){
+
+                // check if driver is logged in
                 if(LogInMethods.isLoggedIn(driver)) {
                     account.setLoggedIn(true);
                     logger.info("setting " + driver.getAccount().getUsername() + " as logged in");
                 } else {
-                    List<Driver> deleteDrivers = new ArrayList<>();
-                    logger.info("setting " + driver.getAccount().getUsername() + " as logged out and removing driver");
-
                     account.setLoggedIn(false);
                     account.setRunning(false);
-
-                    driver.close();
                     deleteDrivers.add(driver);
+                    logger.info("setting " + driver.getAccount().getUsername() + " as logged out and removing driver");
                 }
+
                 driver.setAccount(account);
                 driverList.save(driver);
                 accountRepository.save(account);
             }
         }
+
+        for(Driver driver : deleteDrivers){
+            driver.close();
+            driverList.remove(driver);
+        }
+
+        driverList.deleteUnusedPids();
     }
 
     @RequestMapping("/update-stats")
