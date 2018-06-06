@@ -95,6 +95,7 @@ public class ScheduleController {
                     deleteDrivers.add(driver);
                 }
                 driver.setAccount(account);
+                driverList.save(driver);
                 accountRepository.save(account);
             }
         }
@@ -165,6 +166,8 @@ public class ScheduleController {
                 }
 
                 accountRepository.save(account);
+                driver.setAccount(account);
+                driverList.save(driver);
 
                 logger.info(account.getUsername() + " stats have been updated");
 
