@@ -147,11 +147,12 @@ public class AutomationController {
     }
 
     ///////////THE ACTUAL AUTOMATION/////////////////
-    public void automate(Account account){
+    public void automate(Account runAccount){
         Thread thread = new Thread() {
             @Override
             public void run() {
 
+                Account account = runAccount;
                 Setting setting = settingRepository.findByAccount(account);
                 Driver driver = driverList.get(account);
 
@@ -201,6 +202,7 @@ public class AutomationController {
                                 actionRepository.save(action);
 
                                 Thread.sleep(setting.actionSleepTime());
+                                account = accountRepository.findById(account.getId()).get();
                             }
                         }
 
@@ -231,6 +233,7 @@ public class AutomationController {
                             actionRepository.save(action);
 
                             Thread.sleep(setting.actionSleepTime());
+                            account = accountRepository.findById(account.getId()).get();
                         }
 
                         if (Actions.isPrivate(driver)) {
@@ -257,6 +260,7 @@ public class AutomationController {
                             actionRepository.save(action);
 
                             Thread.sleep(setting.actionSleepTime());
+                            account = accountRepository.findById(account.getId()).get();
                         }
 
                         // COMMENT
@@ -279,6 +283,7 @@ public class AutomationController {
                             actionRepository.save(action);
 
                             Thread.sleep(setting.actionSleepTime());
+                            account = accountRepository.findById(account.getId()).get();
                         }
 
                     } catch (Exception e) {
