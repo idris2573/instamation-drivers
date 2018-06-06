@@ -87,15 +87,30 @@ public class DriverList {
 
         for(Driver driverEntry : drivers){
             if(driver.equals(driverEntry)){
-                logger.info(driver.getAccount().getUsername() + " has been updated in DriverList");
                 drivers.remove(driverEntry);
                 drivers.add(driver);
+                logger.info(driver.getAccount().getUsername() + " has been updated in DriverList");
                 return;
             }
         }
 
         logger.info(driver.getAccount().getUsername() + " has been added to the DriverList");
         drivers.add(driver);
+    }
+
+    public void save(Account account){
+        if(account == null || (account.getId() == null && account.getUsername() == null)){
+            return;
+        }
+
+        for(Driver driver : drivers){
+            if(account.equals(driver.getAccount())){
+                driver.setAccount(account);
+                logger.info(account.getUsername() + " has been updated in DriverList");
+                return;
+            }
+        }
+
     }
 
     public List<Driver> getDrivers() {

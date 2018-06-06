@@ -56,14 +56,9 @@ public class ScheduleController {
             // driver is on unusal account enter code page
             if (!driverList.isDriverReady(driver) || !driver.getAccount().isEnabled() || driver.getDriver().getCurrentUrl().contains("com/challenge/") || Actions.isNotAvailable(driver)) {
                 Account account = accountRepository.findByUsername(driver.getAccount().getUsername());
-                try {
-                    account.setLoggedIn(false);
-                    account.setRunning(false);
-                    accountRepository.save(account);
-                }catch (Exception e){}
-
-                driver.setAccount(account);
-                driverList.save(driver);
+                account.setLoggedIn(false);
+                account.setRunning(false);
+                accountRepository.save(account);
                 deleteDrivers.add(driver);
             }
         }
@@ -71,8 +66,8 @@ public class ScheduleController {
         for(Driver driver : deleteDrivers){
             driver.close();
             driverList.remove(driver);
+            logger.info(driver.getAccount() + " driver has been removed");
         }
-
         driverList.deleteUnusedPids();
     }
 
@@ -98,8 +93,7 @@ public class ScheduleController {
                     logger.info("setting " + driver.getAccount().getUsername() + " as logged out and removing driver");
                 }
 
-                driver.setAccount(account);
-                driverList.save(driver);
+                driverList.save(account);
                 accountRepository.save(account);
             }
         }
@@ -108,7 +102,6 @@ public class ScheduleController {
             driver.close();
             driverList.remove(driver);
         }
-
         driverList.deleteUnusedPids();
     }
 
