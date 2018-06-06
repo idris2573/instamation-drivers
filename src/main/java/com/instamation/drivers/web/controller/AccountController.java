@@ -297,15 +297,18 @@ public class AccountController {
             return false;
         }
 
-            try {
+        driver.getDriver().get("https://www.instagram.com/" + account.getUsername());
+        if(Actions.isNotAvailable(driver)){
+            account.setAvailable(false);
+            accountRepository.save(account);
+            logger.error(account.getUsername() + " failed login because account is not available");
+            return false;
+        }
+
+
+        try {
             // like instamation
             driver.getDriver().get("https://www.instagram.com/instamation8/");
-            if(Actions.isNotAvailable(driver)){
-                account.setAvailable(false);
-                accountRepository.save(account);
-                logger.error(account.getUsername() + " failed login because account is not available");
-                return false;
-            }
             Actions.clickButton(driver, "Follow");
         }catch (Exception e){
             return false;

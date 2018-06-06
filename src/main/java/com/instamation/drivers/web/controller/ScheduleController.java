@@ -1,6 +1,7 @@
 package com.instamation.drivers.web.controller;
 
 import com.instamation.drivers.model.Account;
+import com.instamation.drivers.model.Action;
 import com.instamation.drivers.repository.*;
 import com.instamation.drivers.selenium.Actions;
 import com.instamation.drivers.selenium.Driver;
@@ -53,12 +54,12 @@ public class ScheduleController {
             // driver is not ready
             // drivers account is not enabled
             // driver is on unusal account enter code page
-            if (!driverList.isDriverReady(driver) || !driver.getAccount().isEnabled() || driver.getDriver().getCurrentUrl().contains("com/challenge/")) {
-
+            if (!driverList.isDriverReady(driver) || !driver.getAccount().isEnabled() || driver.getDriver().getCurrentUrl().contains("com/challenge/") || Actions.isNotAvailable(driver)) {
+                Account account = accountRepository.findByUsername(driver.getAccount().getUsername());
                 try {
-                    driver.getAccount().setLoggedIn(false);
-                    driver.getAccount().setRunning(false);
-                    accountRepository.save(driver.getAccount());
+                    account.setLoggedIn(false);
+                    account.setRunning(false);
+                    accountRepository.save(account);
                 }catch (Exception e){}
 
                 driver.close();
@@ -73,16 +74,28 @@ public class ScheduleController {
         driverList.deleteUnusedPids();
     }
 
+    @RequestMapping("/check-logged-in")
     @Scheduled(cron="0 15 */1 * * *", zone="Europe/London")
-    public void checkLoggedIn() throws Exception{
+    public void checkLoggedIn(){
         logger.info("Checking logged in drivers...");
         for(Driver driver : driverList.getDrivers()){
-            if(!driver.getAccount().isLoggedIn() && !driver.getAccount().isAutomationLock()){
+            Account account = accountRepository.findByUsername(driver.getAccount().getUsername());
+            if(!driver.getAccount().isAutomationLock()){
                 if(LogInMethods.isLoggedIn(driver)) {
-                    driver.getAccount().setLoggedIn(true);
-                    accountRepository.save(driver.getAccount());
+                    account.setLoggedIn(true);
                     logger.info("setting " + driver.getAccount().getUsername() + " as logged in");
+                } else {
+                    List<Driver> deleteDrivers = new ArrayList<>();
+                    logger.info("setting " + driver.getAccount().getUsername() + " as logged out and removing driver");
+
+                    account.setLoggedIn(false);
+                    account.setRunning(false);
+
+                    driver.close();
+                    deleteDrivers.add(driver);
                 }
+                driver.setAccount(account);
+                accountRepository.save(account);
             }
         }
     }
