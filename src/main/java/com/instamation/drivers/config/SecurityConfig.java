@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/drivers/**");
 
         web.ignoring().antMatchers("/automate/**");
+        web.ignoring().antMatchers("/update-stats");
 
 
     }

@@ -211,7 +211,7 @@ public class Setting {
 
         int buffer = new Random().nextInt(actionTimeInt) + 1;
 
-        return (actionTimeInt + buffer) * 1000;
+        return ((actionTimeInt + buffer) * 1000) / 2;
     }
 
     public Time workingPeriod() throws Exception{

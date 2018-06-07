@@ -724,13 +724,17 @@ public class Actions {
                         countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(1) > span > span")).getText();
                         break;
                     case "followers":
-                        countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(2) > a > span")).getText();
+                        if(!driver.getDriver().findElements(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(2) > a > span")).isEmpty()){
+                            countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(2) > a > span")).getText();
+                        }
                         if(countString == null){
                             countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(2) > span > span")).getText();
                         }
                         break;
                     case "following":
-                        countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(3) > a > span")).getText();
+                        if(!driver.getDriver().findElements(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(3) > a > span")).isEmpty()){
+                            countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(3) > a > span")).getText();
+                        }
                         if(countString == null){
                             countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(3) > span > span")).getText();
                         }
