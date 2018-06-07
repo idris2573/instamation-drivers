@@ -725,9 +725,15 @@ public class Actions {
                         break;
                     case "followers":
                         countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(2) > a > span")).getText();
+                        if(countString == null){
+                            countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(2) > span > span")).getText();
+                        }
                         break;
                     case "following":
                         countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(3) > a > span")).getText();
+                        if(countString == null){
+                            countString = driver.getDriver().findElement(By.cssSelector("#react-root > section > main > div > ul > li:nth-child(3) > span > span")).getText();
+                        }
                         break;
                     default:
                         ;

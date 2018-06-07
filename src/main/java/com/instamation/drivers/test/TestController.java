@@ -3,6 +3,7 @@ package com.instamation.drivers.test;
 import com.instamation.drivers.model.Account;
 import com.instamation.drivers.repository.AccountRepository;
 import com.instamation.drivers.repository.ProxyRepository;
+import com.instamation.drivers.selenium.Actions;
 import com.instamation.drivers.selenium.Driver;
 import com.instamation.drivers.selenium.DriverList;
 import com.instamation.drivers.selenium.StaticMethods;
@@ -99,7 +100,22 @@ public class TestController {
         driver.setPids(accountPids);
         driver.setPids(null);
 
+        return true;
+    }
+
+    @RequestMapping(value = "/stats")
+    public boolean stats() throws Exception{
+        Account account = new Account();
+        account.setUsername("Idris");
+        account.setId(1L);
+        Driver driver = new Driver(account);
+        driverList.save(driver);
+
+        driver.getDriver().get("https://instagram.com/Sadaf_islam_official");
+        Actions.updateProfileDetails(driver,account,accountRepository);
+
 
         return true;
     }
+
 }
