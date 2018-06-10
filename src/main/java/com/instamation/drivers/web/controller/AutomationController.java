@@ -209,6 +209,8 @@ public class AutomationController {
                         driver.getDriver().get("https://instagram.com/" + profile.getUsername());
 
                         if(Actions.isNotAvailable(driver)){
+                            profile.setUnfollowed(true);
+                            profileRepository.save(profile);
                             continue;
                         }
 

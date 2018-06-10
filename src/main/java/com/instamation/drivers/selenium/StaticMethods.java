@@ -28,11 +28,10 @@ public class StaticMethods {
 
                 if(System.getProperty("os.name").equals("Linux")) {
                     if(line.contains("chrome")) {
-
-                        line = line.substring(1);
-                        pid = line.substring(0, line.indexOf(" "));
+                        pid = line.substring(0, line.indexOf(" pts"));
+                        pid = pid.replace(" ", "");
                         if(!pid.isEmpty()) {
-                            processlist.add(pid.replace(" ", ""));
+                            processlist.add(pid);
                         }
                     }
                 } else {
