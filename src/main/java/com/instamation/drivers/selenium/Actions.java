@@ -34,12 +34,11 @@ public class Actions {
             return "success";
         }
 
-        clickButton(driver, "Log In");
         Thread.sleep(1000);
 
         LogInMethods.inputLoginInfo(driver, account);
 
-        clickButton(driver, "Log in");
+        clickLogin(driver);
         Thread.sleep(3000);
 
         // check if wrong credentials
@@ -666,6 +665,23 @@ public class Actions {
         return false;
     }
 
+    private static void clickLogin(Driver driver){
+        boolean worked = false;
+        do {
+            try {
+                JavascriptExecutor js = ((JavascriptExecutor) driver.getDriver());
+                js.executeScript("var script = document.createElement('script');script.src = \"https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js\";document.getElementsByTagName('head')[0].appendChild(script);");
+
+                js.executeScript(
+                        "$(\"button\").each(function(){\n" +
+                                "\tif($(this).text() == \"Log in\"){\n" +
+                                "\t\t$(this).click();\n" +
+                                "\t}\n" +
+                                "});");
+                worked = true;
+            } catch (Exception e) {}
+        } while (!worked);
+    }
 
 
     //    public static void login(Driver driver, Account account) throws Exception{

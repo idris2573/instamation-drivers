@@ -99,6 +99,17 @@ public class Account {
     @Column(name = "available")
     private boolean available = true;
 
+    @Column(name = "tutorial")
+    private boolean tutorial = true;
+
+    public boolean isTutorial() {
+        return tutorial;
+    }
+
+    public void setTutorial(boolean tutorial) {
+        this.tutorial = tutorial;
+    }
+
     public Long getId() {
         return id;
     }
