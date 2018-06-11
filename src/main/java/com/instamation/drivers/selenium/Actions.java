@@ -26,7 +26,6 @@ public class Actions {
 
     public static String login(Driver driver, Account account) throws Exception{
         logger.info(account.getUsername() + " is attempting to log in");
-        Thread.sleep(1000);
 
         // if already logged in
         if (LogInMethods.isLoggedIn(driver)) {
@@ -38,7 +37,7 @@ public class Actions {
 
         LogInMethods.inputLoginInfo(driver, account);
 
-        clickLogin(driver);
+        clickButtonJs(driver, "Log in");
         Thread.sleep(3000);
 
         // check if wrong credentials
@@ -58,7 +57,7 @@ public class Actions {
         }catch (Exception e){}
 
         // add your phone number check
-        clickButton(driver, "Close");
+        clickButtonJs(driver, "Close");
 
         clickNotNow(driver);
         isSaveLoginInfo(driver);
@@ -147,17 +146,17 @@ public class Actions {
 
     ////////////////////////////////////////////////PROFILE AUTOMATION METHODS////////////////////////////////////////////////////////////
 
-    public static void followProfile(Driver driver, Profile profile){
+    public static void followProfile(Driver driver, Profile profile) throws Exception{
 //        driver.getDriver().get("https://instagram.com/" + profile.getUsername());
 
-        clickButton(driver, "Follow");
+        clickButtonJs(driver, "Follow");
 
     }
 
-    public static void unfollowProfile(Driver driver, Profile profile){
+    public static void unfollowProfile(Driver driver, Profile profile) throws Exception{
 //        driver.getDriver().get("https://instagram.com/" + profile.getUsername());
-        clickButton(driver, "Following");
-        clickButton(driver, "Requested");
+        clickButtonJs(driver, "Following");
+        clickButtonJs(driver, "Requested");
     }
 
     public static void likeProfilePosts(Driver driver, Profile profile, Setting setting){
@@ -188,7 +187,7 @@ public class Actions {
             clickComment(driver);
             try {
                 driver.getDriver().findElement(By.tagName("textarea")).sendKeys(comment.decodeStringUrl());
-                clickButton(driver, "Post");
+                clickButtonJs(driver, "Post");
             }catch (Exception e){}
         }
 
@@ -339,7 +338,7 @@ public class Actions {
         do{
             try {
                 Thread.sleep(500);
-                clickButton(driver, "Next");
+                clickButtonJs(driver, "Next");
                 break;
             } catch (Exception e) {
                 attempts++;
@@ -355,7 +354,7 @@ public class Actions {
         driver.getDriver().findElement(By.tagName("textarea")).sendKeys("@" + account.getUsername() + " " +
                 caption.getCaption() + " | Tag your friends" + hashtagString);
 
-        clickButton(driver, "Share");
+        clickButtonJs(driver, "Share");
 
         new File(filepath).delete();
 
@@ -465,7 +464,7 @@ public class Actions {
     }
 
 
-    public static void clickButton(Driver driver, String buttonText){
+    public static boolean clickButton(Driver driver, String buttonText){
         for(int i = 0; i < driver.getDriver().findElements(By.tagName("button")).size(); i++) {
             if(driver.getDriver().findElements(By.tagName("button")).get(i).getText().equalsIgnoreCase(buttonText)){
                 try {
@@ -476,6 +475,55 @@ public class Actions {
                 break;
             }
         }
+
+
+        return false;
+    }
+
+    public static boolean clickButtonJs(Driver driver, String text) throws Exception{
+        int attempts = 0;
+        do {
+            try {
+                JavascriptExecutor js = ((JavascriptExecutor) driver.getDriver());
+                js.executeScript("var script = document.createElement('script');script.src = \"https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js\";document.getElementsByTagName('head')[0].appendChild(script);");
+
+                js.executeScript(
+                        "$(\"button\").each(function(){\n" +
+                                "\tif($(this).text() == \"" + text + "\"){\n" +
+                                "\t\t$(this).click();\n" +
+                                "\t}\n" +
+                                "});");
+                attempts++;
+                return true;
+            } catch (Exception e) {
+                Thread.sleep(500);
+            }
+        } while (attempts < 5);
+
+        return false;
+    }
+
+    public static boolean clickLinkJs(Driver driver, String text) throws Exception{
+        int attempts = 0;
+        do {
+            try {
+                JavascriptExecutor js = ((JavascriptExecutor) driver.getDriver());
+                js.executeScript("var script = document.createElement('script');script.src = \"https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js\";document.getElementsByTagName('head')[0].appendChild(script);");
+
+                js.executeScript(
+                        "$(\"a\").each(function(){\n" +
+                                "\tif($(this).text() == \"" + text + "\"){\n" +
+                                "\t\t$(this)[0].click();\n" +
+                                "\t}\n" +
+                                "});");
+                attempts++;
+                return true;
+            } catch (Exception e) {
+                Thread.sleep(500);
+            }
+        } while (attempts < 5);
+
+        return false;
     }
 
     public static void clickLink(Driver driver, String linkText){
@@ -657,39 +705,20 @@ public class Actions {
     }
 
 
-    private static boolean isSaveLoginInfo(Driver driver){
+    private static boolean isSaveLoginInfo(Driver driver) throws Exception{
         if (driver.getDriver().findElement(By.tagName("body")).getText().contains("Save Your Login Info?")) {
-            clickButton(driver, "Save Info");
+            clickButtonJs(driver, "Save Info");
             return true;
         }
         return false;
     }
-
-    private static void clickLogin(Driver driver){
-        boolean worked = false;
-        do {
-            try {
-                JavascriptExecutor js = ((JavascriptExecutor) driver.getDriver());
-                js.executeScript("var script = document.createElement('script');script.src = \"https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js\";document.getElementsByTagName('head')[0].appendChild(script);");
-
-                js.executeScript(
-                        "$(\"button\").each(function(){\n" +
-                                "\tif($(this).text() == \"Log in\"){\n" +
-                                "\t\t$(this).click();\n" +
-                                "\t}\n" +
-                                "});");
-                worked = true;
-            } catch (Exception e) {}
-        } while (!worked);
-    }
-
 
     //    public static void login(Driver driver, Account account) throws Exception{
 //        logger.info(account.getUsername() + " is attempting to log in");
 //        driver.getDriver().get("https://www.instagram.com/accounts/login/");
 //
 //        Thread.sleep(1000);
-//        clickLogin(driver);
+//        clickButtonJs(driver);
 //        Thread.sleep(1000);
 //        driver.getDriver().findElement(By.name("username")).sendKeys(account.getUsername());
 //        driver.getDriver().findElement(By.name("password")).sendKeys(account.getPassword());

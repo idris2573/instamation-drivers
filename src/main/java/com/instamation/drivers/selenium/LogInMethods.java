@@ -98,7 +98,7 @@ public class LogInMethods {
         }
 
         try{
-            Thread.sleep(1000);
+            Thread.sleep(4000);
         }catch (Exception e){}
 
         try {

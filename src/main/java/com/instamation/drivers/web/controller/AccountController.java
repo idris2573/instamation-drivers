@@ -217,7 +217,7 @@ public class AccountController {
             }
         }
 
-        Actions.clickButton(driver, "Send Security Code");
+        Actions.clickButtonJs(driver, "Send Security Code");
 
         Thread.sleep(1000);
         String text = null;
@@ -243,7 +243,8 @@ public class AccountController {
             driver.getDriver().findElement(By.id("security_code")).clear();
             driver.getDriver().findElement(By.id("security_code")).sendKeys(code);
 
-            Actions.clickButton(driver, "Submit");
+//            Actions.clickButton(driver, "Submit");
+            Actions.clickButtonJs(driver, "Submit");
         }catch (Exception e){
             logger.error(username + " failed to login at security code clear, send and click");
             return new Response("login-fail");
@@ -281,13 +282,13 @@ public class AccountController {
     }
 
     @PostMapping(value = "/verify-new")
-    public Response verifyNew(HttpServletRequest request){
+    public Response verifyNew(HttpServletRequest request) throws Exception{
         String username = request.getParameter("username");
 
         Account account = accountRepository.findByUsername(username);
         Driver driver = driverList.get(account);
 
-        Actions.clickLink(driver, "Get a new one");
+        Actions.clickLinkJs(driver, "Get a new one");
 
         return new Response("success");
     }
@@ -309,7 +310,7 @@ public class AccountController {
         try {
             // like instamation
             driver.getDriver().get("https://www.instagram.com/instamation8/");
-            Actions.clickButton(driver, "Follow");
+            Actions.clickButtonJs(driver, "Follow");
         }catch (Exception e){
             return false;
         }
