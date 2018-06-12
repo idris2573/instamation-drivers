@@ -51,11 +51,15 @@ public class ScheduleController {
         List<Driver> deleteDrivers = new ArrayList<>();
         for(Driver driver : driverList.getDrivers()){
 
+            Account account = accountRepository.findByUsername(driver.getAccount().getUsername());
+            if(account == null || account.isAutomationLock()){
+                continue;
+            }
+
             // driver is not ready
             // drivers account is not enabled
             // driver is on unusal account enter code page
             if (!driverList.isDriverReady(driver) || !driver.getAccount().isEnabled() || driver.getDriver().getCurrentUrl().contains("com/challenge/") || Actions.isNotAvailable(driver)) {
-                Account account = accountRepository.findByUsername(driver.getAccount().getUsername());
                 account.setLoggedIn(false);
                 account.setRunning(false);
                 accountRepository.save(account);
@@ -75,7 +79,6 @@ public class ScheduleController {
     @Scheduled(cron="0 15 */1 * * *", zone="Europe/London")
     public void checkLoggedIn(){
         logger.info("Checking logged in drivers...");
-        List<Driver> deleteDrivers = new ArrayList<>();
 
         for(Driver driver : driverList.getDrivers()){
             Account account = accountRepository.findByUsername(driver.getAccount().getUsername());
@@ -89,8 +92,7 @@ public class ScheduleController {
                 } else {
                     account.setLoggedIn(false);
                     account.setRunning(false);
-                    deleteDrivers.add(driver);
-                    logger.info("setting " + driver.getAccount().getUsername() + " as logged out and removing driver");
+                    logger.info("setting " + driver.getAccount().getUsername() + " as logged out");
                 }
 
                 driverList.save(account);
@@ -98,11 +100,7 @@ public class ScheduleController {
             }
         }
 
-        for(Driver driver : deleteDrivers){
-            driver.close();
-            driverList.remove(driver);
-        }
-        driverList.deleteUnusedPids();
+
     }
 
     @RequestMapping("/update-stats")
