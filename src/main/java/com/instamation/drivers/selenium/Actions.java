@@ -639,7 +639,7 @@ public class Actions {
         List<String> postUrls = new ArrayList<>();
         for(WebElement post : posts){
             String postUrl = post.getAttribute("href");
-            if(postUrl.startsWith("https://www.instagram.com/p/")){
+            if(postUrl != null && postUrl.startsWith("https://www.instagram.com/p/")){
                 postUrls.add(postUrl);
             }
         }

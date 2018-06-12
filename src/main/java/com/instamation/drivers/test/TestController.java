@@ -1,6 +1,8 @@
 package com.instamation.drivers.test;
 
 import com.instamation.drivers.model.Account;
+import com.instamation.drivers.model.Profile;
+import com.instamation.drivers.model.Setting;
 import com.instamation.drivers.repository.AccountRepository;
 import com.instamation.drivers.repository.ProxyRepository;
 import com.instamation.drivers.selenium.Actions;
@@ -115,6 +117,26 @@ public class TestController {
         Actions.updateProfileDetails(driver,account,accountRepository);
 
 
+        return true;
+    }
+
+   @RequestMapping(value = "/like")
+    public boolean like() throws Exception{
+        Account account = new Account();
+        account.setUsername("Idris");
+        account.setId(1L);
+        Driver driver = new Driver(account);
+
+        Profile profile = new Profile();
+        profile.setAccount(account);
+        profile.setUsername("memes");
+
+        Setting setting = new Setting();
+        setting.setLikesPerPage(2);
+        setting.setAccount(account);
+        account.setSetting(setting);
+
+        Actions.likeProfilePosts(driver, profile, setting);
         return true;
     }
 
