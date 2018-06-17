@@ -448,7 +448,7 @@ public class AutomationController {
 
                 profiles = profileRepository.findByAccountAndFollowingAndUnfollowed(account, false, false);
 
-                if (profiles != null && profiles.size() > 4000) {
+                if (profiles != null && profiles.size() > 10000) {
                     break;
                 }
             }

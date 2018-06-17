@@ -109,6 +109,14 @@ public class AccountController {
             return new Response("login-fail");
         }
 
+        if(response.equalsIgnoreCase("login-fail")){
+            driver.close();
+            if(driverList.contains(account)){
+                driverList.remove(account);
+            }
+            return new Response("login-fail");
+        }
+
         // user enters the wrong credentials
         if(response.equalsIgnoreCase("wrong-credentials")){
             // close drive and remove it from driver list if its already in the driver list.
@@ -204,17 +212,9 @@ public class AccountController {
 
         // click the recovery type
         if(type.equalsIgnoreCase("email")){
-            for (WebElement element : driver.getDriver().findElements(By.tagName("label"))) {
-                if(element.getText().contains("Email")){
-                    element.click();
-                }
-            }
+            Actions.clickElementJs(driver, "label", "Email");
         } else {
-            for (WebElement element : driver.getDriver().findElements(By.tagName("label"))) {
-                if(element.getText().contains("Phone")){
-                    element.click();
-                }
-            }
+            Actions.clickElementJs(driver, "label", "Phone");
         }
 
         Actions.clickButtonJs(driver, "Send Security Code");
@@ -243,7 +243,6 @@ public class AccountController {
             driver.getDriver().findElement(By.id("security_code")).clear();
             driver.getDriver().findElement(By.id("security_code")).sendKeys(code);
 
-//            Actions.clickButton(driver, "Submit");
             Actions.clickButtonJs(driver, "Submit");
         }catch (Exception e){
             logger.error(username + " failed to login at security code clear, send and click");
@@ -257,9 +256,19 @@ public class AccountController {
             }
         }catch (Exception e){}
 
+        String response = null;
+
         // check if actually logged in
         if(!LogInMethods.isLoggedIn(driver)) {
-            Actions.login(driver, account);
+            response = Actions.login(driver, account);
+        }
+
+        if(response == null || response.equalsIgnoreCase("login-fail")){
+            driver.close();
+            if(driverList.contains(account)){
+                driverList.remove(account);
+            }
+            return new Response("login-fail");
         }
 
         account.setLoggedIn(true);

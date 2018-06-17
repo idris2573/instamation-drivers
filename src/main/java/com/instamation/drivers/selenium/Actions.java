@@ -40,6 +40,12 @@ public class Actions {
         clickButtonJs(driver, "Log in");
         Thread.sleep(3000);
 
+        // failed login
+        if(driver.getDriver().getCurrentUrl().equalsIgnoreCase("https://www.instagram.com/accounts/login/")){
+            logger.info(account.getUsername() + " failed to log in");
+            return "login-fail";
+        }
+
         // check if wrong credentials
         if(LogInMethods.isWrongCredentials(driver)){
             logger.info(account.getUsername() + " failed to log in with the wrong credentials");
@@ -275,7 +281,7 @@ public class Actions {
             driver.getDriver().get(postUrl);
             scroll(200, js);
 
-            if(!clickLinkContains(driver, " like")){
+            if(!clickLinkContainsJs(driver, " like")){
                 continue;
             }
 
@@ -295,7 +301,7 @@ public class Actions {
             saveProfileUsernames(profileRepository, profileUsernames, profileSeed.getName(), account);
 
             profiles = profileRepository.findByAccount(account);
-            if(profiles != null && profiles.size() > 4000){
+            if(profiles != null && profiles.size() > 10000){
                 break;
             }
 
@@ -526,6 +532,29 @@ public class Actions {
         return false;
     }
 
+    public static boolean clickElementJs(Driver driver, String element, String text) throws Exception{
+        int attempts = 0;
+        do {
+            try {
+                JavascriptExecutor js = ((JavascriptExecutor) driver.getDriver());
+                js.executeScript("var script = document.createElement('script');script.src = \"https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js\";document.getElementsByTagName('head')[0].appendChild(script);");
+
+                js.executeScript(
+                        "$(\"" + element + "\").each(function(){\n" +
+                                "\tif($(this).text().includes(\"" + text + "\")){\n" +
+                                "\t\t$(this).click();\n" +
+                                "\t}\n" +
+                                "});");
+                attempts++;
+                return true;
+            } catch (Exception e) {
+                Thread.sleep(500);
+            }
+        } while (attempts < 5);
+
+        return false;
+    }
+
     public static void clickLink(Driver driver, String linkText){
         for(int i = 0; i < driver.getDriver().findElements(By.tagName("a")).size(); i++) {
             if(driver.getDriver().findElements(By.tagName("a")).get(i).getText().equalsIgnoreCase(linkText)){
@@ -553,6 +582,30 @@ public class Actions {
             }
         }catch (Exception e){}
 
+        return false;
+    }
+
+    public static boolean clickLinkContainsJs(Driver driver, String text) throws Exception{
+        int attempts = 0;
+        do {
+            try {
+                JavascriptExecutor js = ((JavascriptExecutor) driver.getDriver());
+                js.executeScript("var script = document.createElement('script');script.src = \"https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js\";document.getElementsByTagName('head')[0].appendChild(script);");
+
+                js.executeScript(
+                        "$(\"a\").each(function(){\n" +
+                                "\tif($(this).text().includes(\"" + text + "\")){\n" +
+                                "\t\t$(this).click();\n" +
+                                "\t}\n" +
+                                "});");
+                attempts++;
+                return true;
+            } catch (Exception e) {
+                Thread.sleep(500);
+            }
+        } while (attempts < 5);
+
+        clickLinkContains(driver, text);
         return false;
     }
 

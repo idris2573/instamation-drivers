@@ -56,10 +56,12 @@ public class LogInMethods {
     public static String getUnusualAttemptRecoveryType(Driver driver){
         try {
 
+            String email = null;
+            String phone = null;
             String body = driver.getDriver().findElement(By.tagName("body")).getText();
+
             if(body.contains("Email") && body.contains("Phone")){
-                String email = null;
-                String phone = null;
+
                 for (WebElement element : driver.getDriver().findElements(By.tagName("label"))) {
                     if(element.getText().contains("Email")){
                         email = element.getText();
@@ -69,15 +71,17 @@ public class LogInMethods {
                     }
                 }
 
-                return "unusual-attempt-phone-and-email" + "|" + email + "|" + phone;
+                return "unusual-attempt-phone-and-email|" + email + "|" + phone;
             }
 
             for (WebElement element : driver.getDriver().findElements(By.tagName("label"))) {
                 if(element.getText().contains("Email")){
-                    return "unusual-attempt-email";
+                    email = element.getText();
+                    return "unusual-attempt-email|" + email;
                 }
                 if(element.getText().contains("Phone")){
-                    return "unusual-attempt-phone";
+                    phone = element.getText();
+                    return "unusual-attempt-phone|" + phone;
                 }
             }
         }catch (Exception e){}

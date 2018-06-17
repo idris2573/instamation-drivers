@@ -33,9 +33,9 @@ public class Ticket {
     @Column(name = "message")
     private String message;
 
-//    @Column(name = "date", nullable = false, updatable = false)
-//    @CreationTimestamp
-//    private Timestamp date;
+    @Column(name = "date", nullable = false, updatable = false)
+    @CreationTimestamp
+    private Timestamp date;
 
     public Long getId() {
         return id;
@@ -81,7 +81,7 @@ public class Ticket {
         this.message = message;
     }
 
-//    public Timestamp getDate() {
-//        return date;
-//    }
+    public Timestamp getDate() {
+        return date;
+    }
 }
