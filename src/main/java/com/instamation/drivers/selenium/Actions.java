@@ -281,7 +281,7 @@ public class Actions {
             driver.getDriver().get(postUrl);
             scroll(200, js);
 
-            if(!clickLinkContainsJs(driver, " like")){
+            if(!clickLinkContains(driver, " like")){
                 continue;
             }
 

@@ -182,7 +182,13 @@ public class AccountController {
         // check if actually logged in
         if(!LogInMethods.isLoggedIn(driver)) {
             logger.info(account.getUsername() + " is retrying logging in");
-            Actions.login(driver, account);
+            response = Actions.login(driver, account);
+
+            // if login runs into unusual attempt, return an unusual attempt response
+            if(response.contains("unusual-attempt")){
+                return new Response(response);
+            }
+
         } else {
             logger.info(account.getUsername() + " confirmed is logged in");
         }
@@ -262,6 +268,11 @@ public class AccountController {
         // check if actually logged in
         if(!LogInMethods.isLoggedIn(driver)) {
             response = Actions.login(driver, account);
+
+            // if login runs into unusual attempt, return an unusual attempt response
+            if(response.contains("unusual-attempt")){
+                return new Response(response);
+            }
         }
 
         if(response == null || response.equalsIgnoreCase("login-fail")){
