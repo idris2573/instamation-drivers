@@ -102,6 +102,9 @@ public class Account {
     @Column(name = "tutorial")
     private boolean tutorial = true;
 
+    @Column(name = "type")
+    private String type = "TRIAL";
+
     public boolean isTutorial() {
         return tutorial;
     }
@@ -353,6 +356,14 @@ public class Account {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

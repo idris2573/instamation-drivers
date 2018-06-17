@@ -1,5 +1,6 @@
 package com.instamation.drivers.web.controller;
 
+import com.instamation.drivers.config.AccountType;
 import com.instamation.drivers.model.*;
 import com.instamation.drivers.repository.*;
 import com.instamation.drivers.selenium.Actions;
@@ -340,7 +341,8 @@ public class AccountController {
         // set expiry date for the first days free trial
         if(account.getExpiryDate() == null) {
             long day = 86400000;
-            account.setExpiryDate(new Date(System.currentTimeMillis() + day * 3));
+            account.setType(AccountType.TRIAL.name());
+            account.setExpiryDate(new Date(System.currentTimeMillis() + day * AccountType.TRIAL.getDays()));
             account.setEnabled(true);
             accountRepository.save(account);
         }
